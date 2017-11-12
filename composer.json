@@ -1,0 +1,12 @@
+{
+    "name": "api/phalcon-api",
+    "description": "This is an API micro services based on Phalcon framework.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "imajinyun",
+            "email": "imajinyun@gmail.com"
+        }
+    ],
+    "require": {}
+}
