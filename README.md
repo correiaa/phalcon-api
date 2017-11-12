@@ -1,3 +1,11 @@
-# phalcon-api
+# Phalcon RESTful API Micro Service 
 
-This is an API micro services based on Phalcon framework.
+This is a RESTful API micro service based on Phalcon framework.
+
+***
+
+## Create controller
+
+```bash
+$ phalcon controller --name default --namespace App\\Controller --output=./src/controllers --force
+```
