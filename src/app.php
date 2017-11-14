@@ -37,6 +37,27 @@ $app->get('/default/index', function () {
             'getLanguages'                   => $this->request->getLanguages(),
         ]
     );
+    $a = \App\Model\Users::find();
+    $this->response->setJsonContent($a);
+
+    return $this->response;
+});
+
+/**
+ * Get user entity by id.
+ */
+$app->get('/api/v1/user/{id:[a-z0-9-]+}', function ($id) {
+    $object = \App\Model\Users::findFirst([
+        'conditions' => 'id=:id:',
+        'bind'       => [
+            'id' => $id,
+        ],
+    ]);
+    $result = $object ? $object->toArray() : [];
+
+    /** @var $this \Phalcon\Mvc\Micro */
+    $this->response->setStatusCode(200, 'OK')->sendHeaders();
+    $this->response->setJsonContent($result);
 
     return $this->response;
 });

@@ -47,6 +47,9 @@ $di->setShared('db', function () {
         'password' => $config->database->password,
         'dbname'   => $config->database->dbname,
         'charset'  => $config->database->charset,
+        'options'  => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+        ],
     ];
 
     if ($config->database->adapter == 'Postgresql') {

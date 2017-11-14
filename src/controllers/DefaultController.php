@@ -17,6 +17,9 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return __METHOD__;
+        $this->response->setStatusCode(200, 'OK')->sendHeaders();
+        $this->response->setJsonContent(['method' => __METHOD__]);
+
+        return $this->response;
     }
 }
