@@ -13,3 +13,14 @@ $ phalcon controller --name default --namespace App\\Controller --output=./src/c
 ```
 
 ### Create model 
+
+```bash
+$ phalcon model --name=users --namespace=App\\Model --output=./src/models --get-set --doc --trace --camelize --mapcolumn --annotate --force
+```
+
+### Create migration
+
+```bash
+// Initial migration
+$ phalcon migration --action=generate --descr=init --force
+```
