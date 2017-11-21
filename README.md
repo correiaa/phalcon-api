@@ -4,6 +4,74 @@ This is a RESTful API micro service based on Phalcon framework.
 
 ***
 
+## 目录结构
+
+## 项目配置
+
+### 运行配置文件
+
+将 `config/config.default.ini` 重命名为 `config/config.ini`
+
+#### `application` - 应用程序配置
+
+#### `database` - 数据库配置
+
+#### `security` - 安全配置
+
+### 虚拟主机配置
+
+```nginx
+# phalcon-api
+
+server {
+    listen 80;
+    server_name local.phalcon-api.com;
+
+    root /YourWorkspace/phalcon-api/webroot;
+    index index.php index.html index.htm;
+
+    charset utf-8;
+    client_max_body_size 100M;
+    fastcgi_read_timeout 1800;
+
+    access_log /usr/local/var/log/nginx/phalcon-api-access.log;
+    error_log  /usr/local/var/log/nginx/phalcon-api-error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?_url=$uri&args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index /index.php;
+
+        include fastcgi.conf;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+    }
+
+    location = /favicon.icon {
+        log_not_found off;
+        access_log off;
+    }
+
+    location ~ /(\.ht|\.git|\.svn) {
+        deny all;
+    }
+
+    location ~* \.(jpg|jpeg|gif|png|ico|swf)$ {
+        log_not_found off;
+        access_log off;
+        gzip off;
+    }
+}
+```
+
 ## Create skeleton
 
 ### Create controller
