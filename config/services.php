@@ -41,7 +41,7 @@ $di->setShared('db', function () {
     $config = $this->getConfig();
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
-    $params = [
+    $parameter = [
         'host'     => $config->database->host,
         'username' => $config->database->username,
         'password' => $config->database->password,
@@ -53,10 +53,21 @@ $di->setShared('db', function () {
     ];
 
     if ($config->database->adapter == 'Postgresql') {
-        unset($params['charset']);
+        unset($parameter['charset']);
     }
 
-    $connection = new $class($params);
+    $connection = new $class($parameter);
+
+    if ($config->application->isListenDb) {
+        /**
+         * Use the EventManager to listen Database executed query.
+         *
+         * @see https://docs.phalconphp.com/ar/3.2/events
+         */
+        $manager = new \Phalcon\Events\Manager();
+        $manager->attach('db', new \App\Event\DatabaseEvent());
+        $connection->setEventsManager($manager);
+    }
 
     return $connection;
 });
