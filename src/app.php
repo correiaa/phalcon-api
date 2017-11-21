@@ -63,6 +63,20 @@ $app->get('/api/v1/user/{id:[a-z0-9-]+}', function ($id) {
 });
 
 /**
+ * Get user list.
+ */
+$app->get('/api/v1/user/list', function () {
+    $object = \App\Model\Users::find();
+    $result = $object->toArray();
+
+    /** @var $this \Phalcon\Mvc\Micro */
+    $this->response->setStatusCode(200, 'OK')->sendHeaders();
+    $this->response->setJsonContent($result);
+
+    return $this->response;
+});
+
+/**
  * Not found handler.
  */
 $app->notFound(function () use ($app) {
