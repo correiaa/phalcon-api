@@ -11,6 +11,7 @@ $loader->registerNamespaces(
         'App\\Controller' => '../src/controllers',
         'App\\Event'      => '../src/events',
         'App\\Model'      => '../src/models',
+        'App\\Traits'     => '../src/traits',
     ]
 );
 $loader->registerDirs(
@@ -19,5 +20,6 @@ $loader->registerDirs(
         $config->application->controllersDir,
         $config->application->eventsDir,
         $config->application->modelsDir,
+        $config->application->traitsDir,
     ]
 )->register();
