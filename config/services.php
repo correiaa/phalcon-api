@@ -8,18 +8,6 @@ $di->setShared('config', function () {
 });
 
 /**
- * Sets the view component.
- */
-$di->setShared('view', function () {
-    $config = $this->getConfig();
-
-    $view = new \Phalcon\Mvc\View\Simple();
-    $view->setViewsDir($config->application->viewsDir);
-
-    return $view;
-});
-
-/**
  * The URL component is used to generate all kind of urls in the application.
  */
 $di->setShared('url', function () {

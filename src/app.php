@@ -10,7 +10,23 @@
  * Add your routes here...
  */
 $app->get('/', function () {
-    echo $this['view']->render('index');
+    /** @var \Phalcon\Mvc\Micro $this */
+    $this->response->setStatusCode(200, 'OK')->sendHeaders();
+    $result = [
+        'phalcon'     => [
+            'id'      => \Phalcon\Version::getId(),
+            'version' => \Phalcon\Version::get(),
+        ],
+        'application' => [
+            'ip'      => $this->request->getClientAddress(),
+            'charset' => $this->request->getClientCharsets(),
+            'host'    => $this->request->getHttpHost(),
+            'agent'   => $this->request->getUserAgent(),
+        ],
+    ];
+    $this->response->setJsonContent($result);
+
+    return $this->response;
 });
 
 /**
