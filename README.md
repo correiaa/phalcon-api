@@ -1,16 +1,25 @@
 # Phalcon RESTful API Micro Service 
 
+> * [Phalcon 官网](https://phalconphp.com/zh/)
+> * [GitHub](https://github.com/phalcon/cphalcon/)
+
+***
+
 This is a RESTful API micro service based on Phalcon framework.
 
 ***
+
+## 框架环境
+
+基于 `Phalcon 3.2.2` 构建
 
 ## 目录结构
 
 ```bash
 $ tree -d -L 2 -I vendor
 .
-├── config 配置目录
-├── src 应用目录
+├── config -> 配置目录
+├── src -> 应用目录
 │   ├── components 组件
 │   ├── controllers 控制器
 │   ├── events 事件
@@ -19,10 +28,10 @@ $ tree -d -L 2 -I vendor
 │   ├── models 模型
 │   ├── validations 验证
 │   └── views 视图
-├── tmp 缓存目录
+├── tmp -> 缓存目录
 │   ├── cache 缓存
 │   └── logs 日志
-└── webroot 入口目录
+└── webroot -> 入口目录
     ├── css 样式
     ├── files 文件
     ├── img 图片
@@ -39,9 +48,38 @@ $ tree -d -L 2 -I vendor
 
 #### `application` - 应用程序配置
 
+| 配置键 | 配置值 | 说明 |
+| --- | --- | --- |
+| `isListenDb` | 可选的值: `0: 禁用, 1: 开启` | 开启后会记录运行的 `SQL` |
+| `isToken` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证访问令牌 `TOKEN` |
+| `isSign` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证数据签名 `SIGN` |
+| `componentsDir` | `../src/components/` | 组件目录 |
+| `controllersDir` | `../src/controllers/` | 控制器目录 |
+| `eventsDir` | `../src/events/` | 事件目录 |
+| `migrationsDir` | `../src/migrations/` | 迁移目录 |
+| `modelsDir` | `../src/models/` | 模型目录 |
+| `validationsDir` | `../src/validations/` | 验证目录 |
+| `viewsDir` | `../src/views/` | 视图目录 |
+| `baseUri` | `/phalcon-api/` | 根目录 |
+
 #### `database` - 数据库配置
 
+| 配置键 | 配置值 | 说明 |
+| --- | --- | --- |
+| `adapter` | `Mysql` | 数据库适配器, 此荐仅支持 `MySQL` |
+| `host` | `ip address` | 数据库地址 |
+| `username` | `username` | 数据库用户 |
+| `password` | `password` | 数据库密码 |
+| `dbname` | `dbname` | 数据库名称 |
+| `charset` | `charset` | 数据库字符 |
+
+
 #### `security` - 安全配置
+
+| 配置键 | 配置值 | 说明 |
+| --- | --- | --- |
+| `appid` | `32 位 APP ID` | 应用 ID |
+| `appsecret` | `64 位 APP SECRET` | 应用密钥 |
 
 ### 虚拟主机配置
 

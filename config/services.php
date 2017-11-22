@@ -1,8 +1,5 @@
 <?php
 
-use Phalcon\Mvc\View\Simple as View;
-use Phalcon\Mvc\Url as UrlResolver;
-
 /**
  * Shared configuration service.
  */
@@ -16,7 +13,7 @@ $di->setShared('config', function () {
 $di->setShared('view', function () {
     $config = $this->getConfig();
 
-    $view = new View();
+    $view = new \Phalcon\Mvc\View\Simple();
     $view->setViewsDir($config->application->viewsDir);
 
     return $view;
@@ -28,7 +25,7 @@ $di->setShared('view', function () {
 $di->setShared('url', function () {
     $config = $this->getConfig();
 
-    $url = new UrlResolver();
+    $url = new \Phalcon\Mvc\Url();
     $url->setBaseUri($config->application->baseUri);
 
     return $url;
