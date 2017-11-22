@@ -66,7 +66,7 @@ $ tree -d -L 2 -I vendor
 
 | 配置键 | 配置值 | 说明 |
 | --- | --- | --- |
-| `adapter` | `Mysql` | 数据库适配器, 此荐仅支持 `MySQL` |
+| `adapter` | `Mysql` | 数据库适配器, 些项目仅支持 `MySQL` |
 | `host` | `ip address` | 数据库地址 |
 | `username` | `username` | 数据库用户 |
 | `password` | `password` | 数据库密码 |
