@@ -7,7 +7,7 @@
  */
 
 /**
- * Add your routes here...
+ * Home page.
  */
 $app->get('/', function () {
     /** @var \Phalcon\Mvc\Micro $this */
@@ -18,10 +18,19 @@ $app->get('/', function () {
             'version' => \Phalcon\Version::get(),
         ],
         'application' => [
-            'ip'      => $this->request->getClientAddress(),
-            'charset' => $this->request->getClientCharsets(),
-            'host'    => $this->request->getHttpHost(),
-            'agent'   => $this->request->getUserAgent(),
+            'clientAddress' => $this->request->getClientAddress(),
+            'clientCharset' => $this->request->getClientCharsets(),
+            'httpHost'      => $this->request->getHttpHost(),
+            'userAgent'     => $this->request->getUserAgent(),
+            'uri'           => $this->request->getURI(),
+            'port'          => $this->request->getPort(),
+            'scheme'        => $this->request->getScheme(),
+            'method'        => $this->request->getMethod(),
+            'serverName'    => $this->request->getServerName(),
+            'serverAddress' => $this->request->getServerAddress(),
+            'contentType'   => $this->request->getContentType(),
+            'basicAuth'     => $this->request->getBasicAuth(),
+            'languages'     => $this->request->getLanguages(),
         ],
     ];
     $this->response->setJsonContent($result);
