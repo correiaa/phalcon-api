@@ -6,6 +6,31 @@ This is a RESTful API micro service based on Phalcon framework.
 
 ## 目录结构
 
+```bash
+$ tree -d -L 2 -I vendor
+.
+├── config 配置目录
+├── src 应用目录
+│   ├── components 组件
+│   ├── controllers 控制器
+│   ├── events 事件
+│   ├── exceptions 异常
+│   ├── migrations 迁移
+│   ├── models 模型
+│   ├── validations 验证
+│   └── views 视图
+├── tmp 缓存目录
+│   ├── cache 缓存
+│   └── logs 日志
+└── webroot 入口目录
+    ├── css 样式
+    ├── files 文件
+    ├── img 图片
+    └── js 脚本
+
+18 directories
+```
+
 ## 项目配置
 
 ### 运行配置文件
