@@ -69,6 +69,38 @@ $app->get('/default/index', function () {
 });
 
 /**
+ * RabbitMQ producer.
+ */
+$app->get('/api/v1/queue/producer', function () {
+    /** @var \PhpAmqpLib\Connection\AMQPStreamConnection $AMQPStreamConnection */
+    $AMQPStreamConnection = $this->getSharedService('rabbitmq');
+    $AMQPChannel = $AMQPStreamConnection->channel();
+    $AMQPChannel->queue_declare(
+        'test',
+        false,
+        false,
+        false,
+        false
+    );
+
+    $AMQPMessage = new \PhpAmqpLib\Message\AMQPMessage('this is a test for RabbitMQ.');
+    $AMQPChannel->basic_publish($AMQPMessage, false, 'test');
+    $AMQPChannel->close();
+    $AMQPStreamConnection->close();
+    $this->response->setStatusCode(200, 'OK')->sendHeaders();
+    $this->response->setJsonContent(
+        [
+            $AMQPMessage->getBody(),
+            $AMQPMessage->getBodySize(),
+            $AMQPMessage->getContentEncoding(),
+            $AMQPMessage->get_properties(),
+        ]);
+
+    return $this->response;
+
+});
+
+/**
  * Get user entity by id.
  */
 $app->get('/api/v1/user/{id:[a-z0-9-]+}', function ($id) {

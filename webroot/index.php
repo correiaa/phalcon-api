@@ -19,6 +19,9 @@ define('TMP', ROOT . DS . 'tmp' . DS);
 define('LOGS', TMP . 'logs' . DS);
 define('CACHE', TMP . 'cache' . DS);
 
+require CONFIG . 'helper.php';
+require ROOT . '/vendor/autoload.php';
+
 try {
 
     /**

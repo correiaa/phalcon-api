@@ -56,3 +56,24 @@ $di->setShared('db', function () {
 
     return $connection;
 });
+
+/**
+ * Shared RabbitMQ service.
+ */
+$di->setShared('rabbitmq', function () {
+    $config = $this->getConfig();
+
+    $connection = new \PhpAmqpLib\Connection\AMQPStreamConnection(
+        $config->rabbitmq->host,
+        $config->rabbitmq->port,
+        $config->rabbitmq->username,
+        $config->rabbitmq->password,
+        $config->rabbitmq->vhost,
+        $config->rabbitmq->insist,
+        $config->rabbitmq->loginMethod,
+        $config->rabbitmq->loginResponse,
+        $config->rabbitmq->locale
+    );
+
+    return $connection;
+});
