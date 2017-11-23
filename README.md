@@ -19,25 +19,26 @@ This is a RESTful API micro service based on Phalcon framework.
 $ tree -d -L 2 -I vendor
 .
 ├── config -> 配置目录
+│   ├── config.default.ini 配置文件
+│   ├── loader.php         配置文件
+│   └── services.php       服务文件
 ├── src -> 应用目录
-│   ├── components 组件
+│   ├── components  组件
 │   ├── controllers 控制器
-│   ├── events 事件
-│   ├── exceptions 异常
-│   ├── migrations 迁移
-│   ├── models 模型
-│   ├── validations 验证
-│   └── views 视图
+│   ├── events      事件
+│   ├── exceptions  异常
+│   ├── migrations  迁移
+│   ├── models      模型
+│   └── validations 验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
-│   └── logs 日志
+│   └── logs  日志
 └── webroot -> 入口目录
-    ├── css 样式
-    ├── files 文件
-    ├── img 图片
-    └── js 脚本
-
-18 directories
+    ├── css       样式
+    ├── files     文件
+    ├── img       图片
+    ├── js        图片
+    └── index.php 入口
 ```
 
 ## 项目配置
@@ -59,7 +60,6 @@ $ tree -d -L 2 -I vendor
 | `migrationsDir` | `../src/migrations/` | 迁移目录 |
 | `modelsDir` | `../src/models/` | 模型目录 |
 | `validationsDir` | `../src/validations/` | 验证目录 |
-| `viewsDir` | `../src/views/` | 视图目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
 
 #### `database` - 数据库配置
