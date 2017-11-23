@@ -135,21 +135,21 @@ server {
 }
 ```
 
-## Create skeleton
+## 框架命令
 
-### Create controller
+### 创建控制器 - `Create Controller`
 
 ```bash
 $ phalcon controller --name default --namespace App\\Controller --output=./src/controllers --force
 ```
 
-### Create model 
+### 创建模型 - `Create Model` 
 
 ```bash
 $ phalcon model --name=users --namespace=App\\Model --output=./src/models --get-set --doc --trace --camelize --mapcolumn --annotate --force
 ```
 
-### Create migration
+### 创建迁移 - `Create Migration`
 
 ```bash
 // Initial migration
