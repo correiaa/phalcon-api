@@ -55,7 +55,7 @@ class DefaultController extends Controller
         $this->response
             ->setStatusCode(200, 'OK')
             ->sendHeaders()
-            ->response->setJsonContent(
+            ->setJsonContent(
                 [
                     'getClientAddress'               => $this->request->getClientAddress(),
                     'getClientCharsets'              => $this->request->getClientCharsets(),
