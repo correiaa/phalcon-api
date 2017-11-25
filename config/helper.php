@@ -11,6 +11,19 @@ if (!function_exists('dd')) {
     function dd(...$args)
     {
         echo (new \Phalcon\Debug\Dump())->variables($args);
-        die(1);
+        exit(1);
+    }
+}
+
+if (!function_exists('json')) {
+    /**
+     * Returns an JSON string of information about a single variable.
+     *
+     * @param mixed $args
+     */
+    function json($args)
+    {
+        echo (new \Phalcon\Debug\Dump())->toJson($args);
+        exit(1);
     }
 }

@@ -60,7 +60,6 @@ try {
      * Handle the request
      */
     $app->handle();
-
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
