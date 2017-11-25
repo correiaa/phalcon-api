@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Di\FactoryDefault;
+use Phalcon\Events\Manager;
 use Phalcon\Mvc\Micro;
 
 error_reporting(E_ALL);
@@ -23,27 +24,23 @@ require CONFIG . 'helper.php';
 require ROOT . '/vendor/autoload.php';
 
 try {
-
     /**
-     * The FactoryDefault Dependency Injector automatically registers the services that
-     * provide a full stack framework. These default services can be overidden with custom ones.
+     * The FactoryDefault Dependency Injector automatically registers
+     * the services that provide a full stack framework.
+     * These default services can be overidden with custom ones.
      */
     $di = new FactoryDefault();
 
-    /**
-     * Include Services
-     */
-    include CONFIG . 'services.php';
+    include CONFIG . 'services.php'; // Include some services.
 
     /**
      * Get config service for use in inline setup below
      */
     $config = $di->getConfig();
 
-    /**
-     * Include Autoloader
-     */
-    include CONFIG . 'loader.php';
+    include CONFIG . 'loader.php'; // Include phalcon autoloader.
+
+    $manager = new Manager();
 
     /**
      * Starting the application
