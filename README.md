@@ -29,6 +29,7 @@ $ tree -d -L 2 -I vendor
 │   ├── exceptions  异常
 │   ├── migrations  迁移
 │   ├── models      模型
+│   ├── traits      复用
 │   └── validations 验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
@@ -59,6 +60,7 @@ $ tree -d -L 2 -I vendor
 | `eventsDir` | `../src/events/` | 事件目录 |
 | `migrationsDir` | `../src/migrations/` | 迁移目录 |
 | `modelsDir` | `../src/models/` | 模型目录 |
+| `traitsDir` | `../src/traits/` | 复用目录 |
 | `validationsDir` | `../src/validations/` | 验证目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
 
