@@ -6,4 +6,4 @@ if ($uri !== '/' && file_exists(__DIR__ . '/webroot' . $uri)) {
 }
 $_GET['_url'] = $_SERVER['REQUEST_URI'];
 
-require_once __DIR__ . '/index.php';
+require __DIR__ . '/webroot/index.php';
