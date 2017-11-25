@@ -13,6 +13,8 @@ use Phalcon\Version;
 class DefaultController extends Controller
 {
     /**
+     * Default access entry.
+     *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
     public function indexAction()
@@ -50,7 +52,7 @@ class DefaultController extends Controller
     /**
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    public function testAction()
+    public function utilAction()
     {
         $this->response
             ->setStatusCode(200, 'OK')

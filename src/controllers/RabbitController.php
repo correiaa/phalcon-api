@@ -17,7 +17,8 @@ class RabbitController extends Controller
      */
     public function producerAction()
     {
-        $AMQPStreamConnection = $this->getSharedService('rabbitmq');
+        /** @var \PhpAmqpLib\Connection\AMQPStreamConnection $AMQPStreamConnection */
+        $AMQPStreamConnection = $this->getDI()->getShared('rabbitmq');
         $AMQPChannel = $AMQPStreamConnection->channel();
         $AMQPChannel->queue_declare(
             'test',
@@ -27,6 +28,7 @@ class RabbitController extends Controller
             false
         );
 
+        /** @var AMQPMessage $AMQPMessage */
         $AMQPMessage = new AMQPMessage('this is a test for RabbitMQ.');
         $AMQPChannel->basic_publish($AMQPMessage, false, 'test');
         $AMQPChannel->close();

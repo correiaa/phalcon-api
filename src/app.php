@@ -14,7 +14,7 @@ $app->get('/', [new \App\Controller\DefaultController(), 'indexAction']);
 /**
  * Default page.
  */
-$app->get('/test', [new \App\Controller\DefaultController(), 'testAction']);
+$app->get('/util', [new \App\Controller\DefaultController(), 'utilAction']);
 
 /**
  * RabbitMQ producer.
