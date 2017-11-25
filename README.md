@@ -16,13 +16,19 @@ This is a RESTful API micro service based on Phalcon framework.
 ## 目录结构
 
 ```bash
-$ tree -d -L 2 -I vendor
+$ tree -L 2 -I vendor
 .
+├── LICENSE
+├── README.md
+├── composer.json
+├── composer.lock
 ├── config -> 配置目录
 │   ├── config.default.ini 配置文件
-│   ├── loader.php         配置文件
+│   ├── helper.php         助手文件
+│   ├── loader.php         加载文件
 │   └── services.php       服务文件
 ├── src -> 应用目录
+│   ├── app.php     路由
 │   ├── components  组件
 │   ├── controllers 控制器
 │   ├── events      事件
@@ -35,11 +41,12 @@ $ tree -d -L 2 -I vendor
 │   ├── cache 缓存
 │   └── logs  日志
 └── webroot -> 入口目录
-    ├── css       样式
-    ├── files     文件
-    ├── img       图片
-    ├── js        图片
-    └── index.php 入口
+    ├── css         样式
+    ├── favicon.ico 图标
+    ├── files       文件
+    ├── img         图片
+    ├── index.php   入口
+    └── js          脚本
 ```
 
 ## 项目配置
