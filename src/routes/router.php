@@ -1,6 +1,31 @@
 <?php
 
 /**
+ * User all routes collection.
+ */
+$function = call_user_func(function () use ($config) {
+    $version = $config->application->apiVersion;
+    $directory = __DIR__ . DS . $version . DS;
+
+    if (!file_exists($directory)) {
+        throw new \ErrorException("$version directory is not exists.");
+    }
+
+    $collections = [];
+    $files = scandir($directory, SCANDIR_SORT_ASCENDING);
+    if (count($files)) {
+        foreach ($files as $file) {
+            $info = pathinfo($file);
+            if ($info['extension'] === 'php') {
+                $collections[] = include "{$directory}{$file}";
+            }
+        }
+    }
+
+    return $collections;
+});
+
+/**
  * Not found handler.
  */
 $app->notFound(function () use ($app) {
@@ -44,22 +69,5 @@ $app->error(function ($exception) use ($app) {
     }
 });
 
-/**
- * User route collection.
- */
-return call_user_func(function () use ($config) {
-    $version = $config->application->apiVersion;
-    $directory = __DIR__ . DS . $version . DS;
-    $collections = [];
-    $files = scandir($directory, SCANDIR_SORT_ASCENDING);
-    if (count($files)) {
-        foreach ($files as $file) {
-            $info = pathinfo($file);
-            if ($info['extension'] === 'php') {
-                $collections[] = include "{$directory}{$file}";
-            }
-        }
-    }
 
-    return $collections;
-});
+return $function;
