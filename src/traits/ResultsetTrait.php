@@ -37,13 +37,6 @@ trait ResultsetTrait
         return $this->getResultset(false, $data, $msg, $code);
     }
 
-    public function getPageResultset(array $data, $msg = 'OK', $code = 'API_1001')
-    {
-        $array = [];
-
-        return $this->getResultset(true, $array, $msg, $code);
-    }
-
     /**
      * Get resultset.
      *
