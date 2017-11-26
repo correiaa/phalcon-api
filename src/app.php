@@ -7,40 +7,6 @@
  */
 
 /**
- * Home page.
- */
-$app->get('/', [new \App\Controller\DefaultController(), 'indexAction']);
-
-$app->get('/a/b', function () {
-    throw new \RuntimeException('sdfaf');
-});
-
-/**
- * Default page.
- */
-$app->get('/util', [new \App\Controller\DefaultController(), 'utilAction']);
-
-/**
- * RabbitMQ producer.
- */
-$app->get('/api/v1/queue/producer', [new \App\Controller\RabbitController(), 'producerAction']);
-
-/**
- * Get user list.
- */
-$app->get('/api/v1/user/list', [new \App\Controller\UserController(), 'listAction']);
-
-/**
- * Get user entity.
- */
-$app->get('/api/v1/user/{id:[a-z0-9-]+}', [new \App\Controller\UserController(), 'viewAction']);
-
-/**
- * Get token.
- */
-$app->get('/api/v1/token/get/{id:[0-9]+}/{timestamp:[0-9]+}', [new \App\Controller\TokenController(), 'getAction']);
-
-/**
  * Not found handler.
  */
 $app->notFound(function () use ($app) {

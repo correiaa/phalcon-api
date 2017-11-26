@@ -13,6 +13,28 @@ use Phalcon\Mvc\Controller;
 class UserController extends Controller
 {
     /**
+     * Get user entity.
+     *
+     * @param null $id
+     *
+     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     */
+    public function getAction($id = null)
+    {
+        $user = Users::findFirst([
+            'conditions' => 'id=:id:',
+            'bind'       => ['id' => $id],
+        ]);
+        $result = $user ? $user->toArray() : [];
+        $this->response
+            ->setStatusCode(200, 'OK')
+            ->sendHeaders()
+            ->setJsonContent($result);
+
+        return $this->response;
+    }
+
+    /**
      * Get user list.
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
@@ -24,28 +46,6 @@ class UserController extends Controller
             ->setStatusCode(200, 'OK')
             ->sendHeaders()
             ->setJsonContent($list);
-
-        return $this->response;
-    }
-
-    /**
-     * Get user entity.
-     *
-     * @param null $id
-     *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
-     */
-    public function viewAction($id = null)
-    {
-        $user = Users::findFirst([
-            'conditions' => 'id=:id:',
-            'bind'       => ['id' => $id],
-        ]);
-        $result = $user ? $user->toArray() : [];
-        $this->response
-            ->setStatusCode(200, 'OK')
-            ->sendHeaders()
-            ->setJsonContent($result);
 
         return $this->response;
     }

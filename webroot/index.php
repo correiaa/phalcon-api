@@ -48,10 +48,13 @@ try {
      */
     $app = new Micro($di);
 
-    /**
-     * Include Application
-     */
-    include APP . '/app.php';
+    $di->set('collection', function () use ($config) {
+        return include APP . 'routes/router.php';
+    });
+    foreach ((array)$di->get('collection') as $collection) {
+        $app->mount($collection);
+    }
+    include APP . 'app.php';
 
     /**
      * Handle the request
