@@ -2,8 +2,6 @@
 
 namespace App\Traits;
 
-use Phalcon\Http\Response;
-
 /**
  * Resultset Trait.
  *
@@ -11,16 +9,60 @@ use Phalcon\Http\Response;
  */
 trait ResultsetTrait
 {
-    public function getResultset(Response $response)
+    /**
+     * Get success resultset.
+     *
+     * @param array  $data
+     * @param string $msg
+     * @param string $code
+     *
+     * @return array
+     */
+    public function getOKResultset(array $data, $msg = 'OK', $code = 'API_1001')
+    {
+        return $this->getResultset(true, $data, $msg, $code);
+    }
+
+    /**
+     * Get failed resultset.
+     *
+     * @param array  $data
+     * @param string $msg
+     * @param string $code
+     *
+     * @return array
+     */
+    public function getNOResultset(array $data, $msg = 'NO', $code = 'API_1002')
+    {
+        return $this->getResultset(false, $data, $msg, $code);
+    }
+
+    public function getPageResultset(array $data, $msg = 'OK', $code = 'API_1001')
+    {
+        $array = [];
+
+        return $this->getResultset(true, $array, $msg, $code);
+    }
+
+    /**
+     * Get resultset.
+     *
+     * @param bool   $status
+     * @param array  $data
+     * @param string $msg
+     * @param string $code
+     *
+     * @return array
+     */
+    private function getResultset($status, array $data, $msg, $code = '')
     {
         $result = [
-            'status' => false,
-            'msg'    => 'API_1001',
-            'tip'    => '',
+            'status' => $status,
+            'msg'    => $msg,
+            'code'   => $code,
+            'data'   => $data,
         ];
-        $response->setStatusCode(200, 'OK')
-            ->setJsonContent($result);
 
-        return $response;
+        return $result;
     }
 }
