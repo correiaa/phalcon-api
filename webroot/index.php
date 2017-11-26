@@ -4,6 +4,9 @@ use Phalcon\Di\FactoryDefault;
 use Phalcon\Events\Manager;
 use Phalcon\Mvc\Micro;
 
+/**
+ * Sets which PHP errors are reported.
+ */
 error_reporting(E_ALL);
 
 /**
@@ -34,7 +37,7 @@ try {
     include CONFIG . 'services.php'; // Include some services.
 
     /**
-     * Get config service for use in inline setup below
+     * Get config service for use in inline setup below.
      */
     $config = $di->getConfig();
 
@@ -48,18 +51,14 @@ try {
      */
     $app = new Micro($di);
 
-    $di->set('collection', function () use ($config) {
+    $di->set('collection', function () use ($config, $app) {
         return include APP . 'routes/router.php';
     });
     foreach ((array)$di->get('collection') as $collection) {
         $app->mount($collection);
     }
-    include APP . 'app.php';
 
-    /**
-     * Handle the request
-     */
-    $app->handle();
+    $app->handle(); // Handle the request.
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
