@@ -24,9 +24,7 @@ $ tree -L 2 -I vendor
 ├── composer.lock
 ├── config -> 配置目录
 │   ├── config.default.ini 配置文件
-│   ├── helper.php         助手文件
-│   ├── loader.php         加载文件
-│   └── services.php       服务文件
+│   └── helpers.php        函数文件
 ├── src -> 应用目录
 │   ├── app.php     路由
 │   ├── components  组件
@@ -35,18 +33,18 @@ $ tree -L 2 -I vendor
 │   ├── exceptions  异常
 │   ├── migrations  迁移
 │   ├── models      模型
-│   ├── traits      复用
+│   ├── helpers     助手(复用)
 │   └── validations 验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
 │   └── logs  日志
 └── webroot -> 入口目录
-    ├── css         样式
+    ├── .htaccess   重写
     ├── favicon.ico 图标
     ├── files       文件
-    ├── img         图片
-    ├── index.php   入口
-    └── js          脚本
+    ├── cli.php     命令行入口
+    ├── debug.php   调试入口
+    └── index.php   入口
 ```
 
 ## 项目配置
