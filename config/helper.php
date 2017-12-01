@@ -1,6 +1,6 @@
 <?php
 
-if (!function_exists('dd')) {
+if ( ! function_exists('dd')) {
     /**
      * Dump the passed variables and end the script.
      *
@@ -15,7 +15,7 @@ if (!function_exists('dd')) {
     }
 }
 
-if (!function_exists('json')) {
+if ( ! function_exists('json')) {
     /**
      * Returns an JSON string of information about a single variable.
      *
