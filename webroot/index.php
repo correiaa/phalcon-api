@@ -10,20 +10,7 @@ use Phalcon\Mvc\Micro;
  */
 error_reporting(E_ALL);
 
-/**
- * Use the DS to separate the directories in other defines.
- */
-if ( ! defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
-define('ROOT', dirname(__DIR__));
-define('APP', ROOT . DS . 'src' . DS);
-define('CONFIG', ROOT . DS . 'config' . DS);
-define('WWW_ROOT', ROOT . DS . 'webroot' . DS);
-define('TMP', ROOT . DS . 'tmp' . DS);
-define('LOGS', TMP . 'logs' . DS);
-define('CACHE', TMP . 'cache' . DS);
-
+require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
 
 try {
