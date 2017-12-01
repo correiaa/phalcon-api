@@ -453,7 +453,8 @@ class Users extends Model
 
     /**
      * Independent Column Mapping.
-     * Keys are the real names in the table and the values their names in the application
+     * Keys are the real names in the table and the values their names in the
+     * application
      *
      * @return array
      */

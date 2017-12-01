@@ -38,10 +38,11 @@ class Filesystem
 
             if (true !== @mkdir($dir, $mode, true)) {
                 $error = error_get_last();
-                if (!is_dir($dir)) {
+                if ( ! is_dir($dir)) {
                     if ($error) {
                         throw new IOException(
-                            sprintf('Failed to create "%s": %s.', $dir, $error['message']),
+                            sprintf('Failed to create "%s": %s.', $dir,
+                                $error['message']),
                             0,
                             null,
                             $dir

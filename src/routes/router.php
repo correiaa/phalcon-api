@@ -3,11 +3,12 @@
 /**
  * User all routes collection.
  */
-$function = call_user_func(function () use ($config) {
-    $version = $config->application->apiVersion;
+$function = call_user_func(function () use ($Micro) {
+    $Config = $Micro->getDI()->get('config');
+    $version = $Config->application->apiVersion;
     $directory = __DIR__ . DS . $version . DS;
 
-    if (!file_exists($directory)) {
+    if ( ! file_exists($directory)) {
         throw new \ErrorException("$version directory is not exists.");
     }
 
@@ -25,11 +26,28 @@ $function = call_user_func(function () use ($config) {
     return $collections;
 });
 
+$Micro->get('/', function () use ($Micro) {
+    $Micro->response
+        ->setStatusCode(200, 'OK')
+        ->sendHeaders()
+        ->setJsonContent(
+            [
+                'status' => true,
+                'code'   => 'API_1001',
+                'msg'    => 'Welcome access to the RESTful API.',
+                'tip'    => '欢迎访问 RESTful API.',
+                'data'   => [],
+            ]
+        );
+
+    return $Micro->response;
+});
+
 /**
  * Not found handler.
  */
-$app->notFound(function () use ($app) {
-    $app->response
+$Micro->notFound(function () use ($Micro) {
+    $Micro->response
         ->setStatusCode(404, 'Not Found')
         ->sendHeaders()
         ->setJsonContent(
@@ -42,17 +60,17 @@ $app->notFound(function () use ($app) {
             ]
         );
 
-    return $app->response;
+    return $Micro->response;
 });
 
 /**
  * Error handler.
  */
-$app->error(function ($exception) use ($app) {
-    $isDebug = $app->getService('config')->application->isDebug;
+$Micro->error(function ($exception) use ($Micro) {
+    $isDebug = $Micro->getDI()->get('config')->application->isDebug;
 
-    if (!$isDebug) {
-        $app->response
+    if ( ! $isDebug) {
+        $Micro->response
             ->setStatusCode(200, 'Exception')
             ->sendHeaders()
             ->setJsonContent(
@@ -65,9 +83,8 @@ $app->error(function ($exception) use ($app) {
                 ]
             );
 
-        return $app->response;
+        return $Micro->response;
     }
 });
-
 
 return $function;

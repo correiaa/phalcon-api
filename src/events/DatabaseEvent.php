@@ -92,7 +92,7 @@ class DatabaseEvent
         $path = LOGS . '%s/%s/%s/' . self::FILE_NAME;
         $path = sprintf($path, date('Y'), date('m'), date('d'));
 
-        if (!file_exists($path)) {
+        if ( ! file_exists($path)) {
             $Filesystem = new Filesystem();
             $Filesystem->mkdir(dirname($path));
         }

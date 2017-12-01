@@ -1,7 +1,8 @@
 <?php
 
+use App\Bootstrap;
 use Phalcon\Di\FactoryDefault;
-use Phalcon\Events\Manager;
+use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
 
 /**
@@ -12,7 +13,7 @@ error_reporting(E_ALL);
 /**
  * Use the DS to separate the directories in other defines.
  */
-if (!defined('DS')) {
+if ( ! defined('DS')) {
     define('DS', DIRECTORY_SEPARATOR);
 }
 define('ROOT', dirname(__DIR__));
@@ -23,42 +24,26 @@ define('TMP', ROOT . DS . 'tmp' . DS);
 define('LOGS', TMP . 'logs' . DS);
 define('CACHE', TMP . 'cache' . DS);
 
-require CONFIG . 'helper.php';
 require ROOT . '/vendor/autoload.php';
 
 try {
-    /**
-     * The FactoryDefault Dependency Injector automatically registers
-     * the services that provide a full stack framework.
-     * These default services can be overidden with custom ones.
-     */
     $di = new FactoryDefault();
 
-    include CONFIG . 'services.php'; // Include some services.
+    require APP . 'Bootstrap.php';
+    $Bootstrap = new Bootstrap($di, new Loader());
+    $Bootstrap->main();
 
-    /**
-     * Get config service for use in inline setup below.
-     */
-    $config = $di->getConfig();
+    $Micro = new Micro($di);
+    $config = $di->get('config');
 
-    include CONFIG . 'loader.php'; // Include phalcon autoloader.
-
-    $manager = new Manager();
-
-    /**
-     * Starting the application
-     * Assign service locator to the application
-     */
-    $app = new Micro($di);
-
-    $di->set('collection', function () use ($config, $app) {
+    $di->set('collection', function () use ($Micro) {
         return include APP . 'routes/router.php';
     });
     foreach ((array)$di->get('collection') as $collection) {
-        $app->mount($collection);
+        $Micro->mount($collection);
     }
 
-    $app->handle(); // Handle the request.
+    $Micro->handle();
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';

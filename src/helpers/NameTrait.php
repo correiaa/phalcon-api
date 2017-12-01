@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Traits;
+namespace App\Helper;
 
 /**
  * Name Trait.
  *
- * @package App\Traits
+ * @package App\Helper
  */
 trait NameTrait
 {

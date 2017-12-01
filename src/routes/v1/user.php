@@ -1,7 +1,8 @@
 <?php
 
-return call_user_func(function () use ($config) {
-    $version = $config->application->apiVersion;
+return call_user_func(function () use ($Micro) {
+    $Config = $Micro->getDI()->get('config');
+    $version = $Config->application->apiVersion;
     $prefix = "/api/{$version}/user";
     $collection = new \Phalcon\Mvc\Micro\Collection();
     $collection->setPrefix($prefix)

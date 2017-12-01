@@ -22,8 +22,12 @@ class IOException extends \RuntimeException
      * @param \Throwable|null $previous
      * @param null            $path
      */
-    public function __construct($message = '', $code = 0, \Throwable $previous = null, $path = null)
-    {
+    public function __construct(
+        $message = '',
+        $code = 0,
+        \Throwable $previous = null,
+        $path = null
+    ) {
         $this->path = $path;
         parent::__construct($message, $code, $previous);
     }
