@@ -24,17 +24,20 @@ $ tree -L 2 -I vendor
 ├── composer.lock
 ├── config -> 配置目录
 │   ├── config.default.ini 配置文件
-│   └── helpers.php        函数文件
+│   └── helper.php         函数文件
+│   └── paths.php          路径文件
 ├── src -> 应用目录
-│   ├── app.php     路由
-│   ├── components  组件
-│   ├── controllers 控制器
-│   ├── events      事件
-│   ├── exceptions  异常
-│   ├── migrations  迁移
-│   ├── models      模型
-│   ├── helpers     助手(复用)
-│   └── validations 验证
+│   ├── Bootstrap.php   引导
+│   ├── components      组件
+│   ├── controllers     控制器
+│   ├── events          事件
+│   ├── exceptions      异常
+│   ├── helpers         助手(复用)
+│   ├── migrations      迁移
+│   ├── models          模型
+│   ├── routes          路由
+│   ├── tasks           任务(控制台)
+│   └── validations     验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
 │   └── logs  日志
@@ -44,7 +47,7 @@ $ tree -L 2 -I vendor
     ├── files       文件
     ├── cli.php     命令行入口
     ├── debug.php   调试入口
-    └── index.php   入口
+    └── index.php   主入口
 ```
 
 ## 项目配置
@@ -60,12 +63,14 @@ $ tree -L 2 -I vendor
 | `isListenDb` | 可选的值: `0: 禁用, 1: 开启` | 开启后会记录运行的 `SQL` |
 | `isToken` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证访问令牌 `TOKEN` |
 | `isSign` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证数据签名 `SIGN` |
+| `apiVersion` | `v1, v2, ...` | 接口版本 |
 | `componentsDir` | `../src/components/` | 组件目录 |
 | `controllersDir` | `../src/controllers/` | 控制器目录 |
 | `eventsDir` | `../src/events/` | 事件目录 |
 | `migrationsDir` | `../src/migrations/` | 迁移目录 |
 | `modelsDir` | `../src/models/` | 模型目录 |
-| `traitsDir` | `../src/traits/` | 复用目录 |
+| `helpersDir` | `../src/helpers/` | 复用目录 |
+| `traitsDir` | `../src/traits/` | 助手(复用)目录 |
 | `validationsDir` | `../src/validations/` | 验证目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
 
