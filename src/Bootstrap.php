@@ -58,6 +58,7 @@ class Bootstrap
             $config->application->eventsDir,
             $config->application->helpersDir,
             $config->application->modelsDir,
+            $config->application->tasksDir,
             $config->application->validationsDir,
         ];
         $this->loader->registerDirs($directories);
@@ -70,12 +71,13 @@ class Bootstrap
     protected function registerNamespaces()
     {
         $namespaces = [
-            'App\\Component'  => '../src/components',
-            'App\\Controller' => '../src/controllers',
-            'App\\Event'      => '../src/events',
-            'App\\Helper'     => '../src/helpers',
-            'App\\Model'      => '../src/models',
-            'App\\Validation' => '../src/validations',
+            'App\\Component'  => APP . 'components',
+            'App\\Controller' => APP . 'controllers',
+            'App\\Event'      => APP . 'events',
+            'App\\Helper'     => APP . 'helpers',
+            'App\\Model'      => APP . 'models',
+            'App\\Task'       => APP . 'tasks',
+            'App\\Validation' => APP . 'validations',
         ];
         $this->loader->registerNamespaces($namespaces);
         $this->loader->register();

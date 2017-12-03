@@ -12,13 +12,14 @@ use Phalcon\Loader;
 
 error_reporting(E_ALL);
 
-require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config/paths.php';
+require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
 
 $Cli = new Cli();
 
 require APP . 'Bootstrap.php';
 $Bootstrap = new Bootstrap($Cli, new Loader());
+$Bootstrap->main();
 $Console = new Console();
 $Console->setDI($Cli);
 
@@ -27,7 +28,7 @@ $Console->setDI($Cli);
  */
 $arguments = [];
 foreach ($argv as $key => $item) {
-    if ($key === 1) {
+    if ($key === 1 || $key === 0) {
         $item = $item ?: 'main';
         $arguments['task'] = 'App\\Task\\' . ucfirst($item);
     } elseif ($key === 2) {
