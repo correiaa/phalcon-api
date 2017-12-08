@@ -11,7 +11,7 @@ This is a RESTful API micro service based on Phalcon framework.
 
 ## 框架环境
 
-基于 `Phalcon 3.2.2` 构建
+基于 `Phalcon 3.2.4` 构建
 
 ## 目录结构
 
