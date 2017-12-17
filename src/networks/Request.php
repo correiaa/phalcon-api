@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http;
+namespace App\Network;
 
 /**
- * Class Request.
+ * Request Network.
  *
  * @package App\Network
  */

@@ -77,4 +77,24 @@ class UserController extends Controller
 
         return $this->response;
     }
+
+    public function authenticateAction()
+    {
+        $username = $this->request->getUsername();
+        $password = $this->request->getPassword();
+
+        // TODO: find user information by username and password.
+        $user = [
+            'id'       => 1001,
+            'username' => $username,
+            'password' => $password,
+        ];
+
+        $this->response
+            ->setStatusCode(200, 'OK')
+            ->sendHeaders()
+            ->setJsonContent($user);
+
+        return $this->response;
+    }
 }

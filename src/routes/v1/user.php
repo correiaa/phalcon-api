@@ -9,30 +9,23 @@ return call_user_func(function () use ($Micro) {
         ->setHandler(\App\Controller\UserController::class)
         ->setLazy(true);
 
-    /**
-     * Add user.
-     */
+    /** Add user. */
     $collection->post('/add', 'addAction');
 
-    /**
-     * Set user.
-     */
+    /** Set user. */
     $collection->post('/set', 'setAction');
 
-    /**
-     * Get user.
-     */
+    /** Get user. */
     $collection->get('/get/{id:[a-z0-9-_]+}', 'getAction');
 
-    /**
-     * Del user.
-     */
+    /** Del user. */
     $collection->post('/del/{id:[a-z0-9-_]+}', 'delAction');
 
-    /**
-     * User list.
-     */
+    /** User list. */
     $collection->get('/list', 'listAction');
+
+    /** User */
+    $collection->post('/authenticate', 'authenticateAction');
 
     return $collection;
 });

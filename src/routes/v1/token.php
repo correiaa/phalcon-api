@@ -9,19 +9,16 @@ return call_user_func(function () use ($Micro) {
         ->setHandler(\App\Controller\TokenController::class)
         ->setLazy(true);
 
-    /**
-     * Set token.
-     */
+    /** Set token. */
     $collection->post('/set', 'setAction');
 
-    /**
-     * Get token.
-     */
-    $collection->get('/get', 'getAction');
+    /** Get token. */
+    $collection->post('/get', 'getAction');
 
-    /**
-     * Del token.
-     */
+    /** Verify token. */
+    $collection->get('/verify', 'verifyAction');
+
+    /** Del token. */
     $collection->post('/del', 'delAction');
 
     return $collection;
