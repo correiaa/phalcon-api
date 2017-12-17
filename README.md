@@ -5,9 +5,7 @@
 
 ***
 
-This is a RESTful API micro service based on Phalcon framework.
-
-***
+🔥 This is a RESTful API micro service based on Phalcon framework.
 
 ## 框架环境
 
@@ -35,6 +33,7 @@ $ tree -L 2 -I vendor
 │   ├── helpers         助手(复用)
 │   ├── migrations      迁移
 │   ├── models          模型
+│   ├── networks        网络
 │   ├── routes          路由
 │   ├── tasks           任务(控制台)
 │   └── validations     验证
@@ -71,6 +70,7 @@ $ tree -L 2 -I vendor
 | `helpersDir` | `../src/helpers/` | 助手(复用)目录 |
 | `migrationsDir` | `../src/migrations/` | 迁移目录 |
 | `modelsDir` | `../src/models/` | 模型目录 |
+| `networksDir` | `../src/networks/` | 网络目录 |
 | `tasksDir` | `../src/tasks/` | 任务目录 |
 | `validationsDir` | `../src/validations/` | 验证目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
