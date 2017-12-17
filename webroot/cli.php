@@ -29,12 +29,12 @@ $Console->setDI($Cli);
 $arguments = [];
 foreach ($argv as $key => $item) {
     if ($key === 1 || $key === 0) {
-        $item = $item ?: 'main';
+        $item = false !== strpos($item, 'cli') ? 'main' : $item;
         $arguments['task'] = 'App\\Task\\' . ucfirst($item);
     } elseif ($key === 2) {
         $arguments['action'] = $item;
     } elseif ($key >= 3) {
-        $arguments['parameter'] = $item;
+        $arguments['parameter'][] = $item;
     }
 }
 

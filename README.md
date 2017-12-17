@@ -148,7 +148,7 @@ server {
 }
 ```
 
-## 框架命令
+## 脚手架
 
 ### 创建控制器 - `Create Controller`
 
@@ -167,4 +167,22 @@ $ phalcon model --name=users --namespace=App\\Model --output=./src/models --get-
 ```bash
 // Initial migration
 $ phalcon migration --action=generate --descr=init --force
+```
+
+## 任务
+
+### 运行任务
+
+```bash
+// 默认任务: 运行时执行 MainTask 类的 mainAction 方法
+$ php webroot/cli.php
+
+// 运行名称为 main 的任务
+$ php webroot/cli.php main
+
+// 运行名称为 main, 动作为 action 的任务
+$ php webroot/cli.php main action
+
+// 运行名称为 main, 动作为 action, 参数为 argument 的任务
+$ php webroot/cli.php main action argument1 argument2 argument3...
 ```
