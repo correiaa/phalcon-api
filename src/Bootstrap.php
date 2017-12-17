@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Event\DatabaseEvent;
+use App\Network\Request;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Events\Manager;
@@ -17,6 +18,9 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
  */
 class Bootstrap
 {
+    const REQUEST = 'request';
+    const RESPONSE = 'response';
+
     /** @var \Phalcon\Di\FactoryDefault $factoryDefault */
     private $factoryDefault;
 
@@ -24,7 +28,7 @@ class Bootstrap
     private $loader;
 
     /**
-     * Application constructor.
+     * Bootstrap constructor.
      *
      * @param \Phalcon\Di\FactoryDefault $factoryDefault
      * @param \Phalcon\Loader            $loader
@@ -41,8 +45,8 @@ class Bootstrap
     public function main()
     {
         $this->registerFiles();
-        $this->registerServices();
         $this->registerNamespaces();
+        $this->registerServices();
         $this->registerDirs();
     }
 
@@ -58,6 +62,7 @@ class Bootstrap
             $config->application->eventsDir,
             $config->application->helpersDir,
             $config->application->modelsDir,
+            $config->application->networksDir,
             $config->application->tasksDir,
             $config->application->validationsDir,
         ];
@@ -76,6 +81,7 @@ class Bootstrap
             'App\\Event'      => APP . 'events',
             'App\\Helper'     => APP . 'helpers',
             'App\\Model'      => APP . 'models',
+            'App\\Network'    => APP . 'networks',
             'App\\Task'       => APP . 'tasks',
             'App\\Validation' => APP . 'validations',
         ];
@@ -100,10 +106,19 @@ class Bootstrap
      */
     protected function registerServices()
     {
+        $this->setHttpService();
         $this->setConfigService();
         $this->setUrlService();
         $this->setDatabaseService();
         $this->setRabbitMQService();
+    }
+
+    /**
+     * Set http service.
+     */
+    private function setHttpService()
+    {
+        $this->factoryDefault->setShared(self::REQUEST, new Request());
     }
 
     /**
