@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Command Line Interface access main entry.
+ * CLI access main entry.
  */
 
 use App\Bootstrap;

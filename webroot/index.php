@@ -1,13 +1,14 @@
 <?php
 
+/**
+ * Web access main entry.
+ */
+
 use App\Bootstrap;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
 
-/**
- * Sets which PHP errors are reported.
- */
 error_reporting(E_ALL);
 
 require dirname(__DIR__) . '/config/paths.php';
