@@ -3,9 +3,9 @@
 namespace App\Http;
 
 /**
- * Request Network.
+ * Request Http.
  *
- * @package App\Network
+ * @package App\Http
  */
 class Request extends \Phalcon\Http\Request
 {
