@@ -35,7 +35,7 @@ $ tree -L 2 -I vendor
 │   ├── models          模型
 │   ├── routes          路由
 │   ├── tasks           任务(控制台)
-│   ├── traits          助手(复用)
+│   ├── traits          复用
 │   └── validations     验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
