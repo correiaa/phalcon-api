@@ -30,12 +30,12 @@ $ tree -L 2 -I vendor
 │   ├── controllers     控制器
 │   ├── events          事件
 │   ├── exceptions      异常
-│   ├── helpers         助手(复用)
+│   ├── https           网络
 │   ├── migrations      迁移
 │   ├── models          模型
-│   ├── networks        网络
 │   ├── routes          路由
 │   ├── tasks           任务(控制台)
+│   ├── traits          助手(复用)
 │   └── validations     验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
