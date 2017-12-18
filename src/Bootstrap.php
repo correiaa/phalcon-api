@@ -60,10 +60,10 @@ class Bootstrap
             $config->application->componentsDir,
             $config->application->controllersDir,
             $config->application->eventsDir,
-            $config->application->helpersDir,
             $config->application->modelsDir,
             $config->application->networksDir,
             $config->application->tasksDir,
+            $config->application->traitsDir,
             $config->application->validationsDir,
         ];
         $this->loader->registerDirs($directories);
@@ -79,10 +79,10 @@ class Bootstrap
             'App\\Component'  => APP . 'components',
             'App\\Controller' => APP . 'controllers',
             'App\\Event'      => APP . 'events',
-            'App\\Helper'     => APP . 'helpers',
             'App\\Model'      => APP . 'models',
             'App\\Network'    => APP . 'networks',
             'App\\Task'       => APP . 'tasks',
+            'App\\Traits'     => APP . 'traits',
             'App\\Validation' => APP . 'validations',
         ];
         $this->loader->registerNamespaces($namespaces);
