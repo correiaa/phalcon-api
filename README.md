@@ -168,6 +168,12 @@ $ phalcon migration --action=generate --descr=init --force
 $ phalcon migration generate --descr=init --migrations=./migrations
 ```
 
+### 迁移单个表
+
+```bash
+$ phalcon migration --action=generate --table=users --version=1.0.0
+```
+
 ## 任务
 
 ### 运行任务
