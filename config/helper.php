@@ -49,7 +49,7 @@ if ( ! function_exists('logger')) {
             $y = date('Y');
             $m = date('m');
             $d = date('d');
-            $formatter = LOGS . '%s/%s/%s/%s.log';
+            $formatter = LOGS_DIR . '%s/%s/%s/%s.log';
             $path = sprintf($formatter, $y, $m, $d, $name ?: $func);
 
             if ( ! file_exists($path)) {

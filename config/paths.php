@@ -13,38 +13,37 @@ if ( ! defined('DS')) {
 define('ROOT', dirname(__DIR__));
 
 /**
- * The actual directory name for the application directory. Normally named
- * 'src'.
- */
-define('APP_DIR', 'src');
-
-/**
  * Path to the application's directory.
  */
-define('APP', ROOT . DS . APP_DIR . DS);
+define('APP_DIR', ROOT . DS . 'src' . DS);
 
 /**
  * Path to the config directory.
  */
-define('CONFIG', ROOT . DS . 'config' . DS);
+define('CONFIG_DIR', ROOT . DS . 'config' . DS);
+
+/**
+ * Path to the route directory.
+ */
+define('ROUTE_DIR', ROOT . DS . 'routes' . DS);
 
 /**
  * File path to the webroot directory.
  */
-define('WWW_ROOT', ROOT . DS . 'webroot' . DS);
+define('WWW_DIR', ROOT . DS . 'webroot' . DS);
 
 /**
  * Path to the temporary files directory.
  */
-define('TMP', ROOT . DS . 'tmp' . DS);
+define('TMP_DIR', ROOT . DS . 'tmp' . DS);
 
 /**
  * Path to the logs directory.
  */
-define('LOGS', TMP . 'logs' . DS);
+define('LOGS_DIR', TMP_DIR . 'logs' . DS);
 
 /**
  * Path to the cache files directory. It can be shared between hosts in a
  * multi-server setup.
  */
-define('CACHE', TMP . 'cache' . DS);
+define('CACHE_DIR', TMP_DIR . 'cache' . DS);

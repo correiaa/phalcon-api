@@ -17,7 +17,7 @@ require ROOT . '/vendor/autoload.php';
 try {
     $di = new FactoryDefault();
 
-    require APP . 'Bootstrap.php';
+    require APP_DIR . 'Bootstrap.php';
     $Bootstrap = new Bootstrap($di, new Loader());
     $Bootstrap->main();
 
@@ -25,7 +25,7 @@ try {
     $config = $di->get('config');
 
     $di->set('collection', function () use ($Micro) {
-        return include APP . 'routes/router.php';
+        return include ROUTE_DIR . 'router.php';
     });
     foreach ((array)$di->get('collection') as $collection) {
         $Micro->mount($collection);

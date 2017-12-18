@@ -44,8 +44,8 @@ class Bootstrap
     {
         $this->registerFiles();
         $this->registerNamespaces();
-        $this->registerServices();
         $this->registerDirs();
+        $this->registerServices();
     }
 
     /**
@@ -53,18 +53,19 @@ class Bootstrap
      */
     protected function registerDirs()
     {
-        $config = $this->getConfigService();
-        $directories = [
-            $config->application->componentsDir,
-            $config->application->controllersDir,
-            $config->application->eventsDir,
-            $config->application->httpsDir,
-            $config->application->middlewaresDir,
-            $config->application->modelsDir,
-            $config->application->tasksDir,
-            $config->application->traitsDir,
-            $config->application->validationsDir,
-        ];
+        // $config = $this->getConfigService();
+        // $directories = [
+        //     $config->application->componentsDir,
+        //     $config->application->controllersDir,
+        //     $config->application->eventsDir,
+        //     $config->application->httpsDir,
+        //     $config->application->middlewaresDir,
+        //     $config->application->modelsDir,
+        //     $config->application->tasksDir,
+        //     $config->application->traitsDir,
+        //     $config->application->validationsDir,
+        // ];
+        $directories = [APP_DIR];
         $this->loader->registerDirs($directories);
         $this->loader->register();
     }
@@ -74,18 +75,7 @@ class Bootstrap
      */
     protected function registerNamespaces()
     {
-        $namespaces = [
-            'App\\Component'  => APP . 'components',
-            'App\\Controller' => APP . 'controllers',
-            'App\\Event'      => APP . 'events',
-            'App\\Exception'  => APP . 'exceptions',
-            'App\\Http'       => APP . 'https',
-            'App\\Middleware' => APP . 'middlewares',
-            'App\\Model'      => APP . 'models',
-            'App\\Task'       => APP . 'tasks',
-            'App\\Traits'     => APP . 'traits',
-            'App\\Validation' => APP . 'validations',
-        ];
+        $namespaces = ['App' => APP_DIR];
         $this->loader->registerNamespaces($namespaces);
         $this->loader->register();
     }
@@ -96,8 +86,7 @@ class Bootstrap
     protected function registerFiles()
     {
         $files = [
-            CONFIG . 'helper.php',
-            APP . 'Service.php',
+            CONFIG_DIR . 'helper.php',
         ];
         $this->loader->registerFiles($files);
         $this->loader->register();
@@ -130,7 +119,7 @@ class Bootstrap
     private function setConfigService()
     {
         $this->factoryDefault->setShared(Service::CONFIG, function () {
-            return new Ini(CONFIG . 'config.ini');
+            return new Ini(CONFIG_DIR . 'config.ini');
         });
     }
 

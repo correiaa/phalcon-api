@@ -17,7 +17,7 @@ require ROOT . '/vendor/autoload.php';
 
 $Cli = new Cli();
 
-require APP . 'Bootstrap.php';
+require APP_DIR . 'Bootstrap.php';
 $Bootstrap = new Bootstrap($Cli, new Loader());
 $Bootstrap->main();
 $Console = new Console();
@@ -34,7 +34,7 @@ foreach ($argv as $key => $item) {
     } elseif ($key === 2) {
         $arguments['action'] = $item;
     } elseif ($key >= 3) {
-        $arguments['parameter'][] = $item;
+        $arguments['args'][] = $item;
     }
 }
 

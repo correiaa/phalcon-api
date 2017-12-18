@@ -169,6 +169,14 @@ $ phalcon model --name=users --namespace=App\\Model --output=./src/models --get-
 $ phalcon migration --action=generate --descr=init --force
 ```
 
+## 迁移
+
+### 迁移初始化
+
+```bash
+$ phalcon migration generate --descr=init --migrations=./migrations
+```
+
 ## 任务
 
 ### 运行任务
