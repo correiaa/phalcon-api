@@ -24,19 +24,20 @@ $ tree -L 2 -I vendor
 │   ├── config.default.ini 配置文件
 │   └── helper.php         函数文件
 │   └── paths.php          路径文件
+├── migrations -> 迁移目录
+├── routes -> 路由目录
 ├── src -> 应用目录
-│   ├── Bootstrap.php   引导
-│   ├── components      组件
-│   ├── controllers     控制器
-│   ├── events          事件
-│   ├── exceptions      异常
-│   ├── https           网络
-│   ├── migrations      迁移
-│   ├── models          模型
-│   ├── routes          路由
-│   ├── tasks           任务(控制台)
-│   ├── traits          复用
-│   └── validations     验证
+│   ├── Bootstrap.php  引导
+│   ├── Service.php    服务
+│   ├── Component      组件
+│   ├── Controller     控制器
+│   ├── Event          事件
+│   ├── Exception      异常
+│   ├── Http           网络
+│   ├── Model          模型
+│   ├── Task           任务(控制台)
+│   ├── Traits         复用
+│   └── Validation     验证
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
 │   └── logs  日志
@@ -63,16 +64,6 @@ $ tree -L 2 -I vendor
 | `isToken` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证访问令牌 `TOKEN` |
 | `isSign` | 可选的值: `0: 禁用, 1: 开启` | 开启后会验证数据签名 `SIGN` |
 | `apiVersion` | `v1, v2, ...` | 接口版本 |
-| `componentsDir` | `../src/components/` | 组件目录 |
-| `controllersDir` | `../src/controllers/` | 控制器目录 |
-| `eventsDir` | `../src/events/` | 事件目录 |
-| `exceptions` | `../src/exceptions/` | 异常目录 |
-| `httpsDir` | `../src/https/` | 网络目录 |
-| `migrationsDir` | `../src/migrations/` | 迁移目录 |
-| `modelsDir` | `../src/models/` | 模型目录 |
-| `tasksDir` | `../src/tasks/` | 任务目录 |
-| `traitsDir` | `../src/traits/` | 复用目录 |
-| `validationsDir` | `../src/validations/` | 验证目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
 
 #### `database` - 数据库配置
