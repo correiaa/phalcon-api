@@ -67,11 +67,11 @@ $ tree -L 2 -I vendor
 | `controllersDir` | `../src/controllers/` | 控制器目录 |
 | `eventsDir` | `../src/events/` | 事件目录 |
 | `exceptions` | `../src/exceptions/` | 异常目录 |
-| `helpersDir` | `../src/helpers/` | 助手(复用)目录 |
 | `migrationsDir` | `../src/migrations/` | 迁移目录 |
 | `modelsDir` | `../src/models/` | 模型目录 |
 | `networksDir` | `../src/networks/` | 网络目录 |
 | `tasksDir` | `../src/tasks/` | 任务目录 |
+| `traitsDir` | `../src/traits/` | 复用目录 |
 | `validationsDir` | `../src/validations/` | 验证目录 |
 | `baseUri` | `/phalcon-api/` | 根目录 |
 
