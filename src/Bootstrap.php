@@ -79,6 +79,7 @@ class Bootstrap
             'App\\Component'  => APP . 'components',
             'App\\Controller' => APP . 'controllers',
             'App\\Event'      => APP . 'events',
+            'App\\Exception'  => APP . 'exceptions',
             'App\\Http'       => APP . 'https',
             'App\\Model'      => APP . 'models',
             'App\\Task'       => APP . 'tasks',
