@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Network;
+namespace App\Http;
 
 /**
  * Request Network.

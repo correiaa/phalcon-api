@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Event\DatabaseEvent;
-use App\Network\Request;
+use App\Http\Request;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Events\Manager;
@@ -60,8 +60,8 @@ class Bootstrap
             $config->application->componentsDir,
             $config->application->controllersDir,
             $config->application->eventsDir,
+            $config->application->httpsDir,
             $config->application->modelsDir,
-            $config->application->networksDir,
             $config->application->tasksDir,
             $config->application->traitsDir,
             $config->application->validationsDir,
@@ -79,8 +79,8 @@ class Bootstrap
             'App\\Component'  => APP . 'components',
             'App\\Controller' => APP . 'controllers',
             'App\\Event'      => APP . 'events',
+            'App\\Http'       => APP . 'https',
             'App\\Model'      => APP . 'models',
-            'App\\Network'    => APP . 'networks',
             'App\\Task'       => APP . 'tasks',
             'App\\Traits'     => APP . 'traits',
             'App\\Validation' => APP . 'validations',
