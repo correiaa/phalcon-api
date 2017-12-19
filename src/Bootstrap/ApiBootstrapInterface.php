@@ -7,14 +7,18 @@ use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
 /**
- * Bootstrap Interface.
+ * ApiBootstrap Interface.
  *
- * @package App\Bootstrap
+ * @copyright Copyright (c) Xiaohe Software Foundation, Inc.
+ * @link      https://www.xiaohe.com/ Xiaohe(tm) Project
+ * @package   App\Bootstrap
+ * @date      2017-12-19 23:10
+ * @author    majinyun <majinyun@xiaohe.com>
  */
-interface BootstrapInterface
+interface ApiBootstrapInterface
 {
     /**
-     * Run some services.
+     * Run api some services.
      *
      * @param \App\Api                    $api
      * @param \Phalcon\DiInterface        $di

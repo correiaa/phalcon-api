@@ -2,14 +2,14 @@
 
 namespace App;
 
-use Phalcon\Mvc\Micro;
+use Phalcon\Cli\Console;
 
 /**
- * Api Class.
+ * Cli Class.
  *
  * @package App
  */
-class Api extends Micro
+class Cli extends Console
 {
     /**
      * Attach middleware.

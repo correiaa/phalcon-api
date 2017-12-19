@@ -6,10 +6,10 @@
 
 use App\Api;
 use App\Bootstrap;
-use App\Bootstrap\ServiceBootstrap;
+use App\Bootstrap\ApiServiceBootstrap;
 use App\Register;
 use Phalcon\Config\Adapter\Ini;
-use Phalcon\Di\FactoryDefault;
+use Phalcon\Di\FactoryDefault as Di;
 use Phalcon\Loader;
 
 error_reporting(E_ALL);
@@ -18,7 +18,7 @@ require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
 
 try {
-    $di = new FactoryDefault();
+    $di = new Di();
     $loader = new Loader();
 
     require APP_DIR . 'Register.php';
@@ -29,7 +29,7 @@ try {
     $ini = new Ini(CONFIG_DIR . 'config.ini');
 
     $bootstrap = new Bootstrap(
-        new ServiceBootstrap()
+        new ApiServiceBootstrap()
     );
     $bootstrap->run($api, $di, $ini);
 

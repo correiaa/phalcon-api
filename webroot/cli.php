@@ -4,10 +4,13 @@
  * CLI access main entry.
  */
 
-use App\bak;
-use Phalcon\Cli\Console;
+use App\Bootstrap;
+use App\Bootstrap\CliServiceBootstrap;
+use App\Cli;
+use App\Register;
 use Phalcon\Cli\Console\Exception;
-use Phalcon\Di\FactoryDefault\Cli;
+use Phalcon\Config\Adapter\Ini;
+use Phalcon\Di\FactoryDefault\Cli as Di;
 use Phalcon\Loader;
 
 error_reporting(E_ALL);
@@ -15,13 +18,21 @@ error_reporting(E_ALL);
 require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
 
-$Cli = new Cli();
+$di = new Di();
+$loader = new Loader();
+$ini = new Ini(CONFIG_DIR . 'config.ini');
 
-require APP_DIR . 'Bootstrap.php';
-$Bootstrap = new bak($Cli, new Loader());
-$Bootstrap->main();
-$Console = new Console();
-$Console->setDI($Cli);
+require APP_DIR . 'Register.php';
+$register = new Register($di, $loader);
+$register->main();
+
+$cli = new Cli();
+$cli->setDI($di);
+
+$bootstrap = new Bootstrap(
+    new CliServiceBootstrap()
+);
+$bootstrap->run($cli, $di, $ini);
 
 /**
  * Process the console arguments.
@@ -39,7 +50,7 @@ foreach ($argv as $key => $item) {
 }
 
 try {
-    $Console->handle($arguments);
+    $cli->handle($arguments);
 } catch (Exception $exception) {
     fwrite(STDERR, $exception->getMessage() . PHP_EOL);
     exit(1);

@@ -14,11 +14,11 @@ use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 /**
- * Service Bootstrap.
+ * ApiService Bootstrap.
  *
  * @package App\Bootstrap
  */
-class ServiceBootstrap implements BootstrapInterface
+class ApiServiceBootstrap implements ApiBootstrapInterface
 {
     /** @var \App\Api $api */
     private $api;
