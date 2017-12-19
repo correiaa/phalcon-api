@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Traits\ResultsetTrait;
 use App\Model\Users;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
