@@ -23,7 +23,7 @@ define('APP_DIR', ROOT . DS . 'src' . DS);
 define('CONFIG_DIR', ROOT . DS . 'config' . DS);
 
 /**
- * Path to the route directory.
+ * Path to the routes directory.
  */
 define('ROUTE_DIR', ROOT . DS . 'routes' . DS);
 

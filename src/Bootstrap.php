@@ -53,18 +53,6 @@ class Bootstrap
      */
     protected function registerDirs()
     {
-        // $config = $this->getConfigService();
-        // $directories = [
-        //     $config->application->componentsDir,
-        //     $config->application->controllersDir,
-        //     $config->application->eventsDir,
-        //     $config->application->httpsDir,
-        //     $config->application->middlewaresDir,
-        //     $config->application->modelsDir,
-        //     $config->application->tasksDir,
-        //     $config->application->traitsDir,
-        //     $config->application->validationsDir,
-        // ];
         $directories = [APP_DIR];
         $this->loader->registerDirs($directories);
         $this->loader->register();

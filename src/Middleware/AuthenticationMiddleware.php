@@ -7,7 +7,7 @@ use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
 
 /**
- * AuthenticationMiddleware Class.
+ * Authentication Middleware.
  *
  * @package App\Middleware
  */
@@ -18,10 +18,14 @@ class AuthenticationMiddleware implements MiddlewareInterface
      *
      * @param \Phalcon\Events\Event $event
      * @param \Phalcon\Mvc\Micro    $micro
+     *
+     * @return string
      */
     public function beforeExecuteRoute(Event $event, Micro $micro)
     {
         $token = $micro->request->getToken();
+
+        return $token;
     }
 
     /**
