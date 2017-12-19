@@ -3,9 +3,9 @@
 /**
  * User all routes collection.
  */
-$function = call_user_func(function () use ($Micro) {
-    $Config = $Micro->getDI()->get('config');
-    $version = $Config->application->apiVersion;
+$function = call_user_func(function () use ($api) {
+    $ini = $api->getDI()->get('config');
+    $version = $ini->application->apiVersion;
     $directory = __DIR__ . DS . $version . DS;
 
     if ( ! file_exists($directory)) {
@@ -26,8 +26,8 @@ $function = call_user_func(function () use ($Micro) {
     return $collections;
 });
 
-$Micro->get('/', function () use ($Micro) {
-    $Micro->response
+$api->get('/', function () use ($api) {
+    $api->response
         ->setStatusCode(200, 'OK')
         ->sendHeaders()
         ->setJsonContent(
@@ -40,14 +40,14 @@ $Micro->get('/', function () use ($Micro) {
             ]
         );
 
-    return $Micro->response;
+    return $api->response;
 });
 
 /**
  * Not found handler.
  */
-$Micro->notFound(function () use ($Micro) {
-    $Micro->response
+$api->notFound(function () use ($api) {
+    $api->response
         ->setStatusCode(404, 'Not Found')
         ->sendHeaders()
         ->setJsonContent(
@@ -60,17 +60,17 @@ $Micro->notFound(function () use ($Micro) {
             ]
         );
 
-    return $Micro->response;
+    return $api->response;
 });
 
 /**
  * Error handler.
  */
-$Micro->error(function ($exception) use ($Micro) {
-    $isDebug = $Micro->getDI()->get('config')->application->isDebug;
+$api->error(function ($exception) use ($api) {
+    $isDebug = $api->getDI()->get('config')->application->isDebug;
 
     if ( ! $isDebug) {
-        $Micro->response
+        $api->response
             ->setStatusCode(200, 'Exception')
             ->sendHeaders()
             ->setJsonContent(
@@ -83,7 +83,7 @@ $Micro->error(function ($exception) use ($Micro) {
                 ]
             );
 
-        return $Micro->response;
+        return $api->response;
     }
 });
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Bootstrap;
+use App\bak;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
@@ -17,7 +17,7 @@ try {
     $di = new FactoryDefault();
 
     require APP_DIR . 'Bootstrap.php';
-    $Bootstrap = new Bootstrap($di, new Loader());
+    $Bootstrap = new bak($di, new Loader());
     $Bootstrap->main();
 
     $Micro = new Micro($di);

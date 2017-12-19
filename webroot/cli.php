@@ -4,7 +4,7 @@
  * CLI access main entry.
  */
 
-use App\Bootstrap;
+use App\bak;
 use Phalcon\Cli\Console;
 use Phalcon\Cli\Console\Exception;
 use Phalcon\Di\FactoryDefault\Cli;
@@ -18,7 +18,7 @@ require ROOT . '/vendor/autoload.php';
 $Cli = new Cli();
 
 require APP_DIR . 'Bootstrap.php';
-$Bootstrap = new Bootstrap($Cli, new Loader());
+$Bootstrap = new bak($Cli, new Loader());
 $Bootstrap->main();
 $Console = new Console();
 $Console->setDI($Cli);
