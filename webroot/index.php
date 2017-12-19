@@ -32,9 +32,6 @@ try {
         new ServiceBootstrap()
     );
     $bootstrap->run($api, $di, $ini);
-    // require APP_DIR . 'Bootstrap.php';
-    // $Bootstrap = new bak($di, new Loader());
-    // $Bootstrap->main();
 
     $di->set('collection', function () use ($api) {
         return include ROUTE_DIR . 'router.php';
@@ -42,7 +39,6 @@ try {
     foreach ((array)$di->get('collection') as $collection) {
         $api->mount($collection);
     }
-
     $api->handle();
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
