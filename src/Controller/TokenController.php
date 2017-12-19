@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use Firebase\JWT\JWT;
-use Phalcon\Mvc\Controller;
 
 /**
  * Token Controller.
  *
  * @package App\Controller
  */
-class TokenController extends Controller
+class TokenController extends AbstractController
 {
     const TOKEN_TTL = 86400;
 

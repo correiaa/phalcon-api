@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Phalcon\Mvc\Controller;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
@@ -10,7 +9,7 @@ use PhpAmqpLib\Message\AMQPMessage;
  *
  * @package App\Controller
  */
-class RabbitController extends Controller
+class RabbitController extends AbstractController
 {
     /**
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface

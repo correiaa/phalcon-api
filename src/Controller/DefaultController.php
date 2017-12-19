@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Phalcon\Mvc\Controller;
 use Phalcon\Version;
 
 /**
@@ -10,7 +9,7 @@ use Phalcon\Version;
  *
  * @package App\Controller
  */
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
     /**
      * Default access entry.

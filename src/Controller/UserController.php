@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Traits\ResultsetTrait;
 use App\Model\Users;
-use Phalcon\Mvc\Controller;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 /**
@@ -12,7 +11,7 @@ use Phalcon\Paginator\Adapter\QueryBuilder;
  *
  * @package App\Controller
  */
-class UserController extends Controller
+class UserController extends AbstractController
 {
     use ResultsetTrait;
 
