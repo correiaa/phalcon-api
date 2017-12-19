@@ -13,8 +13,6 @@ use Phalcon\Paginator\Adapter\QueryBuilder;
  */
 class UserController extends AbstractController
 {
-    use ResultsetTrait;
-
     /**
      * Get user entity.
      *
@@ -24,19 +22,17 @@ class UserController extends AbstractController
      */
     public function getAction($id = null)
     {
+        if ( ! $id) {
+            return $this->warning([], 'Invalid parameter.');
+        }
+
         $entity = Users::findFirst([
             'conditions' => 'id=:id:',
             'bind'       => ['id' => $id],
         ]);
         $data = $entity ? $entity->toArray() : [];
-        $result = $this->getOKResultset($data);
 
-        $this->response
-            ->setStatusCode(200, 'OK')
-            ->sendHeaders()
-            ->setJsonContent($result);
-
-        return $this->response;
+        return $this->success($data);
     }
 
     /**
@@ -68,13 +64,8 @@ class UserController extends AbstractController
             'limit' => $paginator->getLimit(),
             'list'  => $paginator->getPaginate()->items,
         ];
-        $result = $this->getOKResultset($array);
-        $this->response
-            ->setStatusCode(200, 'OK')
-            ->sendHeaders()
-            ->setJsonContent($result);
 
-        return $this->response;
+        return $this->success($array);
     }
 
     public function authenticateAction()
@@ -89,11 +80,6 @@ class UserController extends AbstractController
             'password' => $password,
         ];
 
-        $this->response
-            ->setStatusCode(200, 'OK')
-            ->sendHeaders()
-            ->setJsonContent($user);
-
-        return $this->response;
+        return $this->success($user);
     }
 }

@@ -56,6 +56,11 @@ class TokenController extends AbstractController
         return $this->response;
     }
 
+    /**
+     * Get secret key.
+     *
+     * @return string
+     */
     private function getSecretKey()
     {
         $key = $this->getDI()->get('config')->security->appsecret;

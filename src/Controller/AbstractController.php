@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Traits\ResultsetTrait;
 use Phalcon\Mvc\Controller;
 
 /**
@@ -11,74 +12,58 @@ use Phalcon\Mvc\Controller;
  */
 abstract class AbstractController extends Controller
 {
+    use ResultsetTrait;
+
     /**
      * Successful notification.
      *
+     * @param array  $data
      * @param string $msg
      * @param string $code
-     * @param array  $data
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    public function success($msg = 'OK', $code = 'API_1001', array $data = [])
+    public function success(array $data, $msg = 'OK', $code = 'API_1001')
     {
-        return $this->createJsonResponse(true, $msg, $code, $data);
+        return $this->createJsonResponse(true, $data, $msg, $code);
     }
 
     /**
      * Warning notification.
      *
+     * @param array  $data
      * @param string $msg
      * @param string $code
-     * @param array  $data
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    public function warning($msg = 'NO', $code = 'API_1002', array $data = [])
+    public function warning(array $data, $msg = 'NO', $code = 'API_1002')
     {
-        return $this->createJsonResponse(false, $msg, $code, $data);
+        return $this->createJsonResponse(false, $data, $msg, $code);
     }
 
     /**
      * Create JSON response.
      *
      * @param bool   $status
+     * @param array  $data
      * @param string $msg
      * @param string $code
-     * @param array  $data
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    private function createJsonResponse($status, $msg, $code, array $data = [])
+    private function createJsonResponse($status, array $data, $msg, $code)
     {
-        $content = $this->getResultset($status, $msg, $code, $data);
+        if ($status) {
+            $content = $this->getOKResultset($data, $msg, $code);
+        } else {
+            $content = $this->getNOResultset($data, $msg, $code);
+        }
         $this->response
             ->setStatusCode(200, $status ? 'OK' : 'NO')
             ->sendHeaders()
             ->setJsonContent($content);
 
         return $this->response;
-    }
-
-    /**
-     * Get resultset.
-     *
-     * @param bool   $status
-     * @param string $msg
-     * @param string $code
-     * @param array  $data
-     *
-     * @return array
-     */
-    public function getResultset($status, $msg, $code, array $data = [])
-    {
-        $result = [
-            'status' => $status,
-            'msg'    => $msg,
-            'code'   => $code,
-            'data'   => $data,
-        ];
-
-        return $result;
     }
 }

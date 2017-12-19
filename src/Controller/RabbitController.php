@@ -12,6 +12,8 @@ use PhpAmqpLib\Message\AMQPMessage;
 class RabbitController extends AbstractController
 {
     /**
+     * RabbitMQ producer.
+     *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
     public function producerAction()
@@ -39,15 +41,13 @@ class RabbitController extends AbstractController
         logger(json_encode($text), 8, 'producer');
         $AMQPChannel->close();
         $AMQPStreamConnection->close();
-        $this->response->setStatusCode(200, 'OK')->sendHeaders();
-        $this->response->setJsonContent(
-            [
-                '队列内容' => $AMQPMessage->getBody(),
-                '内容大小' => $AMQPMessage->getBodySize(),
-            ]
-        );
 
-        return $this->response;
+        $result = [
+            '队列内容' => $AMQPMessage->getBody(),
+            '内容大小' => $AMQPMessage->getBodySize(),
+        ];
+
+        return $this->success($result);
     }
 }
 
