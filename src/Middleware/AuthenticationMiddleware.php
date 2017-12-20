@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use App\Api;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
@@ -17,15 +18,17 @@ class AuthenticationMiddleware implements MiddlewareInterface
      * Before anything happens.
      *
      * @param \Phalcon\Events\Event $event
-     * @param \Phalcon\Mvc\Micro    $micro
+     * @param \App\Api              $api
      *
      * @return string
      */
-    public function beforeExecuteRoute(Event $event, Micro $micro)
+    public function beforeExecuteRoute(Event $event, Api $api)
     {
-        $token = $micro->request->getToken();
+        $token = $api->request->getToken();
 
-        return $token;
+        if ($token) {
+            $this->authManager->authenticateToken($token);
+        }
     }
 
     /**

@@ -3,13 +3,16 @@
 namespace App\Bootstrap;
 
 use App\Api;
+use App\Auth\Manager as AuthManager;
+use App\Auth\JWTToken;
+use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Http\Request;
 use App\Http\Response;
 use App\Service;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
-use Phalcon\Events\Manager;
+use Phalcon\Events\Manager as EventManager;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
@@ -51,6 +54,8 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
         $this->setHttpService();
         $this->setUrlService();
         $this->setEventManagerService();
+        $this->setJWTTokenService();
+        $this->setAuthManagerService();
         $this->setDatabaseService();
         $this->setRabbitMQService();
     }
@@ -92,7 +97,35 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
      */
     private function setEventManagerService()
     {
-        $this->di->setShared(Service::EVENT_MANAGER, new Manager());
+        $this->di->setShared(Service::EVENTS_MANAGER, new EventManager());
+    }
+
+    private function setJWTTokenService()
+    {
+        $Ini = $this->ini;
+        $this->di->setShared(Service::TOKEN, function () use ($Ini) {
+            return new JWTToken(
+                $Ini->security->appsecret,
+                JWTToken::ALGORITHM_HS256
+            );
+        });
+    }
+
+    /**
+     * Set auth manager service.
+     */
+    private function setAuthManagerService()
+    {
+        $Ini = $this->ini;
+        $this->di->setShared(Service::AUTH_MANAGER, function () use ($Ini) {
+            $authManager = new AuthManager($Ini->security->expirationTime);
+            $authManager->registerAccountType(
+                UsernameAccountType::NAME,
+                new UsernameAccountType()
+            );
+
+            return $authManager;
+        });
     }
 
     /**
