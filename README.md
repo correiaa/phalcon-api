@@ -95,7 +95,7 @@ server {
     server_name local.phalcon-api.com;
 
     root /YourWorkspace/phalcon-api/webroot;
-    index index.php index.html index.htm;
+    index api.php index.php index.html index.htm;
 
     charset utf-8;
     client_max_body_size 100M;
@@ -105,14 +105,14 @@ server {
     error_log  /usr/local/var/log/nginx/phalcon-api-error.log;
 
     location / {
-        try_files $uri $uri/ /index.php?_url=$uri&args;
+        try_files $uri $uri/ /api.php?_url=$uri&args;
     }
 
     location ~ \.php$ {
         try_files $uri =404;
 
         fastcgi_pass 127.0.0.1:9000;
-        fastcgi_index /index.php;
+        fastcgi_index /api.php;
 
         include fastcgi.conf;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
