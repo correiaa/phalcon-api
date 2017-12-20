@@ -55,7 +55,6 @@ try {
     fwrite(STDERR, $exception->getMessage() . PHP_EOL);
     exit(1);
 } catch (\Throwable $throwable) {
-    exit(json_encode($throwable));
     fwrite(STDERR, $throwable->getMessage() . PHP_EOL);
     exit(2);
 } catch (\Exception $exception) {
