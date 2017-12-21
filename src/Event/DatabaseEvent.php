@@ -89,7 +89,7 @@ class DatabaseEvent
      */
     protected function getLogFile()
     {
-        $path = LOGS . '%s/%s/%s/' . self::FILE_NAME;
+        $path = LOGS_DIR . '%s/%s/%s/' . self::FILE_NAME;
         $path = sprintf($path, date('Y'), date('m'), date('d'));
 
         if ( ! file_exists($path)) {

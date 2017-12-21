@@ -2,10 +2,13 @@
 
 namespace App\Auth;
 
+use Phalcon\Exception;
 use Phalcon\Mvc\User\Plugin;
 
 /**
  * Manager Class.
+ *
+ * @property \App\Auth\JWTToken $jwtToken
  *
  * @package App\Auth
  */
@@ -33,6 +36,14 @@ class Manager extends Plugin
         $this->accountType = [];
     }
 
+    /**
+     * Register account type.
+     *
+     * @param string                         $name
+     * @param \App\Auth\AccountTypeInterface $accountType
+     *
+     * @return $this
+     */
     public function registerAccountType(
         $name,
         AccountTypeInterface $accountType
@@ -59,6 +70,11 @@ class Manager extends Plugin
 
     public function authenticateToken($token)
     {
-
+        try {
+            $token = $this->jwtToken->getProvider($token);
+            dd($token);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }

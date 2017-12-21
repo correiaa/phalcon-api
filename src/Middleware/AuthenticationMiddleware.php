@@ -3,16 +3,21 @@
 namespace App\Middleware;
 
 use App\Api;
+use App\Service;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
+use Phalcon\Mvc\User\Plugin;
 
 /**
  * Authentication Middleware.
  *
+ * @property \App\Http\Request $request
+ * @property \App\Auth\Manager $authManager
+ *
  * @package App\Middleware
  */
-class AuthenticationMiddleware implements MiddlewareInterface
+class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
 {
     /**
      * Before anything happens.

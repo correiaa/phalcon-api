@@ -22,7 +22,7 @@ class Api extends Micro
     {
         if ( ! $this->getEventsManager()) {
             $this->setEventsManager(
-                $this->getDI()->get(Service::EVENT_MANAGER)
+                $this->getDI()->get(Service::EVENTS_MANAGER)
             );
         }
 

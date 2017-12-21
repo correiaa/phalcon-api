@@ -38,8 +38,9 @@ class Request extends \Phalcon\Http\Request
     {
         $headerToken = $this->getHeader('AUTHORIZATION');
         $queryToken = $this->getQuery('token');
+        $token = $queryToken ?: $this->parseBearerValue($headerToken);
 
-        return $headerToken ?: $this->parseBearerValue($queryToken);
+        return $token;
     }
 
     /**
@@ -51,7 +52,7 @@ class Request extends \Phalcon\Http\Request
      */
     protected function parseBearerValue($string)
     {
-        if (false !== strpos(trim($string), 'Bearer')) {
+        if (0 !== strpos(trim($string), 'Bearer')) {
             return null;
         }
 
