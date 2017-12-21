@@ -17,6 +17,9 @@ class Service
     const CONFIG = 'config';
     const CONFIG_FILE = 'config.ini';
 
+    /** Security service. */
+    const SECURITY = 'security';
+
     /** URL service. */
     const URL = 'url';
 

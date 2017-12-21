@@ -23,8 +23,11 @@ abstract class AbstractController extends Controller
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    public function success(array $data, $msg = 'OK', $code = 'API_1001')
-    {
+    public function successResponse(
+        array $data,
+        $msg = 'OK',
+        $code = 'API_1001'
+    ) {
         return $this->createJsonResponse(true, $data, $msg, $code);
     }
 
@@ -37,8 +40,11 @@ abstract class AbstractController extends Controller
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
-    public function warning(array $data, $msg = 'NO', $code = 'API_1002')
-    {
+    public function warningResponse(
+        array $data,
+        $msg = 'NO',
+        $code = 'API_1002'
+    ) {
         return $this->createJsonResponse(false, $data, $msg, $code);
     }
 

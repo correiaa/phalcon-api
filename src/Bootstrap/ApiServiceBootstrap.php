@@ -3,16 +3,15 @@
 namespace App\Bootstrap;
 
 use App\Api;
+use App\Auth\EmailAccountType;
 use App\Auth\Manager as AuthManager;
 use App\Auth\JWTToken;
-use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Http\Request;
 use App\Http\Response;
 use App\Service;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
-use Phalcon\Events\Manager as EventManager;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
@@ -117,8 +116,8 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
         $this->di->setShared(Service::AUTH_MANAGER, function () use ($ini) {
             $authManager = new AuthManager($ini->security->expirationTime);
             $authManager->registerAccountType(
-                UsernameAccountType::NAME,
-                new UsernameAccountType()
+                EmailAccountType::NAME,
+                new EmailAccountType()
             );
 
             return $authManager;

@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Auth\EmailAccountType;
+use App\Auth\UsernameAccountType;
 use App\Model\Users;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 /**
  * User Controller.
+ *
+ * @property \App\Auth\Manager $authManager
  *
  * @package App\Controller
  */
@@ -64,21 +68,34 @@ class UserController extends AbstractController
             'list'  => $paginator->getPaginate()->items,
         ];
 
-        return $this->success($array);
+        return $this->successResponse($array);
     }
 
     public function authenticateAction()
     {
         $username = $this->request->getUsername();
         $password = $this->request->getPassword();
+        $JWTProvider = $this->authManager->loginWithUsernamePassword(
+            EmailAccountType::NAME,
+            $username,
+            $password
+        );
+        $user = Users::findFirst(
+            [
+                'conditions' => 'id=:id:',
+                'bind'       => ['id' => $JWTProvider->getIdentity()],
+            ]
+        );
 
-        // TODO: find user information by username and password.
-        $user = [
-            'id'       => 1001,
-            'username' => $username,
-            'password' => $password,
+        if ( ! $user) {
+            return null;
+        }
+        $result = [
+            'token'  => $JWTProvider->getToken(),
+            'expire' => $JWTProvider->getExpirationTime(),
+            'user'   => $user->toArray(),
         ];
 
-        return $this->success($user);
+        return $this->successResponse($result);
     }
 }
