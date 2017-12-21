@@ -84,9 +84,9 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
      */
     private function setUrlService()
     {
-        $Ini = $this->ini;
-        $this->di->setShared(Service::URL, function () use ($Ini) {
-            $baseUri = $Ini->application->baseUri;
+        $ini = $this->ini;
+        $this->di->setShared(Service::URL, function () use ($ini) {
+            $baseUri = $ini->application->baseUri;
 
             return (new Url())->setBaseUri($baseUri);
         });
@@ -102,10 +102,10 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
 
     private function setJWTTokenService()
     {
-        $Ini = $this->ini;
-        $this->di->setShared(Service::TOKEN, function () use ($Ini) {
+        $ini = $this->ini;
+        $this->di->setShared(Service::TOKEN, function () use ($ini) {
             return new JWTToken(
-                $Ini->security->appsecret,
+                $ini->security->appsecret,
                 JWTToken::ALGORITHM_HS256
             );
         });
@@ -116,9 +116,9 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
      */
     private function setAuthManagerService()
     {
-        $Ini = $this->ini;
-        $this->di->setShared(Service::AUTH_MANAGER, function () use ($Ini) {
-            $authManager = new AuthManager($Ini->security->expirationTime);
+        $ini = $this->ini;
+        $this->di->setShared(Service::AUTH_MANAGER, function () use ($ini) {
+            $authManager = new AuthManager($ini->security->expirationTime);
             $authManager->registerAccountType(
                 UsernameAccountType::NAME,
                 new UsernameAccountType()
@@ -160,7 +160,7 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
                      *
                      * @see https://docs.phalconphp.com/ar/3.2/events
                      */
-                    $manager = new Manager();
+                    $manager = new EventManager();
                     $manager->attach(Service::DB, new DatabaseEvent());
                     $connection->setEventsManager($manager);
                 }
