@@ -47,7 +47,20 @@ class UsernameAccountType implements AccountTypeInterface
         return (string)$user->id;
     }
 
+    /**
+     * User authenticate.
+     *
+     * @param string $identity
+     *
+     * @return bool|mixed
+     */
     public function authenticate($identity)
     {
+        $count = Users::count([
+            'conditions' => 'id=:id:',
+            'bind'       => ['id' => $identity],
+        ]);
+
+        return $count > 0;
     }
 }

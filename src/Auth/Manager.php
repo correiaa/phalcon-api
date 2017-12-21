@@ -58,6 +58,16 @@ class Manager extends Plugin
         return $this;
     }
 
+    /**
+     * Login with user username and password.
+     *
+     * @param string $type
+     * @param string $username
+     * @param string $password
+     *
+     * @return \App\Auth\Provider\JWTProvider
+     * @throws \Phalcon\Exception
+     */
     public function loginWithUsernamePassword($type, $username, $password)
     {
         $array = [
@@ -68,6 +78,15 @@ class Manager extends Plugin
         return $this->login($type, $array);
     }
 
+    /**
+     * User login.
+     *
+     * @param string $type
+     * @param array  $array
+     *
+     * @return \App\Auth\Provider\JWTProvider
+     * @throws \Phalcon\Exception
+     */
     public function login($type, array $array)
     {
         if ( ! $account = $this->getAccountType($type)) {
@@ -93,14 +112,43 @@ class Manager extends Plugin
         return $this->jwtProvider;
     }
 
+    /**
+     * Authentication token.
+     *
+     * @param string $token
+     *
+     * @return bool
+     * @throws \Phalcon\Exception
+     */
     public function authenticateToken($token)
     {
         try {
-            $token = $this->jwtToken->getProvider($token);
-            dd($token);
+            $JWTToken = $this->jwtToken->getProvider($token);
         } catch (Exception $e) {
-            dd($e->getMessage());
+            throw new Exception(Message::AUTH_TOKEN_INVALID);
         }
+
+        if ( ! $JWTToken) {
+            return false;
+        }
+
+        if ($JWTToken->getExpirationTime() < time()) {
+            throw new Exception(Message::AUTH_TOKEN_EXPIRED);
+        }
+        $JWTToken->setToken($token);
+
+        /** @var \App\Auth\AccountTypeInterface $account */
+        $account = $this->getAccountType($JWTToken->getAccountTypeName());
+        if ( ! $account) {
+            throw new Exception(Message::AUTH_TOKEN_FAILED);
+        }
+
+        if ( ! $account->authenticate($JWTToken->getIdentity())) {
+            throw new Exception(Message::AUTH_TOKEN_INVALID);
+        }
+        $this->jwtProvider = $JWTToken;
+
+        return true;
     }
 
     /**
