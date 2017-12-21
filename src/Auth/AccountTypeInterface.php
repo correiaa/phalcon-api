@@ -10,6 +10,8 @@ namespace App\Auth;
 interface AccountTypeInterface
 {
     /**
+     * User login.
+     *
      * @param array $data
      *
      * @return mixed
@@ -17,6 +19,8 @@ interface AccountTypeInterface
     public function login(array $data);
 
     /**
+     * User authentication.
+     *
      * @param string $identity
      *
      * @return mixed

@@ -26,6 +26,7 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * @param \App\Api              $api
      *
      * @return string
+     * @throws \Phalcon\Exception
      */
     public function beforeExecuteRoute(Event $event, Api $api)
     {

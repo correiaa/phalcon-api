@@ -27,11 +27,11 @@ class JWTProvider
     /**
      * SessionStorage constructor.
      *
-     * @param string $accountTypeName
-     * @param string $identity
-     * @param int    $startTime
-     * @param int    $expirationTime
-     * @param null   $token
+     * @param string      $accountTypeName
+     * @param string      $identity
+     * @param int         $startTime
+     * @param int         $expirationTime
+     * @param null|string $token
      */
     public function __construct(
         $accountTypeName,
