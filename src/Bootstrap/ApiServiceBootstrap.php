@@ -3,16 +3,15 @@
 namespace App\Bootstrap;
 
 use App\Api;
+use App\Auth\EmailAccountType;
 use App\Auth\Manager as AuthManager;
 use App\Auth\JWTToken;
-use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Http\Request;
 use App\Http\Response;
 use App\Service;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
-use Phalcon\Events\Manager as EventManager;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
@@ -48,12 +47,14 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
         $this->main();
     }
 
+    /**
+     * Inject necessary services into the container.
+     */
     protected function main()
     {
         $this->setConfigService();
         $this->setHttpService();
         $this->setUrlService();
-        $this->setEventManagerService();
         $this->setJWTTokenService();
         $this->setAuthManagerService();
         $this->setDatabaseService();
@@ -93,17 +94,12 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     }
 
     /**
-     * Set event manager service.
+     * Set JWT token service.
      */
-    private function setEventManagerService()
-    {
-        $this->di->setShared(Service::EVENTS_MANAGER, new EventManager());
-    }
-
     private function setJWTTokenService()
     {
         $ini = $this->ini;
-        $this->di->setShared(Service::TOKEN, function () use ($ini) {
+        $this->di->setShared(Service::JWT_TOKEN, function () use ($ini) {
             return new JWTToken(
                 $ini->security->appsecret,
                 JWTToken::ALGORITHM_HS256
@@ -120,8 +116,8 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
         $this->di->setShared(Service::AUTH_MANAGER, function () use ($ini) {
             $authManager = new AuthManager($ini->security->expirationTime);
             $authManager->registerAccountType(
-                UsernameAccountType::NAME,
-                new UsernameAccountType()
+                EmailAccountType::NAME,
+                new EmailAccountType()
             );
 
             return $authManager;
@@ -133,40 +129,41 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
      */
     private function setDatabaseService()
     {
+        $di = $this->di;
         $ini = $this->ini;
-        $this->di->setShared(Service::DB,
-            function () use ($ini) {
-                $class = 'Phalcon\Db\Adapter\Pdo\\' . $ini->database->adapter;
-                $parameter = [
-                    'host'     => $ini->database->host,
-                    'username' => $ini->database->username,
-                    'password' => $ini->database->password,
-                    'dbname'   => $ini->database->dbname,
-                    'charset'  => $ini->database->charset,
-                    'options'  => [
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
-                    ],
-                ];
+        $this->di->setShared(Service::DB, function () use ($di, $ini) {
+            $class = 'Phalcon\Db\Adapter\Pdo\\' . $ini->database->adapter;
+            $parameter = [
+                'host'     => $ini->database->host,
+                'username' => $ini->database->username,
+                'password' => $ini->database->password,
+                'dbname'   => $ini->database->dbname,
+                'charset'  => $ini->database->charset,
+                'options'  => [
+                    \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                ],
+            ];
 
-                if ($ini->database->adapter == 'Postgresql') {
-                    unset($parameter['charset']);
-                }
+            if ($ini->database->adapter == 'Postgresql') {
+                unset($parameter['charset']);
+            }
 
-                $connection = new $class($parameter);
+            $connection = new $class($parameter);
 
-                if ($ini->application->isListenDb) {
-                    /**
-                     * Use the EventManager to listen Database executed query.
-                     *
-                     * @see https://docs.phalconphp.com/ar/3.2/events
-                     */
-                    $manager = new EventManager();
-                    $manager->attach(Service::DB, new DatabaseEvent());
-                    $connection->setEventsManager($manager);
-                }
+            if ($ini->application->isListenDb) {
+                /**
+                 * Use the EventManager to listen Database executed query.
+                 *
+                 * @var \Phalcon\Events\Manager $manager
+                 * @see https://docs.phalconphp.com/ar/3.2/events
+                 */
+                $manager = $di->get(Service::EVENTS_MANAGER);
+                $manager->attach(Service::DB, new DatabaseEvent());
+                $connection->setEventsManager($manager);
+            }
 
-                return $connection;
-            });
+            return $connection;
+        });
     }
 
     /**
@@ -175,21 +172,20 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     private function setRabbitMQService()
     {
         $ini = $this->ini;
-        $this->di->setShared(Service::RABBITMQ,
-            function () use ($ini) {
-                $connection = new AMQPStreamConnection(
-                    $ini->rabbitmq->host,
-                    $ini->rabbitmq->port,
-                    $ini->rabbitmq->username,
-                    $ini->rabbitmq->password,
-                    $ini->rabbitmq->vhost,
-                    $ini->rabbitmq->insist,
-                    $ini->rabbitmq->loginMethod,
-                    $ini->rabbitmq->loginResponse,
-                    $ini->rabbitmq->locale
-                );
+        $this->di->setShared(Service::RABBITMQ, function () use ($ini) {
+            $connection = new AMQPStreamConnection(
+                $ini->rabbitmq->host,
+                $ini->rabbitmq->port,
+                $ini->rabbitmq->username,
+                $ini->rabbitmq->password,
+                $ini->rabbitmq->vhost,
+                $ini->rabbitmq->insist,
+                $ini->rabbitmq->loginMethod,
+                $ini->rabbitmq->loginResponse,
+                $ini->rabbitmq->locale
+            );
 
-                return $connection;
-            });
+            return $connection;
+        });
     }
 }

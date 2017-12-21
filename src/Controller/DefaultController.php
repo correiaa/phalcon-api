@@ -40,7 +40,7 @@ class DefaultController extends AbstractController
             ],
         ];
 
-        return $this->success($result);
+        return $this->successResponse($result);
     }
 
     /**
@@ -67,6 +67,6 @@ class DefaultController extends AbstractController
             'getLanguages'                   => $this->request->getLanguages(),
         ];
 
-        return $this->success($result);
+        return $this->successResponse($result);
     }
 }

@@ -17,6 +17,9 @@ class Service
     const CONFIG = 'config';
     const CONFIG_FILE = 'config.ini';
 
+    /** Security service. */
+    const SECURITY = 'security';
+
     /** URL service. */
     const URL = 'url';
 
@@ -26,8 +29,8 @@ class Service
     /** Auth manager service. */
     const AUTH_MANAGER = 'authManager';
 
-    /** Token service. */
-    const TOKEN = 'token';
+    /** JWT Token service. */
+    const JWT_TOKEN = 'jwtToken';
 
     /** Queue service. */
     const RABBITMQ = 'rabbitmq';

@@ -29,7 +29,8 @@ try {
     $ini = new Ini(CONFIG_DIR . 'config.ini');
 
     $bootstrap = new Bootstrap(
-        new ApiServiceBootstrap()
+        new ApiServiceBootstrap(),
+        new Bootstrap\MiddlewareBootstrap()
     );
     $bootstrap->run($api, $di, $ini);
 

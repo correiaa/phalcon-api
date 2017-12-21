@@ -111,6 +111,23 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
+     * @param string $token
+     *
+     * @return \App\Auth\Provider\JWTProvider
+     */
+    public function getProvider($token)
+    {
+        $token = $this->decode($token);
+
+        return new JWTProvider(
+            $token->iss,
+            $token->sub,
+            $token->iat,
+            $token->exp
+        );
+    }
+
+    /**
      * @param string $iss
      * @param mixed  $user
      * @param int    $iat

@@ -5,11 +5,7 @@ namespace App\Auth\Provider;
 /**
  * JWTProvider Class.
  *
- * @copyright Copyright (c) Xiaohe Software Foundation, Inc.
- * @link      https://www.xiaohe.com/ Xiaohe(tm) Project
- * @package   App\Auth
- * @date      2017-12-20 22:41
- * @author    majinyun <majinyun@xiaohe.com>
+ * @package App\Auth
  */
 class JWTProvider
 {

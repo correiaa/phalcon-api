@@ -7,13 +7,13 @@ use App\Service;
 use Phalcon\Di;
 
 /**
- * UsernameAccountType Class.
+ * EmailAccountType Class.
  *
  * @package App\Auth
  */
-class UsernameAccountType implements AccountTypeInterface
+class EmailAccountType implements AccountTypeInterface
 {
-    const NAME = 'username';
+    const NAME = 'email';
 
     /**
      * @param array $data
@@ -24,17 +24,16 @@ class UsernameAccountType implements AccountTypeInterface
     {
         /** @var \Phalcon\Security $security */
         $security = Di::getDefault()->get(Service::SECURITY);
-        $username = $data[Manager::LOGIN_USERNAME];
+        $email = $data[Manager::LOGIN_EMAIL];
         $password = $data[Manager::LOGIN_PASSWORD];
 
-        $columns = (new Users())->columnMap();
-        $bindParams = ['username' => $username];
-        $user = Users::query()
-            ->columns($columns)
-            ->where('username=:username:')
-            ->bind($bindParams)
-            ->limit(1)
-            ->execute();
+        $bindParams = ['email' => $email];
+        $user = Users::findFirst([
+            'columns'    => (new Users())->columnMap(),
+            'conditions' => 'email=:email:',
+            'limit'      => 1,
+            'bind'       => $bindParams,
+        ]);
 
         if ( ! $user) {
             return null;
