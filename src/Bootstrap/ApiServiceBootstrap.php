@@ -48,6 +48,9 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
         $this->main();
     }
 
+    /**
+     * Inject necessary services into the container.
+     */
     protected function main()
     {
         $this->setConfigService();
