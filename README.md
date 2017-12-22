@@ -84,6 +84,7 @@ $ tree -L 2 -I vendor
 | --- | --- | --- |
 | `appid` | `32 位 APP ID` | 应用 ID |
 | `appsecret` | `64 位 APP SECRET` | 应用密钥 |
+| `expirationTime` | `604800`, 单位为秒 | `Token` 过期时间 |
 
 ### 虚拟主机配置
 
