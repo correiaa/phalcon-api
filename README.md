@@ -96,6 +96,16 @@ $ tree -L 2 -I vendor
 | `appsecret` | `64 位 APP SECRET` | 应用密钥 |
 | `expirationTime` | `604800`, 单位为秒 | `Token` 过期时间 |
 
+
+### 安装依赖包
+
+> * [如何安装 Composer](https://getcomposer.org/download/)
+> * [Packagist / Composer 中国全量镜像](https://pkg.phpcomposer.com/)
+
+```bash
+$ composer install
+```
+
 ### 虚拟主机配置
 
 ```nginx
