@@ -9,11 +9,7 @@ use Phalcon\DiInterface;
 /**
  * ApiBootstrap Interface.
  *
- * @copyright Copyright (c) Xiaohe Software Foundation, Inc.
- * @link      https://www.xiaohe.com/ Xiaohe(tm) Project
- * @package   App\Bootstrap
- * @date      2017-12-19 23:10
- * @author    majinyun <majinyun@xiaohe.com>
+ * @package App\Bootstrap
  */
 interface ApiBootstrapInterface
 {

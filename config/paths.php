@@ -15,7 +15,7 @@ define('ROOT', dirname(__DIR__));
 /**
  * Path to the application's directory.
  */
-define('APP_DIR', ROOT . DS . 'src' . DS);
+define('APP_DIR', ROOT . DS . 'app' . DS);
 
 /**
  * Path to the config directory.

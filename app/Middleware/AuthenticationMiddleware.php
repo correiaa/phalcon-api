@@ -12,8 +12,8 @@ use Phalcon\Mvc\User\Plugin;
 /**
  * Authentication Middleware.
  *
- * @property \App\Http\Request $request
- * @property \App\Auth\Manager $authManager
+ * @property \app\Http\Request $request
+ * @property \app\Auth\Manager $authManager
  *
  * @package App\Middleware
  */
@@ -23,7 +23,7 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * Before anything happens.
      *
      * @param \Phalcon\Events\Event $event
-     * @param \App\Api              $api
+     * @param \app\Api              $api
      *
      * @return string
      * @throws \Phalcon\Exception
