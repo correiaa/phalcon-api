@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Web access main entry.
+ * API access main entry.
  */
 
 use App\Api;

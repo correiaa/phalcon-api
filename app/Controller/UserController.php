@@ -71,6 +71,12 @@ class UserController extends AbstractController
         return $this->successResponse($array);
     }
 
+    /**
+     * User authenticate.
+     *
+     * @return null|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @throws \Phalcon\Exception
+     */
     public function authenticateAction()
     {
         $username = $this->request->getUsername();

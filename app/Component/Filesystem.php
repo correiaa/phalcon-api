@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component;
+namespace app\Component;
 
 use App\Exception\IOException;
 
