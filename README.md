@@ -18,36 +18,46 @@ $ tree -L 2 -I vendor
 .
 ├── LICENSE
 ├── README.md
+├── app -> 应用目录
+│   ├── Api.php       Api 应用类
+│   ├── Auth          认证
+│   ├── Bootstrap     引导
+│   ├── Bootstrap.php 引导类
+│   ├── Cli.php       Cli 应用类
+│   ├── Component     组件
+│   ├── Service.php   服务
+│   ├── Component     组件
+│   ├── Controller    控制器
+│   ├── Event         事件
+│   ├── Exception     异常
+│   ├── Http          网络
+│   ├── Message.php   消息代码类
+│   ├── Middleware    中间件
+│   ├── Model         模型
+│   ├── Register.php  注册服务类
+│   ├── Service.php   服务名称类
+│   ├── Task          任务(控制台)
+│   ├── Traits        复用
+│   └── Validation    验证
 ├── composer.json
 ├── composer.lock
 ├── config -> 配置目录
 │   ├── config.default.ini 配置文件
-│   └── helper.php         函数文件
+│   ├── helper.php         函数文件
 │   └── paths.php          路径文件
 ├── migrations -> 迁移目录
 ├── routes -> 路由目录
-├── src -> 应用目录
-│   ├── Bootstrap.php  引导
-│   ├── Service.php    服务
-│   ├── Component      组件
-│   ├── Controller     控制器
-│   ├── Event          事件
-│   ├── Exception      异常
-│   ├── Http           网络
-│   ├── Model          模型
-│   ├── Task           任务(控制台)
-│   ├── Traits         复用
-│   └── Validation     验证
+│   ├── router.php 配置文件
+│   ├── v1 版本 1
+│   └── v2 版本 2
 ├── tmp -> 缓存目录
 │   ├── cache 缓存
 │   └── logs  日志
 └── webroot -> 入口目录
     ├── .htaccess   重写
-    ├── favicon.ico 图标
-    ├── files       文件
+    ├── api.php     应用入口
     ├── cli.php     命令行入口
-    ├── debug.php   调试入口
-    └── index.php   主入口
+    └── favicon.ico 图标
 ```
 
 ## 项目配置
