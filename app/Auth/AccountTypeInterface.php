@@ -2,11 +2,6 @@
 
 namespace App\Auth;
 
-/**
- * AccountType Interface.
- *
- * @package App\Auth
- */
 interface AccountTypeInterface
 {
     /**

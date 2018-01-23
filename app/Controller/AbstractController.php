@@ -5,11 +5,6 @@ namespace App\Controller;
 use App\Traits\ResultsetTrait;
 use Phalcon\Mvc\Controller;
 
-/**
- * Abstract Controller.
- *
- * @package App\Controller
- */
 abstract class AbstractController extends Controller
 {
     use ResultsetTrait;

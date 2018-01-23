@@ -4,11 +4,6 @@ namespace app\Component;
 
 use App\Exception\IOException;
 
-/**
- * Class Filesystem.
- *
- * @package App\Component
- */
 class Filesystem
 {
     /**
@@ -30,7 +25,7 @@ class Filesystem
      */
     public function mkdir($file, $mode = 0777)
     {
-        $dirs = is_array($file) ? (array)$file : [$file];
+        $dirs = \is_array($file) ? (array)$file : [$file];
         foreach ($dirs as $dir) {
             if (is_dir($dir)) {
                 continue;
@@ -38,7 +33,7 @@ class Filesystem
 
             if (true !== @mkdir($dir, $mode, true)) {
                 $error = error_get_last();
-                if ( ! is_dir($dir)) {
+                if (! is_dir($dir)) {
                     if ($error) {
                         throw new IOException(
                             sprintf('Failed to create "%s": %s.', $dir,

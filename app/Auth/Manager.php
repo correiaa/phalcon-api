@@ -16,18 +16,24 @@ use Phalcon\Mvc\User\Plugin;
  */
 class Manager extends Plugin
 {
-    const LOGIN_PHONE = 'phone';
-    const LOGIN_EMAIL = 'email';
-    const LOGIN_USERNAME = 'username';
-    const LOGIN_PASSWORD = 'password';
+    public const LOGIN_PHONE = 'phone';
+    public const LOGIN_EMAIL = 'email';
+    public const LOGIN_USERNAME = 'username';
+    public const LOGIN_PASSWORD = 'password';
 
-    /** @var int Expiration time. */
+    /**
+     * @var int Expiration time.
+     */
     private $duration;
 
-    /** @var \App\Auth\Provider\JWTProvider */
+    /**
+     * @var \App\Auth\Provider\JWTProvider
+     */
     private $jwtProvider;
 
-    /** @var array Account types. */
+    /**
+     * @var array Account types.
+     */
     private $accountType;
 
     /**
@@ -89,11 +95,11 @@ class Manager extends Plugin
      */
     public function login($type, array $array)
     {
-        if ( ! $account = $this->getAccountType($type)) {
+        if (! $account = $this->getAccountType($type)) {
             throw new Exception(Message::AUTH_ACCOUNT_TYPE_INVALID);
         }
 
-        if ( ! $identity = $account->login($array)) {
+        if (! $identity = $account->login($array)) {
             throw new Exception(Message::AUTH_LOGIN_FAILED);
         }
 
@@ -128,7 +134,7 @@ class Manager extends Plugin
             throw new Exception(Message::AUTH_TOKEN_INVALID);
         }
 
-        if ( ! $JWTToken) {
+        if (! $JWTToken) {
             return false;
         }
 
@@ -139,11 +145,11 @@ class Manager extends Plugin
 
         /** @var \App\Auth\AccountTypeInterface $account */
         $account = $this->getAccountType($JWTToken->getAccountTypeName());
-        if ( ! $account) {
+        if (! $account) {
             throw new Exception(Message::AUTH_TOKEN_FAILED);
         }
 
-        if ( ! $account->authenticate($JWTToken->getIdentity())) {
+        if (! $account->authenticate($JWTToken->getIdentity())) {
             throw new Exception(Message::AUTH_TOKEN_INVALID);
         }
         $this->jwtProvider = $JWTToken;

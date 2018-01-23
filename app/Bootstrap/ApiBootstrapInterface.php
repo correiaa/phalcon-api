@@ -6,11 +6,6 @@ use App\Api;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-/**
- * ApiBootstrap Interface.
- *
- * @package App\Bootstrap
- */
 interface ApiBootstrapInterface
 {
     /**

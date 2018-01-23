@@ -7,11 +7,6 @@ use App\Middleware\AuthenticationMiddleware;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-/**
- * MiddlewareBootstrap Class.
- *
- * @package App\Bootstrap
- */
 class MiddlewareBootstrap implements ApiBootstrapInterface
 {
     /**

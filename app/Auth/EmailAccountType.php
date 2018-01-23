@@ -6,11 +6,6 @@ use App\Model\Users;
 use App\Service;
 use Phalcon\Di;
 
-/**
- * EmailAccountType Class.
- *
- * @package App\Auth
- */
 class EmailAccountType implements AccountTypeInterface
 {
     const NAME = 'email';
@@ -37,15 +32,15 @@ class EmailAccountType implements AccountTypeInterface
             'bind'       => $bindParams,
         ]);
 
-        if ( ! $user) {
+        if (! $user) {
             return null;
         }
 
-        if ( ! $security->checkHash($password, $user->password)) {
+        if (! $security->checkHash($password, $user->getPassword())) {
             return null;
         }
 
-        return (string)$user->id;
+        return (string)$user->getId();
     }
 
     /**

@@ -6,14 +6,9 @@ use App\Model\Users;
 use App\Service;
 use Phalcon\Di;
 
-/**
- * UsernameAccountType Class.
- *
- * @package App\Auth
- */
 class UsernameAccountType implements AccountTypeInterface
 {
-    const NAME = 'username';
+    public const NAME = 'username';
 
     /**
      * @param array $data
@@ -30,17 +25,17 @@ class UsernameAccountType implements AccountTypeInterface
         $columns = (new Users())->columnMap();
         $bindParams = ['username' => $username];
         $user = Users::query()
-            ->columns($columns)
-            ->where('username=:username:')
-            ->bind($bindParams)
-            ->limit(1)
-            ->execute();
+                     ->columns($columns)
+                     ->where('username=:username:')
+                     ->bind($bindParams)
+                     ->limit(1)
+                     ->execute();
 
-        if ( ! $user) {
+        if (! $user) {
             return null;
         }
 
-        if ( ! $security->checkHash($password, $user->password)) {
+        if (! $security->checkHash($password, $user->password)) {
             return null;
         }
 

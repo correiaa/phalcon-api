@@ -15,11 +15,6 @@ use Phalcon\DiInterface;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-/**
- * ApiService Bootstrap.
- *
- * @package App\Bootstrap
- */
 class ApiServiceBootstrap implements ApiBootstrapInterface
 {
     /** @var \App\Api $api */

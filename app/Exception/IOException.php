@@ -2,11 +2,6 @@
 
 namespace App\Exception;
 
-/**
- * IO Exception.
- *
- * @package App\Exception
- */
 class IOException extends \RuntimeException
 {
     /**

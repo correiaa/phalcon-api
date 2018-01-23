@@ -4,11 +4,6 @@ namespace App\Auth;
 
 use App\Auth\Provider\JWTProvider;
 
-/**
- * JWTToken Interface.
- *
- * @package App\Auth
- */
 interface JWTTokenInterface
 {
     /**

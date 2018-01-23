@@ -12,8 +12,8 @@ use Phalcon\Mvc\User\Plugin;
 /**
  * Authentication Middleware.
  *
- * @property \app\Http\Request $request
- * @property \app\Auth\Manager $authManager
+ * @property \App\Http\Request $request
+ * @property \App\Auth\Manager $authManager
  *
  * @package App\Middleware
  */

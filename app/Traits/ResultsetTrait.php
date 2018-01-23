@@ -2,11 +2,6 @@
 
 namespace App\Traits;
 
-/**
- * Resultset Trait.
- *
- * @package App\Helper
- */
 trait ResultsetTrait
 {
     /**

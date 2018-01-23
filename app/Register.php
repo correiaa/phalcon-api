@@ -5,17 +5,16 @@ namespace App;
 use Phalcon\DiInterface;
 use Phalcon\Loader;
 
-/**
- * Register Class.
- *
- * @package App
- */
 class Register
 {
-    /** @var \Phalcon\DiInterface $di */
+    /**
+     * @var \Phalcon\DiInterface
+     */
     private $di;
 
-    /** @var \Phalcon\Loader $loader */
+    /**
+     * @var \Phalcon\Loader
+     */
     private $loader;
 
     /**

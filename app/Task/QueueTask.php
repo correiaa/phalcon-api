@@ -4,11 +4,6 @@ namespace App\Task;
 
 use Phalcon\Cli\Task;
 
-/**
- * Queue Task.
- *
- * @package App\Task
- */
 class QueueTask extends Task
 {
     public function mainAction()
