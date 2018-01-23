@@ -2,37 +2,48 @@ language: php
 dist: trusty
 sudo: required
 group: deprecated-2017Q4
-
 php:
   - 7.1
   - 7.2
-
+services:
+  - mysql
 matrix:
   fast_finish: true
-
 cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-
+    - $HOME/pear
+    - $HOME/cphalcon
+    - $HOME/ext
+env:
+  global:
+    - ZEND_DONT_UNLOAD_MODULES=1
+    - CC="ccache gcc"
+    - PATH="$PATH:~/bin"
+    - PHALCON_VERSION="v3.3.1"
 before_install:
-  # - phpenv config-rm xdebug.ini || true
-
+  - export PHP_MAJOR="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
+  - export PHP_EXTENSION_DIR=$(php-config --extension-dir)
+  - phpenv config-rm xdebug.ini || true
+  - if [ ! -f "$HOME/cphalcon/$PHALCON_VERSION/tests/travis/phalcon.ini" ]; then mkdir -p $HOME/cphalcon/$PHALCON_VERSION && git clone -q --depth=1 https://github.com/phalcon/cphalcon.git $HOME/cphalcon/$PHALCON_VERSION >/dev/null 2>&1; fi;
 install:
+  - if [ ! -f $HOME/ext/$PHP_VERSION/$PHALCON_VERSION/phalcon.so ]; then cd $HOME/cphalcon/$PHALCON_VERSION/build && bash ./install --phpize $(phpenv which phpize) --php-config $(phpenv which php-config) && mkdir -p $HOME/ext/$PHP_VERSION/$PHALCON_VERSION && cp $PHP_EXTENSION_DIR/phalcon.so $HOME/ext/$PHP_VERSION/$PHALCON_VERSION/phalcon.so; fi;
+  - if [ -f $HOME/ext/$PHP_VERSION/$PHALCON_VERSION/phalcon.so ]; then cp $HOME/ext/$PHP_VERSION/$PHALCON_VERSION/phalcon.so $PHP_EXTENSION_DIR/phalcon.so; fi;
+  - phpenv config-add $HOME/cphalcon/$PHALCON_VERSION/tests/ci/phalcon.ini
+  - cd $TRAVIS_BUILD_DIR
+  - $(phpenv which php) --ri phalcon
 
   # install composer dependencies
   - travis_retry composer self-update
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --no-interaction --prefer-source
-
+  - travis_retry composer install --prefer-dist --no-interaction --no-ansi --no-progress --optimize-autoloader --dev --no-suggest
 before_script:
   # show some versions and env information
   - mysql --version
   - php --version
   - composer --version
-
 script:
   - php vendor/bin/phpunit -c phpunit.xml.dist
-
 notifications:
   email: false
