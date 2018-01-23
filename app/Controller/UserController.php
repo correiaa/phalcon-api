@@ -25,7 +25,7 @@ class UserController extends AbstractController
      */
     public function getAction($id = null)
     {
-        if ( ! $id) {
+        if (! $id) {
             return $this->warning([], 'Invalid parameter.');
         }
 
@@ -93,7 +93,7 @@ class UserController extends AbstractController
             ]
         );
 
-        if ( ! $user) {
+        if (! $user) {
             return null;
         }
         $result = [

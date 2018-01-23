@@ -4,23 +4,18 @@ namespace App;
 
 use Phalcon\Mvc\Micro;
 
-/**
- * Api Class.
- *
- * @package App
- */
 class Api extends Micro
 {
     /**
      * Attach middleware.
      *
-     * @param object $middleware
+     * @param mixed $middleware
      *
      * @return $this
      */
     public function attach($middleware)
     {
-        if ( ! $this->getEventsManager()) {
+        if (! $this->getEventsManager()) {
             $this->setEventsManager(
                 $this->getDI()->get(Service::EVENTS_MANAGER)
             );

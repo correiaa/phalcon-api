@@ -6,8 +6,8 @@ return call_user_func(function () use ($api) {
     $prefix = "/api/{$version}/default";
     $collection = new \Phalcon\Mvc\Micro\Collection();
     $collection->setPrefix($prefix)
-        ->setHandler(\App\Controller\DefaultController::class)
-        ->setLazy(true);
+               ->setHandler(\App\Controller\DefaultController::class)
+               ->setLazy(true);
 
     /** Get default page. */
     $collection->get('/get', 'getAction');

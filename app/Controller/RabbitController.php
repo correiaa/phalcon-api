@@ -4,11 +4,6 @@ namespace App\Controller;
 
 use PhpAmqpLib\Message\AMQPMessage;
 
-/**
- * Rabbit Controller.
- *
- * @package App\Controller
- */
 class RabbitController extends AbstractController
 {
     /**

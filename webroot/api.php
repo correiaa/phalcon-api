@@ -1,9 +1,5 @@
 <?php
 
-/**
- * API access main entry.
- */
-
 use App\Api;
 use App\Bootstrap;
 use App\Bootstrap\ApiServiceBootstrap;

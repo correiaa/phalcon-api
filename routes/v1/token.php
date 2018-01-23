@@ -6,8 +6,8 @@ return call_user_func(function () use ($api) {
     $prefix = "/api/{$version}/token";
     $collection = new \Phalcon\Mvc\Micro\Collection();
     $collection->setPrefix($prefix)
-        ->setHandler(\App\Controller\TokenController::class)
-        ->setLazy(true);
+               ->setHandler(\App\Controller\TokenController::class)
+               ->setLazy(true);
 
     /** Set token. */
     $collection->post('/set', 'setAction');

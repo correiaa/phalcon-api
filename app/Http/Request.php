@@ -2,11 +2,6 @@
 
 namespace App\Http;
 
-/**
- * Request Http.
- *
- * @package App\Http
- */
 class Request extends \Phalcon\Http\Request
 {
     /**

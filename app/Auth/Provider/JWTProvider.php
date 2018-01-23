@@ -2,11 +2,6 @@
 
 namespace App\Auth\Provider;
 
-/**
- * JWTProvider Class.
- *
- * @package App\Auth
- */
 class JWTProvider
 {
     /** @var string Account type name. */

@@ -4,11 +4,6 @@ namespace App\Controller;
 
 use Phalcon\Version;
 
-/**
- * Default Controller.
- *
- * @package App\Controller
- */
 class DefaultController extends AbstractController
 {
     /**

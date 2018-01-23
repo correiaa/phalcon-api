@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists('dd')) {
+if (! function_exists('dd')) {
     /**
      * Dump the passed variables and end the script.
      *
@@ -15,7 +15,7 @@ if ( ! function_exists('dd')) {
     }
 }
 
-if ( ! function_exists('json')) {
+if (! function_exists('json')) {
     /**
      * Returns an JSON string of information about a single variable.
      *
@@ -28,7 +28,7 @@ if ( ! function_exists('json')) {
     }
 }
 
-if ( ! function_exists('logger')) {
+if (! function_exists('logger')) {
     /**
      * Record application running log.
      *
@@ -52,7 +52,7 @@ if ( ! function_exists('logger')) {
             $formatter = LOGS_DIR . '%s/%s/%s/%s.log';
             $path = sprintf($formatter, $y, $m, $d, $name ?: $func);
 
-            if ( ! file_exists($path)) {
+            if (! file_exists($path)) {
                 if (class_exists($class = \App\Component\Filesystem::class)) {
                     $Filesystem = new \App\Component\Filesystem();
                     $Filesystem->mkdir(dirname($path));

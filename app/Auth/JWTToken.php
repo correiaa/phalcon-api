@@ -6,11 +6,6 @@ use App\Auth\Provider\JWTProvider;
 use Firebase\JWT\JWT;
 use Phalcon\Exception;
 
-/**
- * JWTToken Class.
- *
- * @package App\Auth
- */
 class JWTToken implements JWTTokenInterface
 {
     const ALGORITHM_HS256 = 'HS256';
@@ -34,7 +29,7 @@ class JWTToken implements JWTTokenInterface
      */
     public function __construct($secret, $algorithm = self::ALGORITHM_HS256)
     {
-        if ( ! class_exists(JWT::class)) {
+        if (! class_exists(JWT::class)) {
             throw new Exception('You need to load the JWT class.');
         }
         $this->secret = $secret;

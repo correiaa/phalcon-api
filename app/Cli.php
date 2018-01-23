@@ -4,11 +4,6 @@ namespace App;
 
 use Phalcon\Cli\Console;
 
-/**
- * Cli Class.
- *
- * @package App
- */
 class Cli extends Console
 {
     /**
@@ -20,7 +15,7 @@ class Cli extends Console
      */
     public function attach($middleware)
     {
-        if ( ! $this->getEventsManager()) {
+        if (! $this->getEventsManager()) {
             $this->setEventsManager(
                 $this->getDI()->get(Service::EVENT_MANAGER)
             );

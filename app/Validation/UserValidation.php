@@ -6,11 +6,6 @@ use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\PresenceOf;
 
-/**
- * User Validation.
- *
- * @package App\Validation
- */
 class UserValidation extends Validation
 {
     public function addValidate()

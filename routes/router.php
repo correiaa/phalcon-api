@@ -8,7 +8,7 @@ $function = call_user_func(function () use ($api) {
     $version = $ini->application->apiVersion;
     $directory = __DIR__ . DS . $version . DS;
 
-    if ( ! file_exists($directory)) {
+    if (! file_exists($directory)) {
         throw new \ErrorException("$version directory is not exists.");
     }
 
@@ -69,7 +69,7 @@ $api->notFound(function () use ($api) {
 $api->error(function ($exception) use ($api) {
     $isDebug = $api->getDI()->get('config')->application->isDebug;
 
-    if ( ! $isDebug) {
+    if (! $isDebug) {
         $api->response
             ->setStatusCode(200, 'Exception')
             ->sendHeaders()

@@ -13,11 +13,6 @@ use Phalcon\Events\Manager;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-/**
- * CliService Bootstrap.
- *
- * @package App\Bootstrap
- */
 class CliServiceBootstrap implements CliBootstrapInterface
 {
     /** @var \App\Cli $cli */

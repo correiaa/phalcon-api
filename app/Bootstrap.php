@@ -2,11 +2,6 @@
 
 namespace App;
 
-/**
- * Bootstrap Class.
- *
- * @package App
- */
 class Bootstrap
 {
     /** @var \App\Bootstrap[] $bootstraps */

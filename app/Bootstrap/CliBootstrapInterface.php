@@ -6,11 +6,6 @@ use App\Cli;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-/**
- * CliBootstrap Interface.
- *
- * @package App\Bootstrap
- */
 interface CliBootstrapInterface
 {
     /**
