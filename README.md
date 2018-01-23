@@ -5,6 +5,8 @@
 
 ***
 
+[![Travis branch](https://img.shields.io/travis/imajinyun/phalcon-api/master.svg?style=flat-square)](https://travis-ci.org/imajinyun/phalcon-api)
+
 🔥 This is a RESTful API micro service based on Phalcon framework.
 
 ## 框架环境
