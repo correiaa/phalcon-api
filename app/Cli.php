@@ -9,7 +9,7 @@ class Cli extends Console
     /**
      * Attach middleware.
      *
-     * @param object $middleware
+     * @param mixed $middleware
      *
      * @return $this
      */
@@ -17,7 +17,7 @@ class Cli extends Console
     {
         if (! $this->getEventsManager()) {
             $this->setEventsManager(
-                $this->getDI()->get(Service::EVENT_MANAGER)
+                $this->getDI()->get(Service::EVENTS_MANAGER)
             );
         }
 

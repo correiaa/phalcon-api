@@ -6,8 +6,11 @@ return call_user_func(function () use ($api) {
     $prefix = "/api/{$version}/user";
     $collection = new \Phalcon\Mvc\Micro\Collection();
     $collection->setPrefix($prefix)
-               ->setHandler(\App\Controller\UserController::class)
-               ->setLazy(true);
+        ->setHandler(\App\Controller\UserController::class)
+        ->setLazy(true);
+
+    /** User authorize. */
+    $collection->post('/authorize', 'authorizeAction');
 
     /** Add user. */
     $collection->post('/add', 'addAction');

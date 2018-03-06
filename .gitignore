@@ -1,4 +1,5 @@
 ## Project configuration
+/config/.env
 /config/config.ini
 /tmp/cache/*
 /tmp/logs/*

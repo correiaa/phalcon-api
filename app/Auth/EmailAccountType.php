@@ -2,13 +2,13 @@
 
 namespace App\Auth;
 
-use App\Model\Users;
+use App\Model\User;
 use App\Service;
 use Phalcon\Di;
 
 class EmailAccountType implements AccountTypeInterface
 {
-    const NAME = 'email';
+    public const NAME = 'email';
 
     /**
      * User login.
@@ -25,8 +25,8 @@ class EmailAccountType implements AccountTypeInterface
         $password = $data[Manager::LOGIN_PASSWORD];
 
         $bindParams = ['email' => $email];
-        $user = Users::findFirst([
-            'columns'    => (new Users())->columnMap(),
+        $user = User::findFirst([
+            'columns'    => (new User())->columnMap(),
             'conditions' => 'email=:email:',
             'limit'      => 1,
             'bind'       => $bindParams,
@@ -52,7 +52,7 @@ class EmailAccountType implements AccountTypeInterface
      */
     public function authenticate($identity)
     {
-        $count = Users::count([
+        $count = User::count([
             'conditions' => 'id=:id:',
             'bind'       => ['id' => $identity],
         ]);

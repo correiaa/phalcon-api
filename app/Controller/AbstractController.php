@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Traits\ResultsetTrait;
 use Phalcon\Mvc\Controller;
 
+/**
+ * @property \App\Http\Request  $request
+ * @property \App\Http\Response $response
+ */
 abstract class AbstractController extends Controller
 {
     use ResultsetTrait;

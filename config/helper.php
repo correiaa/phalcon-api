@@ -28,6 +28,23 @@ if (! function_exists('json')) {
     }
 }
 
+if (! function_exists('array_flatten')) {
+    function array_flatten(array $array)
+    {
+        $result = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $result = array_merge($result, array_flatten($value));
+            } else {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
+    }
+}
+
 if (! function_exists('logger')) {
     /**
      * Record application running log.

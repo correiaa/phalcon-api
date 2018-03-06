@@ -33,7 +33,7 @@ $api->get('/', function () use ($api) {
         ->setJsonContent(
             [
                 'status' => true,
-                'code'   => 'API_1001',
+                'code'   => 200200,
                 'msg'    => 'Welcome access to the RESTful API.',
                 'tip'    => '欢迎访问 RESTful API.',
                 'data'   => [],
@@ -48,14 +48,14 @@ $api->get('/', function () use ($api) {
  */
 $api->notFound(function () use ($api) {
     $api->response
-        ->setStatusCode(404, 'Not Found')
+        ->setStatusCode(404, 'Not Found.')
         ->sendHeaders()
         ->setJsonContent(
             [
                 'status' => false,
-                'code'   => 'API_1003',
-                'msg'    => '404 Not Found',
-                'tip'    => '404 Not Found',
+                'code'   => 200404,
+                'msg'    => '404 Not Found.',
+                'tip'    => '404 Not Found.',
                 'data'   => [],
             ]
         );
@@ -76,7 +76,7 @@ $api->error(function ($exception) use ($api) {
             ->setJsonContent(
                 [
                     'status' => false,
-                    'code'   => 'API_1004',
+                    'code'   => 200401,
                     'msg'    => $exception->getMessage(),
                     'tip'    => '',
                     'data'   => [],

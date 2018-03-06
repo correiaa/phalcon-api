@@ -2,36 +2,47 @@
 
 namespace App\Bootstrap;
 
-use App\Api;
-use App\Auth\EmailAccountType;
 use App\Auth\Manager as AuthManager;
 use App\Auth\JWTToken;
+use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
-use App\Http\Request;
-use App\Http\Response;
-use App\Service;
+use App\Exception\IOException;
+use Nilnice\Phalcon\Api;
+use Nilnice\Phalcon\Constant\Service;
+use Nilnice\Phalcon\Http\Request;
+use Nilnice\Phalcon\Http\Response;
+use Nilnice\Phalcon\Support\Message;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
+use Phalcon\Exception;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class ApiServiceBootstrap implements ApiBootstrapInterface
 {
-    /** @var \App\Api $api */
+    /**
+     * @var \Nilnice\Phalcon\Api
+     */
     private $api;
 
-    /** @var \Phalcon\DiInterface $di */
+    /**
+     * @var \Phalcon\DiInterface
+     */
     private $di;
 
-    /** @var \Phalcon\Config\Adapter\Ini $ini */
+    /**
+     * @var \Phalcon\Config\Adapter\Ini
+     */
     private $ini;
 
     /**
      * Run service.
      *
-     * @param \App\Api                    $api
+     * @param \Nilnice\Phalcon\Api        $api
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
+     *
+     * @throws \Phalcon\Exception
      */
     public function run(Api $api, DiInterface $di, Ini $ini)
     {
@@ -44,8 +55,10 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
 
     /**
      * Inject necessary services into the container.
+     *
+     * @throws \Phalcon\Exception
      */
-    protected function main()
+    protected function main() : void
     {
         $this->setConfigService();
         $this->setHttpService();
@@ -59,17 +72,18 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     /**
      * Set config service.
      */
-    private function setConfigService()
+    private function setConfigService() : void
     {
         $this->di->setShared(Service::CONFIG, function () {
             return new Ini(CONFIG_DIR . Service::CONFIG_FILE);
         });
+        $this->di->setShared(Service::MESSAGE, new Message());
     }
 
     /**
      * Set http service.
      */
-    private function setHttpService()
+    private function setHttpService() : void
     {
         $this->di->setShared(Service::REQUEST, new Request());
         $this->di->setShared(Service::RESPONSE, new Response());
@@ -78,7 +92,7 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     /**
      * Set url service.
      */
-    private function setUrlService()
+    private function setUrlService() : void
     {
         $ini = $this->ini;
         $this->di->setShared(Service::URL, function () use ($ini) {
@@ -90,29 +104,32 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
 
     /**
      * Set JWT token service.
+     *
+     * @throws \Phalcon\Exception
      */
-    private function setJWTTokenService()
+    private function setJWTTokenService() : void
     {
         $ini = $this->ini;
-        $this->di->setShared(Service::JWT_TOKEN, function () use ($ini) {
-            return new JWTToken(
-                $ini->security->appsecret,
-                JWTToken::ALGORITHM_HS256
-            );
-        });
+        $this->di->setShared(Service::JWT_TOKEN,
+            function () use ($ini) {
+                return new JWTToken(
+                    $ini->security->appsecret,
+                    JWTToken::ALGORITHM_HS256
+                );
+            });
     }
 
     /**
      * Set auth manager service.
      */
-    private function setAuthManagerService()
+    private function setAuthManagerService() : void
     {
         $ini = $this->ini;
         $this->di->setShared(Service::AUTH_MANAGER, function () use ($ini) {
             $authManager = new AuthManager($ini->security->expirationTime);
             $authManager->registerAccountType(
-                EmailAccountType::NAME,
-                new EmailAccountType()
+                UsernameAccountType::NAME,
+                new UsernameAccountType()
             );
 
             return $authManager;
@@ -122,7 +139,7 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     /**
      * Set database service.
      */
-    private function setDatabaseService()
+    private function setDatabaseService() : void
     {
         $di = $this->di;
         $ini = $this->ini;
@@ -153,7 +170,12 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
                  * @see https://docs.phalconphp.com/ar/3.2/events
                  */
                 $manager = $di->get(Service::EVENTS_MANAGER);
-                $manager->attach(Service::DB, new DatabaseEvent());
+
+                try {
+                    $manager->attach(Service::DB, new DatabaseEvent());
+                } catch (IOException $e) {
+                    echo $e->getMessage();
+                }
                 $connection->setEventsManager($manager);
             }
 
@@ -164,7 +186,7 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     /**
      * Set RabbitMQ service.
      */
-    private function setRabbitMQService()
+    private function setRabbitMQService() : void
     {
         $ini = $this->ini;
         $this->di->setShared(Service::RABBITMQ, function () use ($ini) {

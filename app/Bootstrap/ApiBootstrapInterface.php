@@ -2,7 +2,7 @@
 
 namespace App\Bootstrap;
 
-use App\Api;
+use Nilnice\Phalcon\Api;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
@@ -11,7 +11,7 @@ interface ApiBootstrapInterface
     /**
      * Run api some services.
      *
-     * @param \App\Api                    $api
+     * @param \Nilnice\Phalcon\Api        $api
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *

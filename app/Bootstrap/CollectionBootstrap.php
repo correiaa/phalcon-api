@@ -2,17 +2,17 @@
 
 namespace App\Bootstrap;
 
-use App\Api;
-use App\Middleware\AuthenticationMiddleware;
+use App\Resource\UserResource;
+use Nilnice\Phalcon\Api;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-class MiddlewareBootstrap implements ApiBootstrapInterface
+class CollectionBootstrap implements ApiBootstrapInterface
 {
     /**
-     * Run middleware.
+     * Run collection.
      *
-     * @param \App\Api                    $api
+     * @param \Nilnice\Phalcon\Api        $api
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
@@ -20,6 +20,7 @@ class MiddlewareBootstrap implements ApiBootstrapInterface
      */
     public function run(Api $api, DiInterface $di, Ini $ini)
     {
-        $api->attach(new AuthenticationMiddleware());
+        $userResource = new UserResource('/api/v1/user');
+        $api->setCollection($userResource);
     }
 }

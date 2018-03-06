@@ -14,8 +14,8 @@ class RabbitController extends AbstractController
     public function producerAction()
     {
         $data = $this->request->getPost('data');
-        $name = isset($data['name']) ? $data['name'] : 'testing_queue';
-        $text = isset($data['text']) ? $data['text'] : ': ) RabbitMQ test.';
+        $name = $data['name'] ?? 'testing_queue';
+        $text = $data['text'] ?? ': ) RabbitMQ test.';
 
         /** @var \PhpAmqpLib\Connection\AMQPStreamConnection $AMQPStreamConnection */
         $AMQPStreamConnection = $this->getDI()->getShared('rabbitmq');

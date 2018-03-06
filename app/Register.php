@@ -54,7 +54,11 @@ class Register
      */
     protected function registerNamespaces()
     {
-        $namespaces = ['App' => APP_DIR];
+        $namespaces = [
+            'App'     => APP_DIR,
+            'Phalcon' => __DIR__
+                . '/../vendor/phalcon/incubator/Library/Phalcon/',
+        ];
         $this->loader->registerNamespaces($namespaces);
         $this->loader->register();
     }

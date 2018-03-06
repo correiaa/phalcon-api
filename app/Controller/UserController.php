@@ -2,24 +2,19 @@
 
 namespace App\Controller;
 
-use App\Auth\EmailAccountType;
 use App\Auth\UsernameAccountType;
-use App\Model\Users;
+use App\Model\User;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 /**
- * User Controller.
- *
  * @property \App\Auth\Manager $authManager
- *
- * @package App\Controller
  */
 class UserController extends AbstractController
 {
     /**
      * Get user entity.
      *
-     * @param null $id
+     * @param string|null $id
      *
      * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
      */
@@ -29,13 +24,41 @@ class UserController extends AbstractController
             return $this->warning([], 'Invalid parameter.');
         }
 
-        $entity = Users::findFirst([
+        $entity = User::findFirst([
             'conditions' => 'id=:id:',
             'bind'       => ['id' => $id],
         ]);
         $data = $entity ? $entity->toArray() : [];
 
         return $this->success($data);
+    }
+
+    /**
+     * User authorize.
+     *
+     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @throws \Phalcon\Exception
+     */
+    public function authorizeAction()
+    {
+        $request = $this->request;
+        $username = $request->getUsername();
+        $password = $request->getPassword();
+
+        $auth = $this->authManager->loginWithUsernamePassword(
+            UsernameAccountType::NAME,
+            $username,
+            $password
+        );
+
+        $user = User::findFirst($auth->getIdentity());
+        $data = [
+            'token'  => $auth->getToken(),
+            'expire' => $auth->getExpirationTime(),
+            'user'   => $user->toArray(),
+        ];
+
+        return $this->successResponse($data);
     }
 
     /**
@@ -49,7 +72,7 @@ class UserController extends AbstractController
         $builder = $this->modelsManager
             ->createBuilder()
             ->columns('*')
-            ->from(Users::class)
+            ->from(User::class)
             ->where(true)
             ->orderBy('createdAt DESC');
 
@@ -69,39 +92,5 @@ class UserController extends AbstractController
         ];
 
         return $this->successResponse($array);
-    }
-
-    /**
-     * User authenticate.
-     *
-     * @return null|\Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
-     * @throws \Phalcon\Exception
-     */
-    public function authenticateAction()
-    {
-        $username = $this->request->getUsername();
-        $password = $this->request->getPassword();
-        $JWTProvider = $this->authManager->loginWithUsernamePassword(
-            EmailAccountType::NAME,
-            $username,
-            $password
-        );
-        $user = Users::findFirst(
-            [
-                'conditions' => 'id=:id:',
-                'bind'       => ['id' => $JWTProvider->getIdentity()],
-            ]
-        );
-
-        if (! $user) {
-            return null;
-        }
-        $result = [
-            'token'  => $JWTProvider->getToken(),
-            'expire' => $JWTProvider->getExpirationTime(),
-            'user'   => $user->toArray(),
-        ];
-
-        return $this->successResponse($result);
     }
 }

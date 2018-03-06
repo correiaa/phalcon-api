@@ -6,7 +6,7 @@ use Phalcon\Mvc\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email as EmailValidator;
 
-class Users extends Model
+class User extends Model
 {
     /**
      *
@@ -408,8 +408,8 @@ class Users extends Model
      */
     public function initialize()
     {
-        $this->setSchema("test");
-        $this->setSource("users");
+        $this->setSchema('test');
+        $this->setSource('user');
     }
 
     /**
@@ -419,7 +419,7 @@ class Users extends Model
      */
     public function getSource()
     {
-        return 'users';
+        return 'user';
     }
 
     /**
@@ -427,7 +427,7 @@ class Users extends Model
      *
      * @param mixed $parameters
      *
-     * @return Users[]|Users|\Phalcon\Mvc\Model\ResultSetInterface
+     * @return User[]|User|\Phalcon\Mvc\Model\ResultSetInterface
      */
     public static function find($parameters = null)
     {
@@ -439,7 +439,7 @@ class Users extends Model
      *
      * @param mixed $parameters
      *
-     * @return Users|\Phalcon\Mvc\Model\ResultInterface
+     * @return User|\Phalcon\Mvc\Model\ResultInterface
      */
     public static function findFirst($parameters = null)
     {
@@ -456,18 +456,16 @@ class Users extends Model
     public function columnMap()
     {
         return [
-            'id'              => 'id',
-            'email'           => 'email',
-            'nickname'        => 'nickname',
-            'password'        => 'password',
-            'passwordSalt'    => 'passwordSalt',
-            'lockedDeadline'  => 'lockedDeadline',
-            'isUsable'        => 'isUsable',
-            'isDelete'        => 'isDelete',
-            'isVerifiedEmail' => 'isVerifiedEmail',
-            'createdIp'       => 'createdIp',
-            'createdAt'       => 'createdAt',
-            'updatedAt'       => 'updatedAt',
+            'id'         => 'id',
+            'role'       => 'role',
+            'email'      => 'email',
+            'username'   => 'username',
+            'password'   => 'password',
+            'first_name' => 'firstname',
+            'last_name'  => 'lastname',
+            'location'   => 'location',
+            'created_at' => 'createdAt',
+            'updated_at' => 'updatedAt',
         ];
     }
 }

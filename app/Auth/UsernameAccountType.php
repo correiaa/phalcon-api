@@ -2,7 +2,7 @@
 
 namespace App\Auth;
 
-use App\Model\Users;
+use App\Model\User;
 use App\Service;
 use Phalcon\Di;
 
@@ -22,24 +22,20 @@ class UsernameAccountType implements AccountTypeInterface
         $username = $data[Manager::LOGIN_USERNAME];
         $password = $data[Manager::LOGIN_PASSWORD];
 
-        $columns = (new Users())->columnMap();
-        $bindParams = ['username' => $username];
-        $user = Users::query()
-                     ->columns($columns)
-                     ->where('username=:username:')
-                     ->bind($bindParams)
-                     ->limit(1)
-                     ->execute();
+        $user = User::findFirst([
+            'conditions' => 'username = :username:',
+            'bind'       => ['username' => $username],
+        ]);
 
         if (! $user) {
             return null;
         }
 
-        if (! $security->checkHash($password, $user->password)) {
+        if (! $security->checkHash($password, $user->getPassword())) {
             return null;
         }
 
-        return (string)$user->id;
+        return (string)$user->getId();
     }
 
     /**
@@ -51,7 +47,7 @@ class UsernameAccountType implements AccountTypeInterface
      */
     public function authenticate($identity)
     {
-        $count = Users::count([
+        $count = User::count([
             'conditions' => 'id=:id:',
             'bind'       => ['id' => $identity],
         ]);
