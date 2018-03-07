@@ -58,12 +58,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nilnice/phalcon-micro.git",
-                "reference": "0a9ad688b46233152c4908ab94772005cc563e2d"
+                "reference": "ec2bab6be833797c3f2d4706fab76c075ea25c98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/0a9ad688b46233152c4908ab94772005cc563e2d.zip",
-                "reference": "0a9ad688b46233152c4908ab94772005cc563e2d",
+                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/ec2bab6be833797c3f2d4706fab76c075ea25c98.zip",
+                "reference": "ec2bab6be833797c3f2d4706fab76c075ea25c98",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
                 "phalcon",
                 "phalcon-micro"
             ],
-            "time": "2018-03-07T03:57:17+00:00"
+            "time": "2018-03-07T06:54:01+00:00"
         },
         {
             "name": "phalcon/incubator",

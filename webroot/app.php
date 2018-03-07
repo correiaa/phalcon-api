@@ -4,13 +4,12 @@ use App\Bootstrap;
 use App\Bootstrap\ApiServiceBootstrap;
 use App\Register;
 use Dotenv\Dotenv;
-use Nilnice\Phalcon\Api;
+use Nilnice\Phalcon\App;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Http\Response;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\Di\FactoryDefault as Di;
 use Phalcon\Loader;
-
 
 require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
@@ -29,19 +28,19 @@ try {
     $register = new Register($di, $loader);
     $register->main();
 
-    $api = new Api($di);
+    $app = new App($di);
     $ini = new Ini(CONFIG_DIR . 'config.ini');
 
     $bootstrap = new Bootstrap(
         new ApiServiceBootstrap(),
         new Bootstrap\CollectionBootstrap()
     );
-    $bootstrap->run($api, $di, $ini);
-    $api->handle();
+    $bootstrap->run($app, $di, $ini);
+    $app->handle();
 
     /** @var \Nilnice\Phalcon\Http\Response $response */
-    $response = $api->di->getShared(Service::RESPONSE);
-    $content = $api->getReturnedValue();
+    $response = $app->di->getShared(Service::RESPONSE);
+    $content = $app->getReturnedValue();
 
     if ($content !== null) {
         if (is_string($content)) {
@@ -51,7 +50,7 @@ try {
         }
     }
 } catch (\Exception $e) {
-    $di = $api->di ?? new Di();
+    $di = $app->di ?? new Di();
     $response = $di->getShared(Service::RESPONSE);
 
     if (! $response || ! $response instanceof Response) {

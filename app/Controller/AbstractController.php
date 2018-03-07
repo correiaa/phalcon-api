@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Traits\ResultsetTrait;
+use Nilnice\Phalcon\Http\Response;
 use Phalcon\Mvc\Controller;
 
 /**
- * @property \App\Http\Request  $request
- * @property \App\Http\Response $response
+ * @property \Nilnice\Phalcon\Http\Request  $request
+ * @property \Nilnice\Phalcon\Http\Response $response
  */
 abstract class AbstractController extends Controller
 {
@@ -17,34 +18,34 @@ abstract class AbstractController extends Controller
      * Successful notification.
      *
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
     public function successResponse(
         array $data,
-        $msg = 'OK',
-        $code = 'API_1001'
-    ) {
-        return $this->createJsonResponse(true, $data, $msg, $code);
+        string $message = 'OK',
+        int $code = 200200
+    ) : Response {
+        return $this->createJsonResponse(true, $data, $message, $code);
     }
 
     /**
      * Warning notification.
      *
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
     public function warningResponse(
         array $data,
-        $msg = 'NO',
-        $code = 'API_1002'
-    ) {
-        return $this->createJsonResponse(false, $data, $msg, $code);
+        string $message = 'NO',
+        int $code = 400400
+    ) : Response {
+        return $this->createJsonResponse(false, $data, $message, $code);
     }
 
     /**
@@ -52,17 +53,21 @@ abstract class AbstractController extends Controller
      *
      * @param bool   $status
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
-    private function createJsonResponse($status, array $data, $msg, $code)
-    {
+    private function createJsonResponse(
+        bool $status,
+        array $data,
+        string $message,
+        int $code
+    ) : Response {
         if ($status) {
-            $content = $this->getOKResultset($data, $msg, $code);
+            $content = $this->getOkResultset($data, $message, $code);
         } else {
-            $content = $this->getNOResultset($data, $msg, $code);
+            $content = $this->getNoResultset($data, $message, $code);
         }
         $this->response
             ->setStatusCode(200, $status ? 'OK' : 'NO')

@@ -4,8 +4,8 @@ namespace App\Resource;
 
 use App\Controller\DefaultController;
 use Nilnice\Phalcon\Constant\Role;
+use Nilnice\Phalcon\Endpoint;
 use Nilnice\Phalcon\Resource;
-use Phalcon\Mvc\Model;
 
 class DefaultResource extends Resource
 {
@@ -13,11 +13,14 @@ class DefaultResource extends Resource
     {
         $this->setName('All')
             ->setItemKey('all')
-            ->setModel(Model::class)
             ->setHandler(DefaultController::class, true)
-            ->setEndpoint(Endpoint::post('/index', 'viewAction')
+            ->setEndpoint(Endpoint::get('/', 'indexAction')
                 ->setAllowRoles(Role::UNAUTHORIZED)
                 ->setDescription('获取系统信息列表')
+            )
+            ->setEndpoint(Endpoint::get('view', 'viewAction')
+                ->setAllowRoles(Role::UNAUTHORIZED)
+                ->setDescription('查看系统信息')
             );
     }
 }

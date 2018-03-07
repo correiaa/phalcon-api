@@ -5,7 +5,7 @@ namespace App\Bootstrap;
 use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Exception\IOException;
-use Nilnice\Phalcon\Api;
+use Nilnice\Phalcon\App;
 use Nilnice\Phalcon\Auth\JWTToken;
 use Nilnice\Phalcon\Auth\Manager as AuthManager;
 use Nilnice\Phalcon\Constant\Service;
@@ -21,9 +21,9 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 class ApiServiceBootstrap implements ApiBootstrapInterface
 {
     /**
-     * @var \Nilnice\Phalcon\Api
+     * @var \Nilnice\Phalcon\App
      */
-    private $api;
+    private $app;
 
     /**
      * @var \Phalcon\DiInterface
@@ -38,15 +38,15 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
     /**
      * Run service.
      *
-     * @param \Nilnice\Phalcon\Api        $api
+     * @param \Nilnice\Phalcon\App        $app
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
      * @throws \Phalcon\Exception
      */
-    public function run(Api $api, DiInterface $di, Ini $ini)
+    public function run(App $app, DiInterface $di, Ini $ini)
     {
-        $this->api = $api;
+        $this->app = $app;
         $this->di = $di;
         $this->ini = $ini;
 
