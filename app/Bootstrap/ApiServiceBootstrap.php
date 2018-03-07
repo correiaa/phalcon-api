@@ -2,12 +2,12 @@
 
 namespace App\Bootstrap;
 
-use App\Auth\Manager as AuthManager;
-use App\Auth\JWTToken;
 use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Exception\IOException;
 use Nilnice\Phalcon\Api;
+use Nilnice\Phalcon\Auth\JWTToken;
+use Nilnice\Phalcon\Auth\Manager as AuthManager;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Http\Request;
 use Nilnice\Phalcon\Http\Response;
@@ -156,7 +156,7 @@ class ApiServiceBootstrap implements ApiBootstrapInterface
                 ],
             ];
 
-            if ($ini->database->adapter == 'Postgresql') {
+            if ($ini->database->adapter === 'Postgresql') {
                 unset($parameter['charset']);
             }
 

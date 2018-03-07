@@ -4,6 +4,8 @@ namespace App\Auth;
 
 use App\Model\User;
 use App\Service;
+use Nilnice\Phalcon\Auth\AccountTypeInterface;
+use Nilnice\Phalcon\Auth\Manager;
 use Phalcon\Di;
 
 class UsernameAccountType implements AccountTypeInterface
@@ -11,11 +13,13 @@ class UsernameAccountType implements AccountTypeInterface
     public const NAME = 'username';
 
     /**
+     * Use username login.
+     *
      * @param array $data
      *
-     * @return mixed|null|string
+     * @return string
      */
-    public function login(array $data)
+    public function login(array $data) : string
     {
         /** @var \Phalcon\Security $security */
         $security = Di::getDefault()->get(Service::SECURITY);
@@ -43,9 +47,9 @@ class UsernameAccountType implements AccountTypeInterface
      *
      * @param string $identity
      *
-     * @return bool|mixed
+     * @return bool
      */
-    public function authenticate($identity)
+    public function authenticate(string $identity) : bool
     {
         $count = User::count([
             'conditions' => 'id=:id:',

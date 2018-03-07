@@ -2,101 +2,116 @@
 
 namespace App\Model;
 
-use Phalcon\Mvc\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email as EmailValidator;
 
-class User extends Model
+class User extends \Phalcon\Mvc\Model
 {
     /**
      *
-     * @var string
+     * @var integer
      * @Primary
-     * @Column(type="string", length=36, nullable=false)
+     * @Identity
+     * @Column(column="id", type="integer", length=11, nullable=false)
      */
     protected $id;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="email", type="string", length=64, nullable=false)
      */
     protected $email;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=20, nullable=true)
+     * @Column(column="username", type="string", length=32, nullable=false)
+     */
+    protected $username;
+
+    /**
+     *
+     * @var string
+     * @Column(column="nickname", type="string", length=32, nullable=true)
      */
     protected $nickname;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="password", type="string", length=255, nullable=false)
      */
     protected $password;
 
     /**
      *
      * @var string
-     * @Column(type="string", length=64, nullable=false)
+     * @Column(column="password_salt", type="string", length=64, nullable=true)
      */
     protected $passwordSalt;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=true)
+     * @Column(column="role", type="string", length=256, nullable=true)
+     */
+    protected $role;
+
+    /**
+     *
+     * @var string
+     * @Column(column="locked_deadline", type="string", nullable=true)
      */
     protected $lockedDeadline;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=1, nullable=true)
+     * @Column(column="is_verified_email", type="integer", length=4,
+     *                                     nullable=true)
+     */
+    protected $isVerifiedEmail;
+
+    /**
+     *
+     * @var integer
+     * @Column(column="is_usable", type="integer", length=1, nullable=true)
      */
     protected $isUsable;
 
     /**
      *
      * @var integer
-     * @Column(type="integer", length=1, nullable=true)
+     * @Column(column="is_delete", type="integer", length=1, nullable=true)
      */
     protected $isDelete;
 
     /**
      *
-     * @var integer
-     * @Column(type="integer", length=1, nullable=true)
-     */
-    protected $isVerifiedEmail;
-
-    /**
-     *
      * @var string
-     * @Column(type="string", length=16, nullable=true)
+     * @Column(column="created_ip", type="string", length=16, nullable=true)
      */
     protected $createdIp;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(column="created_at", type="string", nullable=true)
      */
     protected $createdAt;
 
     /**
      *
      * @var string
-     * @Column(type="string", nullable=false)
+     * @Column(column="updated_at", type="string", nullable=true)
      */
     protected $updatedAt;
 
     /**
      * Method to set the value of field id
      *
-     * @param string $id
+     * @param integer $id
      *
      * @return $this
      */
@@ -117,6 +132,20 @@ class User extends Model
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field username
+     *
+     * @param string $username
+     *
+     * @return $this
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
 
         return $this;
     }
@@ -164,6 +193,20 @@ class User extends Model
     }
 
     /**
+     * Method to set the value of field role
+     *
+     * @param string $role
+     *
+     * @return $this
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
      * Method to set the value of field lockedDeadline
      *
      * @param string $lockedDeadline
@@ -173,6 +216,20 @@ class User extends Model
     public function setLockedDeadline($lockedDeadline)
     {
         $this->lockedDeadline = $lockedDeadline;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field isVerifiedEmail
+     *
+     * @param integer $isVerifiedEmail
+     *
+     * @return $this
+     */
+    public function setIsVerifiedEmail($isVerifiedEmail)
+    {
+        $this->isVerifiedEmail = $isVerifiedEmail;
 
         return $this;
     }
@@ -201,20 +258,6 @@ class User extends Model
     public function setIsDelete($isDelete)
     {
         $this->isDelete = $isDelete;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field isVerifiedEmail
-     *
-     * @param integer $isVerifiedEmail
-     *
-     * @return $this
-     */
-    public function setIsVerifiedEmail($isVerifiedEmail)
-    {
-        $this->isVerifiedEmail = $isVerifiedEmail;
 
         return $this;
     }
@@ -264,7 +307,7 @@ class User extends Model
     /**
      * Returns the value of field id
      *
-     * @return string
+     * @return integer
      */
     public function getId()
     {
@@ -279,6 +322,16 @@ class User extends Model
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Returns the value of field username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 
     /**
@@ -312,6 +365,16 @@ class User extends Model
     }
 
     /**
+     * Returns the value of field role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
      * Returns the value of field lockedDeadline
      *
      * @return string
@@ -319,6 +382,16 @@ class User extends Model
     public function getLockedDeadline()
     {
         return $this->lockedDeadline;
+    }
+
+    /**
+     * Returns the value of field isVerifiedEmail
+     *
+     * @return integer
+     */
+    public function getIsVerifiedEmail()
+    {
+        return $this->isVerifiedEmail;
     }
 
     /**
@@ -339,16 +412,6 @@ class User extends Model
     public function getIsDelete()
     {
         return $this->isDelete;
-    }
-
-    /**
-     * Returns the value of field isVerifiedEmail
-     *
-     * @return integer
-     */
-    public function getIsVerifiedEmail()
-    {
-        return $this->isVerifiedEmail;
     }
 
     /**
@@ -408,8 +471,8 @@ class User extends Model
      */
     public function initialize()
     {
-        $this->setSchema('test');
-        $this->setSource('user');
+        $this->setSchema("test");
+        $this->setSource("user");
     }
 
     /**
@@ -456,16 +519,20 @@ class User extends Model
     public function columnMap()
     {
         return [
-            'id'         => 'id',
-            'role'       => 'role',
-            'email'      => 'email',
-            'username'   => 'username',
-            'password'   => 'password',
-            'first_name' => 'firstname',
-            'last_name'  => 'lastname',
-            'location'   => 'location',
-            'created_at' => 'createdAt',
-            'updated_at' => 'updatedAt',
+            'id'                => 'id',
+            'email'             => 'email',
+            'username'          => 'username',
+            'nickname'          => 'nickname',
+            'password'          => 'password',
+            'password_salt'     => 'passwordSalt',
+            'role'              => 'role',
+            'locked_deadline'   => 'lockedDeadline',
+            'is_verified_email' => 'isVerifiedEmail',
+            'is_usable'         => 'isUsable',
+            'is_delete'         => 'isDelete',
+            'created_ip'        => 'createdIp',
+            'created_at'        => 'createdAt',
+            'updated_at'        => 'updatedAt',
         ];
     }
 }
