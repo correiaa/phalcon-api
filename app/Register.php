@@ -32,7 +32,7 @@ class Register
     /**
      * Main bootstrap entry.
      */
-    public function main()
+    public function main() : void
     {
         $this->registerFiles();
         $this->registerNamespaces();
@@ -42,7 +42,7 @@ class Register
     /**
      * Register directories.
      */
-    protected function registerDirs()
+    protected function registerDirs() : void
     {
         $directories = [APP_DIR];
         $this->loader->registerDirs($directories);
@@ -52,7 +52,7 @@ class Register
     /**
      * Register namespaces.
      */
-    protected function registerNamespaces()
+    protected function registerNamespaces() : void
     {
         $namespaces = [
             'App'     => APP_DIR,
@@ -66,7 +66,7 @@ class Register
     /**
      * Register files.
      */
-    protected function registerFiles()
+    protected function registerFiles() : void
     {
         $files = [
             CONFIG_DIR . 'helper.php',

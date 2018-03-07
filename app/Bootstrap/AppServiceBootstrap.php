@@ -18,7 +18,7 @@ use Phalcon\Exception;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-class ApiServiceBootstrap implements ApiBootstrapInterface
+class AppServiceBootstrap implements AppBootstrapInterface
 {
     /**
      * @var \Nilnice\Phalcon\App

@@ -4,24 +4,25 @@ namespace App\Controller;
 
 use App\Auth\UsernameAccountType;
 use App\Model\User;
+use Nilnice\Phalcon\Http\Response;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 /**
- * @property \App\Auth\Manager $authManager
+ * @property \Nilnice\Phalcon\Auth\Manager $authManager
  */
 class UserController extends AbstractController
 {
     /**
      * Get user entity.
      *
-     * @param string|null $id
+     * @param mixed|null $id
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
-    public function getAction($id = null)
+    public function getAction($id = null) : Response
     {
         if (! $id) {
-            return $this->warning([], 'Invalid parameter.');
+            return $this->warningResponse([], 'Invalid parameter.');
         }
 
         $entity = User::findFirst([
@@ -30,16 +31,16 @@ class UserController extends AbstractController
         ]);
         $data = $entity ? $entity->toArray() : [];
 
-        return $this->success($data);
+        return $this->successResponse($data);
     }
 
     /**
      * User authorize.
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      * @throws \Phalcon\Exception
      */
-    public function authorizeAction()
+    public function authorizeAction() : Response
     {
         $request = $this->request;
         $username = $request->getUsername();
@@ -64,9 +65,9 @@ class UserController extends AbstractController
     /**
      * Get user list.
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
-    public function listAction()
+    public function listAction() : Response
     {
         $limit = 10;
         $builder = $this->modelsManager

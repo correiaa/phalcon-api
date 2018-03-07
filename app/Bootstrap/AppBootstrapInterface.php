@@ -6,7 +6,7 @@ use Nilnice\Phalcon\App;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-interface ApiBootstrapInterface
+interface AppBootstrapInterface
 {
     /**
      * Run api some services.

@@ -8,7 +8,7 @@ use Nilnice\Phalcon\App;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-class CollectionBootstrap implements ApiBootstrapInterface
+class CollectionBootstrap implements AppBootstrapInterface
 {
     /**
      * Run collection.
@@ -28,6 +28,11 @@ class CollectionBootstrap implements ApiBootstrapInterface
         self::errorHandler($app);
     }
 
+    /**
+     * Not found handler.
+     *
+     * @param \Nilnice\Phalcon\App $app
+     */
     public static function notFoundHandler(App $app) : void
     {
         $app->notFound(function () use ($app) {
@@ -42,6 +47,11 @@ class CollectionBootstrap implements ApiBootstrapInterface
         });
     }
 
+    /**
+     * Error handler.
+     *
+     * @param \Nilnice\Phalcon\App $app
+     */
     public static function errorHandler(App $app) : void
     {
         $app->error(function () use ($app) {

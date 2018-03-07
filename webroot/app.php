@@ -1,7 +1,7 @@
 <?php
 
 use App\Bootstrap;
-use App\Bootstrap\ApiServiceBootstrap;
+use App\Bootstrap\AppServiceBootstrap;
 use App\Register;
 use Dotenv\Dotenv;
 use Nilnice\Phalcon\App;
@@ -32,7 +32,8 @@ try {
     $ini = new Ini(CONFIG_DIR . 'config.ini');
 
     $bootstrap = new Bootstrap(
-        new ApiServiceBootstrap(),
+        new AppServiceBootstrap(),
+        new Bootstrap\MiddlewareBootstrap(),
         new Bootstrap\CollectionBootstrap()
     );
     $bootstrap->run($app, $di, $ini);
