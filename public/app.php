@@ -57,7 +57,7 @@ try {
     if (! $response || ! $response instanceof Response) {
         $response = new Response();
     }
-    $devMode = $ini->application->isDebug ?: $env === 'dev';
+    $devMode = $ini->get('application')->isDebug ?: $env === 'dev';
     $response->setExceptionContent($e, $devMode);
 } finally {
     if (! $response->isSent()) {

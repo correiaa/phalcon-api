@@ -42,6 +42,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
+     * @return mixed|void
      * @throws \Phalcon\Exception
      */
     public function run(App $app, DiInterface $di, Ini $ini)
@@ -96,7 +97,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
     {
         $ini = $this->ini;
         $this->di->setShared(Service::URL, function () use ($ini) {
-            $baseUri = $ini->application->baseUri;
+            $baseUri = $ini->get('application')->baseUri;
 
             return (new Url())->setBaseUri($baseUri);
         });
@@ -113,7 +114,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
         $this->di->setShared(Service::JWT_TOKEN,
             function () use ($ini) {
                 return new JWTToken(
-                    $ini->security->appsecret,
+                    $ini->get('security')->appsecret,
                     JWTToken::ALGORITHM_HS256
                 );
             });
@@ -126,7 +127,8 @@ class AppServiceBootstrap implements AppBootstrapInterface
     {
         $ini = $this->ini;
         $this->di->setShared(Service::AUTH_MANAGER, function () use ($ini) {
-            $authManager = new AuthManager($ini->security->expirationTime);
+            $expirationTime = $ini->get('security')->expirationTime;
+            $authManager = new AuthManager($expirationTime);
             $authManager->registerAccountType(
                 UsernameAccountType::NAME,
                 new UsernameAccountType()
@@ -144,25 +146,27 @@ class AppServiceBootstrap implements AppBootstrapInterface
         $di = $this->di;
         $ini = $this->ini;
         $this->di->setShared(Service::DB, function () use ($di, $ini) {
-            $class = 'Phalcon\Db\Adapter\Pdo\\' . $ini->database->adapter;
+            $database = $ini->get('database');
+            $class = 'Phalcon\Db\Adapter\Pdo\\' . $database->adapter;
             $parameter = [
-                'host'     => $ini->database->host,
-                'username' => $ini->database->username,
-                'password' => $ini->database->password,
-                'dbname'   => $ini->database->dbname,
-                'charset'  => $ini->database->charset,
+                'host'     => $database->host,
+                'username' => $database->username,
+                'password' => $database->password,
+                'dbname'   => $database->dbname,
+                'charset'  => $database->charset,
                 'options'  => [
                     \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
                 ],
             ];
 
-            if ($ini->database->adapter === 'Postgresql') {
+            if ($database->adapter === 'Postgresql') {
                 unset($parameter['charset']);
             }
 
+            /** @var \Phalcon\Db\Adapter\Pdo $connection */
             $connection = new $class($parameter);
 
-            if ($ini->application->isListenDb) {
+            if ($ini->get('application')->isListenDb) {
                 /**
                  * Use the EventManager to listen Database executed query.
                  *
@@ -190,16 +194,17 @@ class AppServiceBootstrap implements AppBootstrapInterface
     {
         $ini = $this->ini;
         $this->di->setShared(Service::RABBITMQ, function () use ($ini) {
+            $rabbitmq = $ini->get('rabbitmq');
             $connection = new AMQPStreamConnection(
-                $ini->rabbitmq->host,
-                $ini->rabbitmq->port,
-                $ini->rabbitmq->username,
-                $ini->rabbitmq->password,
-                $ini->rabbitmq->vhost,
-                $ini->rabbitmq->insist,
-                $ini->rabbitmq->loginMethod,
-                $ini->rabbitmq->loginResponse,
-                $ini->rabbitmq->locale
+                $rabbitmq->host,
+                $rabbitmq->port,
+                $rabbitmq->username,
+                $rabbitmq->password,
+                $rabbitmq->vhost,
+                $rabbitmq->insist,
+                $rabbitmq->loginMethod,
+                $rabbitmq->loginResponse,
+                $rabbitmq->locale
             );
 
             return $connection;
