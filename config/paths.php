@@ -30,7 +30,7 @@ define('ROUTE_DIR', ROOT . DS . 'routes' . DS);
 /**
  * File path to the webroot directory.
  */
-define('WWW_DIR', ROOT . DS . 'webroot' . DS);
+define('WWW_DIR', ROOT . DS . 'public' . DS);
 
 /**
  * Path to the temporary files directory.

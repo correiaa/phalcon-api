@@ -2,24 +2,24 @@
 
 namespace App\Bootstrap;
 
-use App\Api;
-use App\Middleware\AuthenticationMiddleware;
+use Nilnice\Phalcon\App;
+use Nilnice\Phalcon\Middleware\AuthenticationMiddleware;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-class MiddlewareBootstrap implements ApiBootstrapInterface
+class MiddlewareBootstrap implements AppBootstrapInterface
 {
     /**
-     * Run middleware.
+     * Run middleware service.
      *
-     * @param \App\Api                    $api
+     * @param \Nilnice\Phalcon\App        $app
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
      * @return mixed|void
      */
-    public function run(Api $api, DiInterface $di, Ini $ini)
+    public function run(App $app, DiInterface $di, Ini $ini)
     {
-        $api->attach(new AuthenticationMiddleware());
+        $app->attach(new AuthenticationMiddleware());
     }
 }

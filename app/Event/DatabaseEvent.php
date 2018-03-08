@@ -11,7 +11,7 @@ use Phalcon\Logger\Adapter\File;
 
 class DatabaseEvent
 {
-    const FILE_NAME = 'query.log';
+    public const FILE_NAME = 'query.log';
 
     /**
      * @var \Phalcon\Db\Profiler

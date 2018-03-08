@@ -9,15 +9,15 @@ class Cli extends Console
     /**
      * Attach middleware.
      *
-     * @param object $middleware
+     * @param $middleware
      *
-     * @return $this
+     * @return \App\Cli
      */
-    public function attach($middleware)
+    public function attach($middleware) : self
     {
         if (! $this->getEventsManager()) {
             $this->setEventsManager(
-                $this->getDI()->get(Service::EVENT_MANAGER)
+                $this->getDI()->get(Service::EVENTS_MANAGER)
             );
         }
 

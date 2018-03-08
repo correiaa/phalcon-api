@@ -2,8 +2,10 @@
 
 namespace App\Auth;
 
-use App\Model\Users;
+use App\Model\User;
 use App\Service;
+use Nilnice\Phalcon\Auth\AccountTypeInterface;
+use Nilnice\Phalcon\Auth\Manager;
 use Phalcon\Di;
 
 class UsernameAccountType implements AccountTypeInterface
@@ -11,35 +13,33 @@ class UsernameAccountType implements AccountTypeInterface
     public const NAME = 'username';
 
     /**
+     * Use username login.
+     *
      * @param array $data
      *
-     * @return mixed|null|string
+     * @return string
      */
-    public function login(array $data)
+    public function login(array $data) : string
     {
         /** @var \Phalcon\Security $security */
         $security = Di::getDefault()->get(Service::SECURITY);
         $username = $data[Manager::LOGIN_USERNAME];
         $password = $data[Manager::LOGIN_PASSWORD];
 
-        $columns = (new Users())->columnMap();
-        $bindParams = ['username' => $username];
-        $user = Users::query()
-                     ->columns($columns)
-                     ->where('username=:username:')
-                     ->bind($bindParams)
-                     ->limit(1)
-                     ->execute();
+        $user = User::findFirst([
+            'conditions' => 'username = :username:',
+            'bind'       => ['username' => $username],
+        ]);
 
         if (! $user) {
             return null;
         }
 
-        if (! $security->checkHash($password, $user->password)) {
+        if (! $security->checkHash($password, $user->getPassword())) {
             return null;
         }
 
-        return (string)$user->id;
+        return (string)$user->getId();
     }
 
     /**
@@ -47,11 +47,11 @@ class UsernameAccountType implements AccountTypeInterface
      *
      * @param string $identity
      *
-     * @return bool|mixed
+     * @return bool
      */
-    public function authenticate($identity)
+    public function authenticate(string $identity) : bool
     {
-        $count = Users::count([
+        $count = User::count([
             'conditions' => 'id=:id:',
             'bind'       => ['id' => $identity],
         ]);

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Nilnice\Phalcon\Http\Response;
 use Phalcon\Version;
 
 class DefaultController extends AbstractController
@@ -9,9 +10,9 @@ class DefaultController extends AbstractController
     /**
      * Get default page.
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
-    public function getAction()
+    public function indexAction() : Response
     {
         $result = [
             'phalcon'     => [
@@ -41,27 +42,16 @@ class DefaultController extends AbstractController
     /**
      * Get view page.
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
      */
-    public function viewAction()
+    public function viewAction() : Response
     {
+        $message = '欢迎访问 Phalcon RESTful API.';
         $result = [
-            'getClientAddress'               => $this->request->getClientAddress(),
-            'getClientCharsets'              => $this->request->getClientCharsets(),
-            'getUserAgent'                   => $this->request->getUserAgent(),
-            'getHttpHost'                    => $this->request->getHttpHost(),
-            'getMethods'                     => $this->request->getMethod(),
-            'getHttpMethodParameterOverride' => $this->request->getHttpMethodParameterOverride(),
-            'getURI'                         => $this->request->getURI(),
-            'getPort'                        => $this->request->getPort(),
-            'getServerName'                  => $this->request->getServerName(),
-            'getServerAddress'               => $this->request->getServerAddress(),
-            'getContentType'                 => $this->request->getContentType(),
-            'getScheme'                      => $this->request->getScheme(),
-            'getBasicAuth'                   => $this->request->getBasicAuth(),
-            'getLanguages'                   => $this->request->getLanguages(),
+            'message'  => '🔥 This is a RESTful API micro application based on Phalcon framework.',
+            'document' => 'https://github.com/imajinyun/phalcon-api/wiki/',
         ];
 
-        return $this->successResponse($result);
+        return $this->successResponse($result, $message);
     }
 }

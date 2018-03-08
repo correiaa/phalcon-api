@@ -12,7 +12,9 @@
     "php": ">=7.1",
     "php-amqplib/php-amqplib": "^2.7",
     "firebase/php-jwt": "^5.0",
-    "phalcon/incubator": "^3.2"
+    "phalcon/incubator": "^3.2",
+    "nilnice/phalcon-micro": "dev-master",
+    "vlucas/phpdotenv": "^2.4"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.5"

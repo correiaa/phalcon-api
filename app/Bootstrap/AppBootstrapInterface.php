@@ -2,20 +2,20 @@
 
 namespace App\Bootstrap;
 
-use App\Api;
+use Nilnice\Phalcon\App;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 
-interface ApiBootstrapInterface
+interface AppBootstrapInterface
 {
     /**
      * Run api some services.
      *
-     * @param \App\Api                    $api
+     * @param \Nilnice\Phalcon\App        $app
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
      * @return mixed
      */
-    public function run(Api $api, DiInterface $di, Ini $ini);
+    public function run(App $app, DiInterface $di, Ini $ini);
 }

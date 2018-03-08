@@ -8,47 +8,54 @@ trait ResultsetTrait
      * Get success resultset.
      *
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
      * @return array
      */
-    public function getOKResultset(array $data, $msg = 'OK', $code = 'API_1001')
-    {
-        return $this->getResultset(true, $data, $msg, $code);
+    public function getOkResultset(
+        array $data,
+        string $message = 'OK',
+        int $code = 200200
+    ) : array {
+        return $this->getResultset($data, $message, $code);
     }
 
     /**
      * Get failed resultset.
      *
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
      * @return array
      */
-    public function getNOResultset(array $data, $msg = 'NO', $code = 'API_1002')
-    {
-        return $this->getResultset(false, $data, $msg, $code);
+    public function getNoResultset(
+        array $data,
+        string $message = 'NO',
+        int $code = 400400
+    ) : array {
+        return $this->getResultset($data, $message, $code);
     }
 
     /**
      * Get resultset.
      *
-     * @param bool   $status
      * @param array  $data
-     * @param string $msg
-     * @param string $code
+     * @param string $message
+     * @param int    $code
      *
      * @return array
      */
-    private function getResultset($status, array $data, $msg, $code = '')
-    {
+    private function getResultset(
+        array $data,
+        string $message,
+        int $code = 200200
+    ) : array {
         $result = [
-            'status' => $status,
-            'msg'    => $msg,
-            'code'   => $code,
-            'data'   => $data,
+            'code'    => $code,
+            'message' => $message,
+            'data'    => $data,
         ];
 
         return $result;

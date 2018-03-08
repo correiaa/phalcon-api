@@ -1,13 +1,9 @@
 <?php
 
-/**
- * CLI access main entry.
- */
-
-use app\Bootstrap;
-use app\Bootstrap\CliServiceBootstrap;
-use app\Cli;
-use app\Register;
+use App\Bootstrap;
+use App\Bootstrap\CliServiceBootstrap;
+use App\Cli;
+use App\Register;
 use Phalcon\Cli\Console\Exception;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\Di\FactoryDefault\Cli as Di;

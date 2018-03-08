@@ -15,13 +15,19 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class CliServiceBootstrap implements CliBootstrapInterface
 {
-    /** @var \App\Cli $cli */
+    /**
+     * @var \App\Cli $cli
+     */
     private $cli;
 
-    /** @var \Phalcon\DiInterface $di */
+    /**
+     * @var \Phalcon\DiInterface $di
+     */
     private $di;
 
-    /** @var \Phalcon\Config\Adapter\Ini $ini */
+    /**
+     * @var \Phalcon\Config\Adapter\Ini $ini
+     */
     private $ini;
 
     /**
@@ -40,7 +46,7 @@ class CliServiceBootstrap implements CliBootstrapInterface
         $this->main();
     }
 
-    protected function main()
+    protected function main() : void
     {
         $this->setConfigService();
         $this->setHttpService();
@@ -53,7 +59,7 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Set config service.
      */
-    private function setConfigService()
+    private function setConfigService() : void
     {
         $this->di->setShared(Service::CONFIG, function () {
             return new Ini(CONFIG_DIR . Service::CONFIG_FILE);
@@ -63,7 +69,7 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Set http service.
      */
-    private function setHttpService()
+    private function setHttpService() : void
     {
         $this->di->setShared(Service::REQUEST, new Request());
         $this->di->setShared(Service::RESPONSE, new Response());
@@ -72,7 +78,7 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Set url service.
      */
-    private function setUrlService()
+    private function setUrlService() : void
     {
         $Ini = $this->ini;
         $this->di->setShared(Service::URL, function () use ($Ini) {
@@ -85,15 +91,15 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Set event manager service.
      */
-    private function setEventManagerService()
+    private function setEventManagerService() : void
     {
-        $this->di->setShared(Service::EVENT_MANAGER, new Manager());
+        $this->di->setShared(Service::EVENTS_MANAGER, new Manager());
     }
 
     /**
      * Set database service.
      */
-    private function setDatabaseService()
+    private function setDatabaseService() : void
     {
         $ini = $this->ini;
         $this->di->setShared(Service::DB,
@@ -134,24 +140,23 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Set RabbitMQ service.
      */
-    private function setRabbitMQService()
+    private function setRabbitMQService() : void
     {
         $ini = $this->ini;
-        $this->di->setShared(Service::RABBITMQ,
-            function () use ($ini) {
-                $connection = new AMQPStreamConnection(
-                    $ini->rabbitmq->host,
-                    $ini->rabbitmq->port,
-                    $ini->rabbitmq->username,
-                    $ini->rabbitmq->password,
-                    $ini->rabbitmq->vhost,
-                    $ini->rabbitmq->insist,
-                    $ini->rabbitmq->loginMethod,
-                    $ini->rabbitmq->loginResponse,
-                    $ini->rabbitmq->locale
-                );
+        $this->di->setShared(Service::RABBITMQ, function () use ($ini) {
+            $connection = new AMQPStreamConnection(
+                $ini->rabbitmq->host,
+                $ini->rabbitmq->port,
+                $ini->rabbitmq->username,
+                $ini->rabbitmq->password,
+                $ini->rabbitmq->vhost,
+                $ini->rabbitmq->insist,
+                $ini->rabbitmq->loginMethod,
+                $ini->rabbitmq->loginResponse,
+                $ini->rabbitmq->locale
+            );
 
-                return $connection;
-            });
+            return $connection;
+        });
     }
 }

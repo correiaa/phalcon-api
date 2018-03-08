@@ -1,9 +1,9 @@
 <?php
 
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-if ($uri !== '/' && file_exists(__DIR__ . '/webroot' . $uri)) {
+if ($uri !== '/' && file_exists(__DIR__ . '/public' . $uri)) {
     return false;
 }
 $_GET['_url'] = $_SERVER['REQUEST_URI'];
 
-require __DIR__ . '/webroot/index.php';
+require __DIR__ . '/public/index.php';

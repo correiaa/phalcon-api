@@ -4,7 +4,9 @@ namespace App;
 
 class Bootstrap
 {
-    /** @var \App\Bootstrap[] $bootstraps */
+    /**
+     * @var \App\Bootstrap[] $bootstraps
+     */
     private $bootstraps;
 
     /**
@@ -19,11 +21,13 @@ class Bootstrap
 
     /**
      * @param array ...$args
+     *
+     * @return void
      */
-    public function run(...$args)
+    public function run(...$args) : void
     {
         foreach ($this->bootstraps as $bootstrap) {
-            call_user_func_array([$bootstrap, 'run'], $args);
+            \call_user_func_array([$bootstrap, 'run'], $args);
         }
     }
 }

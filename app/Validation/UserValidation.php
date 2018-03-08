@@ -8,7 +8,7 @@ use Phalcon\Validation\Validator\PresenceOf;
 
 class UserValidation extends Validation
 {
-    public function addValidate()
+    public function addValidate() : void
     {
         $this->add('email', new PresenceOf(
             [
