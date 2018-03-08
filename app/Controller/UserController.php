@@ -38,7 +38,8 @@ class UserController extends AbstractController
      * User authorize.
      *
      * @return \Nilnice\Phalcon\Http\Response
-     * @throws \Phalcon\Exception
+     *
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function authorizeAction() : Response
     {
@@ -56,7 +57,7 @@ class UserController extends AbstractController
         $data = [
             'token'  => $auth->getToken(),
             'expire' => $auth->getExpirationTime(),
-            'user'   => $user->toArray(),
+            'user'   => $user ? $user->toArray() : [],
         ];
 
         return $this->successResponse($data);

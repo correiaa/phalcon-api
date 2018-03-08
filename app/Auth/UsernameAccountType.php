@@ -17,9 +17,9 @@ class UsernameAccountType implements AccountTypeInterface
      *
      * @param array $data
      *
-     * @return string
+     * @return null|string
      */
-    public function login(array $data) : string
+    public function login(array $data) : ? string
     {
         /** @var \Phalcon\Security $security */
         $security = Di::getDefault()->get(Service::SECURITY);
@@ -32,11 +32,15 @@ class UsernameAccountType implements AccountTypeInterface
         ]);
 
         if (! $user) {
-            return null;
+            return '-1';
         }
 
         if (! $security->checkHash($password, $user->getPassword())) {
-            return null;
+            return '-2';
+        }
+
+        if (! $user->getIsUsable()) {
+            return '-3';
         }
 
         return (string)$user->getId();
