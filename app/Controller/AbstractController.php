@@ -14,6 +14,12 @@ abstract class AbstractController extends Controller
 {
     use ResultsetTrait;
 
+    // Successful code.
+    public const SUCCESS = 200200;
+
+    // Warning code.
+    public const WARNING = 400400;
+
     /**
      * Successful notification.
      *
@@ -26,7 +32,7 @@ abstract class AbstractController extends Controller
     public function successResponse(
         array $data,
         string $message = 'OK',
-        int $code = 200200
+        int $code = self::SUCCESS
     ) : Response {
         return $this->createJsonResponse(true, $data, $message, $code);
     }
@@ -43,7 +49,7 @@ abstract class AbstractController extends Controller
     public function warningResponse(
         array $data,
         string $message = 'NO',
-        int $code = 400400
+        int $code = self::WARNING
     ) : Response {
         return $this->createJsonResponse(false, $data, $message, $code);
     }

@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class UsersMigration_1513608061724925
+ * Class UserMigration_1520561390629243
  */
-class UsersMigration_1513608061724925 extends Migration
+class UserMigration_1520561390629243 extends Migration
 {
     /**
      * Define the table structure
@@ -17,14 +17,16 @@ class UsersMigration_1513608061724925 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('users', [
+        $this->morphTable('user', [
                 'columns' => [
                     new Column(
                         'id',
                         [
-                            'type' => Column::TYPE_CHAR,
+                            'type' => Column::TYPE_INTEGER,
+                            'unsigned' => true,
                             'notNull' => true,
-                            'size' => 36,
+                            'autoIncrement' => true,
+                            'size' => 11,
                             'first' => true
                         ]
                     ),
@@ -32,9 +34,20 @@ class UsersMigration_1513608061724925 extends Migration
                         'email',
                         [
                             'type' => Column::TYPE_VARCHAR,
+                            'default' => "",
                             'notNull' => true,
                             'size' => 64,
                             'after' => 'id'
+                        ]
+                    ),
+                    new Column(
+                        'username',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => "",
+                            'notNull' => true,
+                            'size' => 32,
+                            'after' => 'email'
                         ]
                     ),
                     new Column(
@@ -42,100 +55,112 @@ class UsersMigration_1513608061724925 extends Migration
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'default' => "",
-                            'size' => 20,
-                            'after' => 'email'
+                            'size' => 32,
+                            'after' => 'username'
                         ]
                     ),
                     new Column(
                         'password',
                         [
                             'type' => Column::TYPE_VARCHAR,
+                            'default' => "",
                             'notNull' => true,
-                            'size' => 64,
+                            'size' => 255,
                             'after' => 'nickname'
                         ]
                     ),
                     new Column(
-                        'passwordSalt',
+                        'password_salt',
                         [
                             'type' => Column::TYPE_VARCHAR,
-                            'notNull' => true,
+                            'default' => "",
                             'size' => 64,
                             'after' => 'password'
                         ]
                     ),
                     new Column(
-                        'lockedDeadline',
+                        'role',
                         [
-                            'type' => Column::TYPE_DATETIME,
-                            'size' => 1,
-                            'after' => 'passwordSalt'
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => "",
+                            'size' => 256,
+                            'after' => 'password_salt'
                         ]
                     ),
                     new Column(
-                        'isUsable',
+                        'locked_deadline',
+                        [
+                            'type' => Column::TYPE_DATETIME,
+                            'default' => "0000-00-00 00:00:00",
+                            'size' => 1,
+                            'after' => 'role'
+                        ]
+                    ),
+                    new Column(
+                        'is_verified_email',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'default' => "0",
+                            'size' => 4,
+                            'after' => 'locked_deadline'
+                        ]
+                    ),
+                    new Column(
+                        'is_usable',
                         [
                             'type' => Column::TYPE_INTEGER,
                             'default' => "1",
+                            'unsigned' => true,
                             'size' => 1,
-                            'after' => 'lockedDeadline'
+                            'after' => 'is_verified_email'
                         ]
                     ),
                     new Column(
-                        'isDelete',
+                        'is_delete',
                         [
                             'type' => Column::TYPE_INTEGER,
                             'default' => "0",
+                            'unsigned' => true,
                             'size' => 1,
-                            'after' => 'isUsable'
+                            'after' => 'is_usable'
                         ]
                     ),
                     new Column(
-                        'isVerifiedEmail',
-                        [
-                            'type' => Column::TYPE_INTEGER,
-                            'default' => "0",
-                            'size' => 1,
-                            'after' => 'isDelete'
-                        ]
-                    ),
-                    new Column(
-                        'createdIp',
+                        'created_ip',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'default' => "",
                             'size' => 16,
-                            'after' => 'isVerifiedEmail'
+                            'after' => 'is_delete'
                         ]
                     ),
                     new Column(
-                        'createdAt',
+                        'created_at',
                         [
                             'type' => Column::TYPE_DATETIME,
-                            'notNull' => true,
+                            'default' => "0000-00-00 00:00:00",
                             'size' => 1,
-                            'after' => 'createdIp'
+                            'after' => 'created_ip'
                         ]
                     ),
                     new Column(
-                        'updatedAt',
+                        'updated_at',
                         [
                             'type' => Column::TYPE_DATETIME,
-                            'notNull' => true,
+                            'default' => "0000-00-00 00:00:00",
                             'size' => 1,
-                            'after' => 'createdAt'
+                            'after' => 'created_at'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['id'], 'PRIMARY'),
-                    new Index('email', ['email'], null)
+                    new Index('PRIMARY', ['id'], 'PRIMARY')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '',
+                    'AUTO_INCREMENT' => '3',
                     'ENGINE' => 'InnoDB',
-                    'TABLE_COLLATION' => 'utf8mb4_general_ci'
+                    'TABLE_COLLATION' => 'utf8_general_ci'
                 ],
             ]
         );
