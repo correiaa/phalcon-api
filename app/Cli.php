@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Nilnice\Phalcon\Constant\Service;
 use Phalcon\Cli\Console;
 
 class Cli extends Console
