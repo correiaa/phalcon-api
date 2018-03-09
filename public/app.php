@@ -14,7 +14,7 @@ use Phalcon\Loader;
 require dirname(__DIR__) . '/config/paths.php';
 require ROOT . '/vendor/autoload.php';
 
-$dotenv = new Dotenv(dirname(__DIR__) . '/config', '.env');
+$dotenv = new Dotenv(dirname(__DIR__), '.env');
 $dotenv->load();
 $env = getenv('APP_ENV');
 
