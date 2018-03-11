@@ -23,8 +23,7 @@ class CollectionBootstrap implements AppBootstrapInterface
     {
         $version = $ini->get('application')->apiVersion;
         $prefix = "/api/{$version}";
-        $app->setCollection(new DefaultResource('/'))
-            ->setCollection(new UserResource("$prefix/user"));
+        $app->setCollection(new UserResource("$prefix/user"));
 
         self::notFoundHandler($app);
         self::errorHandler($app);

@@ -34,6 +34,11 @@ class UserController extends AbstractController
         return $this->successResponse($data);
     }
 
+    public function registerAction()
+    {
+        dd($this->request->getPost());
+    }
+
     /**
      * User authorize.
      *
