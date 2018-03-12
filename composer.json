@@ -1,0 +1,39 @@
+{
+  "name": "imajinyun/phalcon-api",
+  "type": "project",
+  "license": "MIT",
+  "description": "This is an API micro application based on Phalcon framework.",
+  "keywords": [
+    "phalcon",
+    "phalcon-api"
+  ],
+  "authors": [
+    {
+      "name": "imajinyun",
+      "email": "imajinyun@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "php-amqplib/php-amqplib": "^2.7",
+    "firebase/php-jwt": "^5.0",
+    "phalcon/incubator": "^3.2",
+    "vlucas/phpdotenv": "^2.4",
+    "nilnice/phalcon-micro": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.1@dev"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('.env.example', '.env');\""
+    ]
+  },
+  "minimum-stability": "dev",
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}
