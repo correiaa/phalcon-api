@@ -2,7 +2,6 @@
 
 namespace App\Bootstrap;
 
-use App\Resource\DefaultResource;
 use App\Resource\UserResource;
 use Nilnice\Phalcon\App;
 use Phalcon\Config\Adapter\Ini;
@@ -23,8 +22,7 @@ class CollectionBootstrap implements AppBootstrapInterface
     {
         $version = $ini->get('application')->apiVersion;
         $prefix = "/api/{$version}";
-        $app->setCollection(new DefaultResource('/'))
-            ->setCollection(new UserResource("$prefix/user"));
+        $app->setCollection(new UserResource("$prefix/user"));
 
         self::notFoundHandler($app);
         self::errorHandler($app);

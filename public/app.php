@@ -1,14 +1,13 @@
 <?php
 
 use App\Bootstrap;
-use App\Bootstrap\AppServiceBootstrap;
 use App\Register;
 use Dotenv\Dotenv;
 use Nilnice\Phalcon\App;
 use Nilnice\Phalcon\Constant\Service;
+use Nilnice\Phalcon\Container\Container;
 use Nilnice\Phalcon\Http\Response;
 use Phalcon\Config\Adapter\Ini;
-use Phalcon\Di\FactoryDefault as Di;
 use Phalcon\Loader;
 
 require dirname(__DIR__) . '/config/paths.php';
@@ -21,7 +20,7 @@ $env = getenv('APP_ENV');
 error_reporting($env === 'pro' ? E_ALL & ~E_DEPRECATED & ~E_STRICT : E_ALL);
 
 try {
-    $di = new Di();
+    $di = new Container();
     $loader = new Loader();
 
     require APP_DIR . 'Register.php';
@@ -32,9 +31,10 @@ try {
     $ini = new Ini(CONFIG_DIR . 'config.ini');
 
     $bootstrap = new Bootstrap(
-        new AppServiceBootstrap(),
+        new Bootstrap\AppServiceBootstrap(),
         new Bootstrap\MiddlewareBootstrap(),
-        new Bootstrap\CollectionBootstrap()
+        new Bootstrap\CollectionBootstrap(),
+        new Bootstrap\AclBootstrap()
     );
     $bootstrap->run($app, $di, $ini);
     $app->handle();
@@ -51,7 +51,7 @@ try {
         }
     }
 } catch (\Exception $e) {
-    $di = $app->di ?? new Di();
+    $di = $app->di ?? new Container();
     $response = $di->getShared(Service::RESPONSE);
 
     if (! $response || ! $response instanceof Response) {
