@@ -2,7 +2,6 @@
 
 namespace App\Bootstrap;
 
-use App\Resource\DefaultResource;
 use App\Resource\UserResource;
 use Nilnice\Phalcon\App;
 use Phalcon\Config\Adapter\Ini;
