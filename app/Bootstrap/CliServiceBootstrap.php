@@ -4,6 +4,7 @@ namespace App\Bootstrap;
 
 use App\Cli;
 use App\Event\DatabaseEvent;
+use Nilnice\Phalcon\CliBootstrapInterface;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Http\Request;
 use Nilnice\Phalcon\Http\Response;
@@ -80,9 +81,9 @@ class CliServiceBootstrap implements CliBootstrapInterface
      */
     private function setUrlService() : void
     {
-        $Ini = $this->ini;
-        $this->di->setShared(Service::URL, function () use ($Ini) {
-            $baseUri = $Ini->application->baseUri;
+        $ini = $this->ini;
+        $this->di->setShared(Service::URL, function () use ($ini) {
+            $baseUri = $ini->get('application')->baseUri;
 
             return (new Url())->setBaseUri($baseUri);
         });

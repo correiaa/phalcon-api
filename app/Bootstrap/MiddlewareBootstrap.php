@@ -3,6 +3,7 @@
 namespace App\Bootstrap;
 
 use Nilnice\Phalcon\App;
+use Nilnice\Phalcon\AppBootstrapInterface;
 use Nilnice\Phalcon\Middleware\AuthenticationMiddleware;
 use Nilnice\Phalcon\Middleware\AuthorizationMiddleware;
 use Phalcon\Config\Adapter\Ini;

@@ -4,6 +4,7 @@ namespace App\Bootstrap;
 
 use App\Resource\UserResource;
 use Nilnice\Phalcon\App;
+use Nilnice\Phalcon\AppBootstrapInterface;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 

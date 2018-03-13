@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Auth\UsernameAccountType;
 use App\Model\User;
+use Illuminate\Support\Arr;
 use Nilnice\Phalcon\Http\Response;
+use Phalcon\Filter;
 use Phalcon\Paginator\Adapter\QueryBuilder;
 
 /**
@@ -36,7 +38,17 @@ class UserController extends AbstractController
 
     public function registerAction()
     {
-        dd($this->request->getPost());
+        $filter = new Filter();
+        $array = $this->request->getPost();
+        $email = Arr::get($array, 'email', '');
+        $username = Arr::get($array, 'username', '');
+        $password = Arr::get($array, 'password', '');
+
+        // Filter post data.
+        $email = $filter->sanitize($email, ['trim', 'email']);
+        $username = $filter->sanitize($username, ['trim']);
+        $password = $filter->sanitize($password, '');
+
     }
 
     /**
