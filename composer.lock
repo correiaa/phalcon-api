@@ -223,16 +223,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.24.1",
+            "version": "1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41"
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41.zip",
-                "reference": "ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41",
+                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/bba6c6e410c6b4317e37a9474aeaa753808c3875.zip",
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-09T15:49:34+00:00"
+            "time": "2018-03-10T10:10:14+00:00"
         },
         {
             "name": "nilnice/phalcon-micro",
@@ -280,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nilnice/phalcon-micro.git",
-                "reference": "f2b3a33555e137fc70d7f3b9ad433c580d7cc2f0"
+                "reference": "e3f62b693c4ec7396d19984fb02e2227aaa7cd5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/f2b3a33555e137fc70d7f3b9ad433c580d7cc2f0.zip",
-                "reference": "f2b3a33555e137fc70d7f3b9ad433c580d7cc2f0",
+                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/e3f62b693c4ec7396d19984fb02e2227aaa7cd5b.zip",
+                "reference": "e3f62b693c4ec7396d19984fb02e2227aaa7cd5b",
                 "shasum": ""
             },
             "require": {
@@ -314,7 +314,7 @@
                 "phalcon",
                 "phalcon-micro"
             ],
-            "time": "2018-03-12T03:58:00+00:00"
+            "time": "2018-03-13T03:55:53+00:00"
         },
         {
             "name": "phalcon/incubator",

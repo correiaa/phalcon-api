@@ -5,6 +5,7 @@ namespace App\Bootstrap;
 use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
 use App\Exception\IOException;
+use App\User\User;
 use Nilnice\Phalcon\App;
 use Nilnice\Phalcon\Auth\JWTToken;
 use Nilnice\Phalcon\Auth\Manager as AuthManager;
@@ -62,11 +63,11 @@ class AppServiceBootstrap implements AppBootstrapInterface
     protected function main() : void
     {
         $this->setConfigService();
-        $this->setHttpService();
         $this->setUrlService();
         $this->setJWTTokenService();
         $this->setAuthManagerService();
         $this->setDatabaseService();
+        $this->setUserService();
         $this->setRabbitMQService();
     }
 
@@ -79,15 +80,6 @@ class AppServiceBootstrap implements AppBootstrapInterface
             return new Ini(CONFIG_DIR . Service::CONFIG_FILE);
         });
         $this->di->setShared(Service::MESSAGE, new Message());
-    }
-
-    /**
-     * Set http service.
-     */
-    private function setHttpService() : void
-    {
-        $this->di->setShared(Service::REQUEST, new Request());
-        $this->di->setShared(Service::RESPONSE, new Response());
     }
 
     /**
@@ -185,6 +177,14 @@ class AppServiceBootstrap implements AppBootstrapInterface
 
             return $connection;
         });
+    }
+
+    /**
+     * Set user service.
+     */
+    public function setUserService() : void
+    {
+        $this->di->setShared(Service::USER, new User());
     }
 
     /**

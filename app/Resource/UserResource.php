@@ -41,7 +41,7 @@ class UserResource extends Resource
             )
             ->setEndpoint(Endpoint::post('/authorize', 'authorizeAction')
                 ->setName('authorize')
-                ->setDenyRoles(Memory::UNAUTHORIZED)
+                ->setAllowRoles(Memory::UNAUTHORIZED)
                 ->setDescription('为注册的用户提供授权服务')
             );
     }

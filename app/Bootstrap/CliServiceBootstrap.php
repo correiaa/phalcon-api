@@ -80,9 +80,9 @@ class CliServiceBootstrap implements CliBootstrapInterface
      */
     private function setUrlService() : void
     {
-        $Ini = $this->ini;
-        $this->di->setShared(Service::URL, function () use ($Ini) {
-            $baseUri = $Ini->application->baseUri;
+        $ini = $this->ini;
+        $this->di->setShared(Service::URL, function () use ($ini) {
+            $baseUri = $ini->get('application')->baseUri;
 
             return (new Url())->setBaseUri($baseUri);
         });
