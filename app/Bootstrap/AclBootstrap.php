@@ -4,6 +4,7 @@ namespace App\Bootstrap;
 
 use Nilnice\Phalcon\Acl\Adapter\Memory;
 use Nilnice\Phalcon\App;
+use Nilnice\Phalcon\AppBootstrapInterface;
 use Nilnice\Phalcon\Constant\Service;
 use Phalcon\Acl\Role;
 use Phalcon\Config\Adapter\Ini;

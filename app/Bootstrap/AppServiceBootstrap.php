@@ -7,6 +7,7 @@ use App\Event\DatabaseEvent;
 use App\Exception\IOException;
 use App\User\User;
 use Nilnice\Phalcon\App;
+use Nilnice\Phalcon\AppBootstrapInterface;
 use Nilnice\Phalcon\Auth\JWTToken;
 use Nilnice\Phalcon\Auth\Manager as AuthManager;
 use Nilnice\Phalcon\Constant\Service;

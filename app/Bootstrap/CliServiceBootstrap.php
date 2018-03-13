@@ -4,6 +4,7 @@ namespace App\Bootstrap;
 
 use App\Cli;
 use App\Event\DatabaseEvent;
+use Nilnice\Phalcon\CliBootstrapInterface;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Http\Request;
 use Nilnice\Phalcon\Http\Response;
