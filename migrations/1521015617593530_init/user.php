@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class UserMigration_1520561390629243
+ * Class UserMigration_1521015617593530
  */
-class UserMigration_1520561390629243 extends Migration
+class UserMigration_1521015617593530 extends Migration
 {
     /**
      * Define the table structure
@@ -70,21 +70,12 @@ class UserMigration_1520561390629243 extends Migration
                         ]
                     ),
                     new Column(
-                        'password_salt',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "",
-                            'size' => 64,
-                            'after' => 'password'
-                        ]
-                    ),
-                    new Column(
                         'role',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'default' => "",
                             'size' => 256,
-                            'after' => 'password_salt'
+                            'after' => 'password'
                         ]
                     ),
                     new Column(
@@ -158,7 +149,7 @@ class UserMigration_1520561390629243 extends Migration
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '3',
+                    'AUTO_INCREMENT' => '8',
                     'ENGINE' => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_general_ci'
                 ],
