@@ -19,7 +19,8 @@
     "firebase/php-jwt": "^5.0",
     "phalcon/incubator": "^3.2",
     "vlucas/phpdotenv": "^2.4",
-    "nilnice/phalcon-micro": "dev-master"
+    "nilnice/phalcon-micro": "dev-master",
+    "symfony/filesystem": "^4.1@dev"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.1@dev"

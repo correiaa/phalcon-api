@@ -2,11 +2,14 @@
 
 namespace App\Model;
 
+use Phalcon\Mvc\Model;
 use Phalcon\Validation;
 use Phalcon\Validation\Validator\Email as EmailValidator;
 
-class User extends AppModel
+class User extends Model
 {
+    // use ModelTrait;
+
     /**
      *
      * @var integer
@@ -43,13 +46,6 @@ class User extends AppModel
      * @Column(column="password", type="string", length=255, nullable=false)
      */
     protected $password;
-
-    /**
-     *
-     * @var string
-     * @Column(column="password_salt", type="string", length=64, nullable=true)
-     */
-    protected $passwordSalt;
 
     /**
      *
@@ -107,6 +103,17 @@ class User extends AppModel
      * @Column(column="updated_at", type="string", nullable=true)
      */
     protected $updatedAt;
+
+    public function beforeCreate()
+    {
+        $this->createAt = date('Y-m-d H:i:s');
+        $this->updateAt = $this->createAt;
+    }
+
+    public function beforeUpdate()
+    {
+        $this->updateAt = date('Y-m-d H:i:s');
+    }
 
     /**
      * Method to set the value of field id
@@ -174,20 +181,6 @@ class User extends AppModel
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Method to set the value of field passwordSalt
-     *
-     * @param string $passwordSalt
-     *
-     * @return $this
-     */
-    public function setPasswordSalt($passwordSalt)
-    {
-        $this->passwordSalt = $passwordSalt;
 
         return $this;
     }
@@ -355,16 +348,6 @@ class User extends AppModel
     }
 
     /**
-     * Returns the value of field passwordSalt
-     *
-     * @return string
-     */
-    public function getPasswordSalt()
-    {
-        return $this->passwordSalt;
-    }
-
-    /**
      * Returns the value of field role
      *
      * @return string
@@ -471,8 +454,7 @@ class User extends AppModel
      */
     public function initialize()
     {
-        $this->setSchema("test");
-        $this->setSource("user");
+        $this->setSource('user');
     }
 
     /**
@@ -524,7 +506,6 @@ class User extends AppModel
             'username'          => 'username',
             'nickname'          => 'nickname',
             'password'          => 'password',
-            'password_salt'     => 'passwordSalt',
             'role'              => 'role',
             'locked_deadline'   => 'lockedDeadline',
             'is_verified_email' => 'isVerifiedEmail',

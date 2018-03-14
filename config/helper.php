@@ -49,12 +49,12 @@ if (! function_exists('logger')) {
     /**
      * Record application running log.
      *
-     * @param string $msg
-     * @param int    $type
-     * @param string $name
-     * @param array  $context
+     * @param            $msg
+     * @param int        $type
+     * @param string     $name
+     * @param array|null $context
      *
-     * @return null
+     * @throws \RuntimeException
      */
     function logger(
         $msg,
@@ -70,8 +70,10 @@ if (! function_exists('logger')) {
             $path = sprintf($formatter, $y, $m, $d, $name ?: $func);
 
             if (! file_exists($path)) {
-                if (class_exists($class = \App\Component\Filesystem::class)) {
-                    $Filesystem = new \App\Component\Filesystem();
+                $class = \Symfony\Component\Filesystem\Filesystem::class;
+                if (class_exists($class)) {
+                    $Filesystem
+                        = new \Symfony\Component\Filesystem\Filesystem();
                     $Filesystem->mkdir(dirname($path));
                 } else {
                     throw new \RuntimeException("$class cannot be loaded.");

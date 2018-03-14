@@ -38,17 +38,34 @@ class UserController extends AbstractController
 
     public function registerAction()
     {
-        $filter = new Filter();
         $array = $this->request->getPost();
         $email = Arr::get($array, 'email', '');
         $username = Arr::get($array, 'username', '');
+        $nickname = Arr::get($array, 'nickname', '');
         $password = Arr::get($array, 'password', '');
+        $ip = Arr::get($array, 'ip', '');
 
         // Filter post data.
+        $filter = new Filter();
         $email = $filter->sanitize($email, ['trim', 'email']);
         $username = $filter->sanitize($username, ['trim']);
-        $password = $filter->sanitize($password, '');
+        $nickname = $filter->sanitize($nickname, ['trim']);
+        $password = $filter->sanitize($password, ['trim']);
+        $ip = $filter->sanitize($ip, ['trim']);
 
+        $user = new User();
+        $user->setEmail($email);
+        $user->setUsername($username);
+        $user->setNickname(ucfirst($nickname));
+        $user->setPassword($this->security->hash($password));
+        $user->setRole('User');
+        $user->setCreatedIp($ip);
+
+        if ($user->save()) {
+            return $this->successResponse([], '注册成功');
+        }
+
+        return $this->warningResponse([], '注册失败');
     }
 
     /**
