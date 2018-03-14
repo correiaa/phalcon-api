@@ -2,12 +2,12 @@
 
 namespace App\Event;
 
-use App\Component\Filesystem;
 use Phalcon\Db\Adapter\Pdo;
 use Phalcon\Db\Profiler;
 use Phalcon\Events\Event;
 use Phalcon\Logger;
 use Phalcon\Logger\Adapter\File;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DatabaseEvent
 {
@@ -24,9 +24,9 @@ class DatabaseEvent
     protected $logger;
 
     /**
-     * DatabaseListener constructor.
+     * DatabaseEvent constructor.
      *
-     * @throws \App\Exception\IOException
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
     public function __construct()
     {
@@ -40,12 +40,12 @@ class DatabaseEvent
      * @param \Phalcon\Events\Event   $event
      * @param \Phalcon\Db\Adapter\Pdo $connection
      *
-     * @return null
+     * @return void
      */
-    public function beforeQuery(Event $event, Pdo $connection)
+    public function beforeQuery(Event $event, Pdo $connection) : void
     {
         if (__FUNCTION__ !== $event->getType()) {
-            return null;
+            return;
         }
         $this->profiler->startProfile($connection->getSQLStatement());
     }
@@ -56,12 +56,12 @@ class DatabaseEvent
      * @param \Phalcon\Events\Event   $event
      * @param \Phalcon\Db\Adapter\Pdo $connection
      *
-     * @return null
+     * @return void
      */
-    public function afterQuery(Event $event, Pdo $connection)
+    public function afterQuery(Event $event, Pdo $connection) : void
     {
         if (__FUNCTION__ !== $event->getType()) {
-            return null;
+            return;
         }
 
         $Line = new Logger\Formatter\Line("[%date%] - [%type%]\r\n%message%");
@@ -73,23 +73,24 @@ class DatabaseEvent
     /**
      * @return \Phalcon\Db\Profiler
      */
-    public function getProfiler()
+    public function getProfiler() : Profiler
     {
         return $this->profiler;
     }
 
     /**
      * @return string
-     * @throws \App\Exception\IOException
+     *
+     * @throws \Symfony\Component\Filesystem\Exception\IOException
      */
-    protected function getLogFile()
+    protected function getLogFile() : string
     {
         $path = LOGS_DIR . '%s/%s/%s/' . self::FILE_NAME;
         $path = sprintf($path, date('Y'), date('m'), date('d'));
 
         if (! file_exists($path)) {
-            $Filesystem = new Filesystem();
-            $Filesystem->mkdir(dirname($path));
+            $filesystem = new Filesystem();
+            $filesystem->mkdir(\dirname($path));
         }
 
         return $path;

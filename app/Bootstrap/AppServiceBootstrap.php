@@ -4,7 +4,6 @@ namespace App\Bootstrap;
 
 use App\Auth\UsernameAccountType;
 use App\Event\DatabaseEvent;
-use App\Exception\IOException;
 use App\User\User;
 use Nilnice\Phalcon\App;
 use Nilnice\Phalcon\AppBootstrapInterface;
@@ -16,6 +15,7 @@ use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Symfony\Component\Filesystem\Exception\IOException;
 
 class AppServiceBootstrap implements AppBootstrapInterface
 {
@@ -96,7 +96,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
     /**
      * Set JWT token service.
      *
-     * @throws \Phalcon\Exception
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     private function setJWTTokenService() : void
     {
