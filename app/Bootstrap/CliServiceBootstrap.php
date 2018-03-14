@@ -2,8 +2,8 @@
 
 namespace App\Bootstrap;
 
-use App\Cli;
 use App\Event\DatabaseEvent;
+use Nilnice\Phalcon\Cli;
 use Nilnice\Phalcon\CliBootstrapInterface;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Http\Request;
@@ -16,9 +16,6 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 
 class CliServiceBootstrap implements CliBootstrapInterface
 {
-    /**
-     * @var \App\Cli $cli
-     */
     private $cli;
 
     /**
@@ -34,9 +31,11 @@ class CliServiceBootstrap implements CliBootstrapInterface
     /**
      * Run service.
      *
-     * @param \App\Cli                    $cli
+     * @param \Nilnice\Phalcon\Cli        $cli
      * @param \Phalcon\DiInterface        $di
      * @param \Phalcon\Config\Adapter\Ini $ini
+     *
+     * @return mixed|void
      */
     public function run(Cli $cli, DiInterface $di, Ini $ini)
     {

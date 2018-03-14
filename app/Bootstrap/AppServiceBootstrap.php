@@ -11,12 +11,9 @@ use Nilnice\Phalcon\AppBootstrapInterface;
 use Nilnice\Phalcon\Auth\JWTToken;
 use Nilnice\Phalcon\Auth\Manager as AuthManager;
 use Nilnice\Phalcon\Constant\Service;
-use Nilnice\Phalcon\Http\Request;
-use Nilnice\Phalcon\Http\Response;
 use Nilnice\Phalcon\Support\Message;
 use Phalcon\Config\Adapter\Ini;
 use Phalcon\DiInterface;
-use Phalcon\Exception;
 use Phalcon\Mvc\Url;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
