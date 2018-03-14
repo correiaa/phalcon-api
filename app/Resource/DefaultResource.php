@@ -18,13 +18,13 @@ class DefaultResource extends Resource
             ->setHandler(DefaultController::class, true)
             ->setEndpoint(Endpoint::get('/', 'indexAction')
                 ->setName('index')
-                ->setAllowRoles(Memory::UNAUTHORIZED)
-                ->setDescription('获取系统信息列表')
+                ->setAllowRoles(Memory::All_ROLES)
+                ->setDescription('默认欢迎页面')
             )
-            ->setEndpoint(Endpoint::get('view', 'viewAction')
-                ->setName('view')
-                ->setAllowRoles(Memory::UNAUTHORIZED)
-                ->setDescription('查看系统信息')
+            ->setEndpoint(Endpoint::get('info', 'infoAction')
+                ->setName('info')
+                ->setAllowRoles(Memory::All_ROLES)
+                ->setDescription('查看系统信息页面')
             );
     }
 }

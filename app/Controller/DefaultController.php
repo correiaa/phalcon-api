@@ -14,6 +14,22 @@ class DefaultController extends AbstractController
      */
     public function indexAction() : Response
     {
+        $message = '欢迎访问 Phalcon RESTful API.';
+        $result = [
+            'message'  => '🔥 This is a RESTful API micro application based on Phalcon framework.',
+            'document' => 'https://github.com/imajinyun/phalcon-api/wiki/',
+        ];
+
+        return $this->successResponse($result, $message);
+    }
+
+    /**
+     * Get system information.
+     *
+     * @return \Nilnice\Phalcon\Http\Response
+     */
+    public function infoAction() : Response
+    {
         $result = [
             'phalcon'     => [
                 'id'      => Version::getId(),
@@ -37,21 +53,5 @@ class DefaultController extends AbstractController
         ];
 
         return $this->successResponse($result);
-    }
-
-    /**
-     * Get view page.
-     *
-     * @return \Nilnice\Phalcon\Http\Response
-     */
-    public function viewAction() : Response
-    {
-        $message = '欢迎访问 Phalcon RESTful API.';
-        $result = [
-            'message'  => '🔥 This is a RESTful API micro application based on Phalcon framework.',
-            'document' => 'https://github.com/imajinyun/phalcon-api/wiki/',
-        ];
-
-        return $this->successResponse($result, $message);
     }
 }
