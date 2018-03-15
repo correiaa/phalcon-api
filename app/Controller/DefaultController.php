@@ -16,8 +16,8 @@ class DefaultController extends AbstractController
     {
         $message = '欢迎访问 Phalcon RESTful API.';
         $result = [
-            'message'  => '🔥 This is a RESTful API micro application based on Phalcon framework.',
-            'document' => 'https://github.com/imajinyun/phalcon-api/wiki/',
+            'description'   => '🔥 This is a RESTful API micro application based on Phalcon framework.',
+            'documentation' => 'https://github.com/imajinyun/phalcon-api/wiki/',
         ];
 
         return $this->successResponse($result, $message);

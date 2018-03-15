@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Traits\ResultsetTrait;
 use Nilnice\Phalcon\Http\Response;
 use Phalcon\Mvc\Controller;
+use Phalcon\Validation;
 
 /**
  * @property \Nilnice\Phalcon\Http\Request  $request
@@ -52,6 +53,33 @@ abstract class AbstractController extends Controller
         int $code = self::WARNING
     ) : Response {
         return $this->createJsonResponse(false, $data, $message, $code);
+    }
+
+    /**
+     * Validate submission data.
+     *
+     * @param \Phalcon\Validation $validation
+     * @param array               $data
+     *
+     * @return array
+     */
+    public function validator(Validation $validation, array $data) : array
+    {
+        $result = ['code' => '', 'type' => '', 'field' => '', 'message' => '',];
+        $messages = $validation->validate($data);
+
+        if (\count($messages)) {
+            foreach ($messages as $message) {
+                $result['code'] = $message->getCode();
+                $result['type'] = $message->getType();
+                $result['field'] = $message->getField();
+                $result['message'] = $message->getMessage();
+
+                return $result;
+            }
+        }
+
+        return $result;
     }
 
     /**

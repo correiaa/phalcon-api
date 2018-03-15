@@ -280,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nilnice/phalcon-micro.git",
-                "reference": "b0a5603c8a4c5e24c4c46a3ae064eaab5863918d"
+                "reference": "a66bebeca3159f1182cd5a7e6750572b48be6b3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/b0a5603c8a4c5e24c4c46a3ae064eaab5863918d.zip",
-                "reference": "b0a5603c8a4c5e24c4c46a3ae064eaab5863918d",
+                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/a66bebeca3159f1182cd5a7e6750572b48be6b3b.zip",
+                "reference": "a66bebeca3159f1182cd5a7e6750572b48be6b3b",
                 "shasum": ""
             },
             "require": {
@@ -314,7 +314,7 @@
                 "phalcon",
                 "phalcon-micro"
             ],
-            "time": "2018-03-14T07:16:33+00:00"
+            "time": "2018-03-14T10:03:36+00:00"
         },
         {
             "name": "phalcon/incubator",
@@ -789,12 +789,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "8630b6e19e07db5309dca3d428be9cba1c66e880"
+                "reference": "57653508ed1bfd94de759fa564c4f4364ba89a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/twigphp/Twig/8630b6e19e07db5309dca3d428be9cba1c66e880.zip",
-                "reference": "8630b6e19e07db5309dca3d428be9cba1c66e880",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig/57653508ed1bfd94de759fa564c4f4364ba89a5d.zip",
+                "reference": "57653508ed1bfd94de759fa564c4f4364ba89a5d",
                 "shasum": ""
             },
             "require": {
@@ -847,7 +847,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-03-05T02:10:27+00:00"
+            "time": "2018-03-14T15:30:56+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

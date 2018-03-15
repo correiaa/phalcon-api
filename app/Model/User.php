@@ -3,12 +3,10 @@
 namespace App\Model;
 
 use Phalcon\Mvc\Model;
-use Phalcon\Validation;
-use Phalcon\Validation\Validator\Email as EmailValidator;
 
 class User extends Model
 {
-    // use ModelTrait;
+    use ModelTrait;
 
     /**
      *
@@ -103,17 +101,6 @@ class User extends Model
      * @Column(column="updated_at", type="string", nullable=true)
      */
     protected $updatedAt;
-
-    public function beforeCreate()
-    {
-        $this->createAt = date('Y-m-d H:i:s');
-        $this->updateAt = $this->createAt;
-    }
-
-    public function beforeUpdate()
-    {
-        $this->updateAt = date('Y-m-d H:i:s');
-    }
 
     /**
      * Method to set the value of field id
@@ -425,28 +412,6 @@ class User extends Model
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Validations and business logic
-     *
-     * @return boolean
-     */
-    public function validation()
-    {
-        $validator = new Validation();
-
-        $validator->add(
-            'email',
-            new EmailValidator(
-                [
-                    'model'   => $this,
-                    'message' => 'Please enter a correct email address',
-                ]
-            )
-        );
-
-        return $this->validate($validator);
     }
 
     /**
