@@ -25,7 +25,7 @@ class UserController extends AbstractController
     public function getAction($id = null) : Response
     {
         if (! $id) {
-            return $this->warningResponse([], 'Invalid parameter.');
+            return $this->warningResponse([], 'Invalid parameter');
         }
 
         $entity = User::findFirst([
@@ -38,9 +38,11 @@ class UserController extends AbstractController
     }
 
     /**
+     * Create or register user.
+     *
      * @return \Nilnice\Phalcon\Http\Response
      */
-    public function registerAction() : Response
+    public function createAction() : Response
     {
         $array = $this->request->getPost();
 
@@ -80,13 +82,35 @@ class UserController extends AbstractController
         return $this->warningResponse([], '注册失败');
     }
 
-    public function renameAction()
+    /**
+     * Update user information.
+     *
+     * @return \Nilnice\Phalcon\Http\Response
+     */
+    public function updateAction() : Response
     {
         $array = $this->request->getPost();
+        $id = Arr::get($array, 'id');
+
+        if (! $id) {
+            return $this->warningResponse([], 'Invalid parameter');
+        }
+        $data = $array;
+
+        $object = User::findFirst([
+            'conditions' => 'id = :id:',
+            'bind'       => ['id' => $id],
+        ]);
+
+        if (! $object) {
+            return $this->warningResponse($data, 'User not found');
+        }
+
+        return $this->successResponse($data);
     }
 
     /**
-     * Get user list.
+     * Get some users list.
      *
      * @return \Nilnice\Phalcon\Http\Response
      */
