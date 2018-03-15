@@ -43,6 +43,11 @@ class UserResource extends Resource
                 ->setName('authorize')
                 ->setAllowRoles(Memory::UNAUTHORIZED)
                 ->setDescription('为注册的用户提供授权服务')
+            )
+            ->setEndpoint(Endpoint::get('/info', 'infoAction')
+                ->setName('info')
+                ->setAllowRoles(Memory::AUTHORIZED)
+                ->setDescription('获取令牌相关信息')
             );
     }
 }
