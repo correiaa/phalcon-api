@@ -9,7 +9,9 @@ class RabbitController extends AbstractController
     /**
      * RabbitMQ producer.
      *
-     * @return \Phalcon\Http\Response|\Phalcon\Http\ResponseInterface
+     * @return \Nilnice\Phalcon\Http\Response
+     *
+     * @throws \RuntimeException
      */
     public function producerAction()
     {

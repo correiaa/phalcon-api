@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Auth\UsernameAccountType;
 use App\Model\User;
+use App\Validation\UserValidation;
 use Illuminate\Support\Arr;
 use Nilnice\Phalcon\Http\Response;
 use Phalcon\Filter;
@@ -36,14 +37,26 @@ class UserController extends AbstractController
         return $this->successResponse($data);
     }
 
-    public function registerAction()
+    /**
+     * @return \Nilnice\Phalcon\Http\Response
+     */
+    public function registerAction() : Response
     {
         $array = $this->request->getPost();
+
+        $validation = new UserValidation();
+        $validation->createValidate($array);
+        $validator = $this->validator($validation, $array);
+
+        if ($validator['message']) {
+            return $this->warningResponse($validator, $validator['message']);
+        }
+
         $email = Arr::get($array, 'email', '');
         $username = Arr::get($array, 'username', '');
         $nickname = Arr::get($array, 'nickname', '');
         $password = Arr::get($array, 'password', '');
-        $ip = Arr::get($array, 'ip', '');
+        $createIp = $this->request->getClientAddress();
 
         // Filter post data.
         $filter = new Filter();
@@ -51,7 +64,6 @@ class UserController extends AbstractController
         $username = $filter->sanitize($username, ['trim']);
         $nickname = $filter->sanitize($nickname, ['trim']);
         $password = $filter->sanitize($password, ['trim']);
-        $ip = $filter->sanitize($ip, ['trim']);
 
         $user = new User();
         $user->setEmail($email);
@@ -59,7 +71,7 @@ class UserController extends AbstractController
         $user->setNickname(ucfirst($nickname));
         $user->setPassword($this->security->hash($password));
         $user->setRole('User');
-        $user->setCreatedIp($ip);
+        $user->setCreatedIp($createIp);
 
         if ($user->save()) {
             return $this->successResponse([], '注册成功');
@@ -68,33 +80,9 @@ class UserController extends AbstractController
         return $this->warningResponse([], '注册失败');
     }
 
-    /**
-     * User authorize.
-     *
-     * @return \Nilnice\Phalcon\Http\Response
-     *
-     * @throws \Nilnice\Phalcon\Exception\Exception
-     */
-    public function authorizeAction() : Response
+    public function renameAction()
     {
-        $request = $this->request;
-        $username = $request->getUsername();
-        $password = $request->getPassword();
-
-        $auth = $this->authManager->loginWithUsernamePassword(
-            UsernameAccountType::NAME,
-            $username,
-            $password
-        );
-
-        $user = User::findFirst($auth->getIdentity());
-        $data = [
-            'token'  => $auth->getToken(),
-            'expire' => $auth->getExpirationTime(),
-            'user'   => $user ? $user->toArray() : [],
-        ];
-
-        return $this->successResponse($data);
+        $array = $this->request->getPost();
     }
 
     /**
@@ -128,5 +116,52 @@ class UserController extends AbstractController
         ];
 
         return $this->successResponse($array);
+    }
+
+    /**
+     * User authorize.
+     *
+     * @return \Nilnice\Phalcon\Http\Response
+     *
+     * @throws \Nilnice\Phalcon\Exception\Exception
+     */
+    public function authorizeAction() : Response
+    {
+        $request = $this->request;
+        $username = $request->getUsername();
+        $password = $request->getPassword();
+
+        $auth = $this->authManager->loginWithUsernamePassword(
+            UsernameAccountType::NAME,
+            $username,
+            $password
+        );
+
+        $user = User::findFirst($auth->getIdentity());
+        $data = [
+            'token'  => $auth->getToken(),
+            'expire' => $auth->getExpirationTime(),
+            'user'   => $user ? $user->toArray() : [],
+        ];
+
+        return $this->successResponse($data);
+    }
+
+    /**
+     * Get token information.
+     *
+     * @return \Nilnice\Phalcon\Http\Response
+     */
+    public function infoAction() : Response
+    {
+        /** @var \Nilnice\Phalcon\Auth\Manager $manager */
+        $manager = $this->di->get('authManager');
+        $provider = $manager->getJWTProvider();
+        $data = [
+            'token'   => $provider->getToken(),
+            'user_id' => $provider->getIdentity(),
+        ];
+
+        return $this->successResponse($data);
     }
 }
