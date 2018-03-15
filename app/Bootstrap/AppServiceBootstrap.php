@@ -42,7 +42,8 @@ class AppServiceBootstrap implements AppBootstrapInterface
      * @param \Phalcon\Config\Adapter\Ini $ini
      *
      * @return mixed|void
-     * @throws \Phalcon\Exception
+     *
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function run(App $app, DiInterface $di, Ini $ini)
     {
@@ -56,7 +57,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
     /**
      * Inject necessary services into the container.
      *
-     * @throws \Phalcon\Exception
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     protected function main() : void
     {
