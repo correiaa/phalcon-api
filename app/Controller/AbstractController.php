@@ -24,35 +24,35 @@ abstract class AbstractController extends Controller
     /**
      * Successful notification.
      *
-     * @param array  $data
      * @param string $message
+     * @param array  $data
      * @param int    $code
      *
      * @return \Nilnice\Phalcon\Http\Response
      */
     public function successResponse(
-        array $data,
         string $message = 'OK',
+        array $data = [],
         int $code = self::SUCCESS
     ) : Response {
-        return $this->createJsonResponse(true, $data, $message, $code);
+        return $this->createJsonResponse(true, $message, $data, $code);
     }
 
     /**
      * Warning notification.
      *
-     * @param array  $data
      * @param string $message
+     * @param array  $data
      * @param int    $code
      *
      * @return \Nilnice\Phalcon\Http\Response
      */
     public function warningResponse(
-        array $data,
         string $message = 'NO',
+        array $data = [],
         int $code = self::WARNING
     ) : Response {
-        return $this->createJsonResponse(false, $data, $message, $code);
+        return $this->createJsonResponse(false, $message, $data, $code);
     }
 
     /**
@@ -83,6 +83,25 @@ abstract class AbstractController extends Controller
     }
 
     /**
+     * @param bool $assoc
+     *
+     * @return array|bool|mixed|null|\stdClass
+     */
+    public function getRaw($assoc = true)
+    {
+        $result = null;
+
+        if ($assoc) {
+            $json = $this->request->getRawBody();
+            $result = json_decode($json, true);
+        } else {
+            $result = $this->request->getJsonRawBody();
+        }
+
+        return $result;
+    }
+
+    /**
      * Create JSON response.
      *
      * @param bool   $status
@@ -94,14 +113,14 @@ abstract class AbstractController extends Controller
      */
     private function createJsonResponse(
         bool $status,
-        array $data,
         string $message,
+        array $data,
         int $code
     ) : Response {
         if ($status) {
-            $content = $this->getOkResultset($data, $message, $code);
+            $content = $this->getOkResultset($message, $data, $code);
         } else {
-            $content = $this->getNoResultset($data, $message, $code);
+            $content = $this->getNoResultset($message, $data, $code);
         }
         $this->response
             ->setStatusCode(200, $status ? 'OK' : 'NO')

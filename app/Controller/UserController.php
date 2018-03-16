@@ -25,7 +25,7 @@ class UserController extends AbstractController
     public function getAction($id = null) : Response
     {
         if (! $id) {
-            return $this->warningResponse([], 'Invalid parameter');
+            return $this->warningResponse('Invalid parameter');
         }
 
         $entity = User::findFirst([
@@ -34,7 +34,7 @@ class UserController extends AbstractController
         ]);
         $data = $entity ? $entity->toArray() : [];
 
-        return $this->successResponse($data);
+        return $this->successResponse('用户实体信息', $data);
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends AbstractController
         $validator = $this->validator($validation, $array);
 
         if ($validator['message']) {
-            return $this->warningResponse($validator, $validator['message']);
+            return $this->warningResponse($validator['message'], $validator);
         }
 
         $email = Arr::get($array, 'email', '');
@@ -76,37 +76,54 @@ class UserController extends AbstractController
         $user->setCreatedIp($createIp);
 
         if ($user->save()) {
-            return $this->successResponse([], '注册成功');
+            return $this->successResponse('注册成功');
         }
 
-        return $this->warningResponse([], '注册失败');
+        return $this->warningResponse('注册失败');
     }
 
     /**
      * Update user information.
      *
+     * @param null|int $id
+     *
      * @return \Nilnice\Phalcon\Http\Response
      */
-    public function updateAction() : Response
+    public function updateAction($id = null) : Response
     {
-        $array = $this->request->getPost();
-        $id = Arr::get($array, 'id');
-
         if (! $id) {
-            return $this->warningResponse([], 'Invalid parameter');
+            return $this->warningResponse('Invalid parameter');
         }
-        $data = $array;
 
-        $object = User::findFirst([
-            'conditions' => 'id = :id:',
+        $entity = User::findFirst([
+            'conditions' => 'id=:id:',
             'bind'       => ['id' => $id],
         ]);
 
-        if (! $object) {
-            return $this->warningResponse($data, 'User not found');
+        if (! $entity) {
+            return $this->warningResponse('User not found');
         }
 
-        return $this->successResponse($data);
+        $array = $this->getRaw();
+        $array['id'] = $id;
+        $validation = new UserValidation();
+        $validation->updateValidate($array);
+        $validator = $this->validator($validation, $array);
+
+        if ($validator['message']) {
+            return $this->warningResponse($validator['message'], $validator);
+        }
+
+        $entity->setEmail($array['email'] ?? $entity->getEmail());
+        $entity->setUsername($array['username'] ?? $entity->getUsername());
+        $entity->setNickname($array['nickname'] ?? $entity->getNickname());
+        $entity->setRole($array['role'] ?? $entity->getRole());
+
+        if (! $entity->update()) {
+            return $this->warningResponse('更新失败');
+        }
+
+        return $this->successResponse('更新成功');
     }
 
     /**
@@ -139,7 +156,7 @@ class UserController extends AbstractController
             'list'  => $paginator->getPaginate()->items,
         ];
 
-        return $this->successResponse($array);
+        return $this->successResponse('用户列表', $array);
     }
 
     /**
@@ -168,7 +185,7 @@ class UserController extends AbstractController
             'user'   => $user ? $user->toArray() : [],
         ];
 
-        return $this->successResponse($data);
+        return $this->successResponse('授权 Access token', $data);
     }
 
     /**
@@ -186,6 +203,6 @@ class UserController extends AbstractController
             'user_id' => $provider->getIdentity(),
         ];
 
-        return $this->successResponse($data);
+        return $this->successResponse('Token 信息', $data);
     }
 }

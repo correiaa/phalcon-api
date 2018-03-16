@@ -20,10 +20,6 @@ class UserValidation extends Validation
             'message' => '用户名称必须填写',
         ]));
 
-        $this->add('password', new PresenceOf([
-            'message' => '用户密码必须填写',
-        ]));
-
         $this->add('nickname', new PresenceOf([
             'message' => '用户昵称必须填写',
         ]));
@@ -35,6 +31,10 @@ class UserValidation extends Validation
     public function createValidate(array $array = null) : void
     {
         $email = Arr::get($array, 'email');
+
+        $this->add('password', new PresenceOf([
+            'message' => '用户密码必须填写',
+        ]));
 
         $this->add('email', new Email([
             'message' => '邮箱地址有误',
@@ -51,9 +51,11 @@ class UserValidation extends Validation
      */
     public function updateValidate(array $array = null) : void
     {
+        $id = Arr::get($array, 'id');
         $email = Arr::get($array, 'email');
 
         $this->add('email', new UserEmailValidator([
+            'id'      => $id,
             'email'   => $email,
             'message' => '邮箱已经存在',
         ]));

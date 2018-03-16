@@ -20,7 +20,7 @@ class DefaultController extends AbstractController
             'documentation' => 'https://github.com/imajinyun/phalcon-api/wiki/',
         ];
 
-        return $this->successResponse($result, $message);
+        return $this->successResponse($message, $result);
     }
 
     /**
@@ -52,6 +52,6 @@ class DefaultController extends AbstractController
             ],
         ];
 
-        return $this->successResponse($result);
+        return $this->successResponse('System information.', $result);
     }
 }

@@ -44,7 +44,7 @@ class RabbitController extends AbstractController
             '内容大小' => $AMQPMessage->getBodySize(),
         ];
 
-        return $this->successResponse($result);
+        return $this->successResponse('RabbitMQ producer', $result);
     }
 }
 
