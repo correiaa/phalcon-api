@@ -44,6 +44,12 @@ class UserResource extends Resource
                 ->setDenyRoles(Memory::UNAUTHORIZED)
                 ->setDescription('获取用户列表')
             )
+            ->setEndpoint(
+                Endpoint::delete('/delete/{id:[0-9]+}', 'deleteAction')
+                    ->setName('delete')
+                    ->setDenyRoles(Memory::UNAUTHORIZED)
+                    ->setDescription('删除用户账号')
+            )
             ->setEndpoint(Endpoint::post('/authorize', 'authorizeAction')
                 ->setName('authorize')
                 ->setAllowRoles(Memory::UNAUTHORIZED)
