@@ -85,7 +85,7 @@ class UserController extends AbstractController
     /**
      * Update user information.
      *
-     * @param null|int $id
+     * @param null|string $id
      *
      * @return \Nilnice\Phalcon\Http\Response
      */
@@ -139,6 +139,7 @@ class UserController extends AbstractController
             ->columns('*')
             ->from(User::class)
             ->where(true)
+            ->andWhere('isDelete=:isDelete:', ['isDelete' => false])
             ->orderBy('createdAt DESC');
 
         $paginator = new QueryBuilder(
@@ -157,6 +158,37 @@ class UserController extends AbstractController
         ];
 
         return $this->successResponse('用户列表', $array);
+    }
+
+    /**
+     * Delete user account.
+     *
+     * @param null|string $id
+     *
+     * @return \Nilnice\Phalcon\Http\Response
+     */
+    public function deleteAction($id = null) : Response
+    {
+        if (! $id) {
+            return $this->warningResponse('Invalid parameter');
+        }
+
+        $entity = User::findFirst([
+            'conditions' => 'id=:id: AND isDelete=:isDelete:',
+            'bind'       => ['id' => $id, 'isDelete' => false],
+        ]);
+
+        if (! $entity) {
+            return $this->warningResponse('Not found user');
+        }
+
+        $entity->setIsDelete(true);
+
+        if (! $entity->save()) {
+            return $this->warningResponse('删除失败');
+        }
+
+        return $this->successResponse('删除成功');
     }
 
     /**
