@@ -7,35 +7,35 @@ trait ResultsetTrait
     /**
      * Get success resultset.
      *
-     * @param array  $data
      * @param string $message
+     * @param array  $data
      * @param int    $code
      *
      * @return array
      */
     public function getOkResultset(
-        array $data,
         string $message = 'OK',
+        array $data = [],
         int $code = 200200
     ) : array {
-        return $this->getResultset($data, $message, $code);
+        return $this->getResultset($message, $data, $code);
     }
 
     /**
      * Get failed resultset.
      *
-     * @param array  $data
      * @param string $message
+     * @param array  $data
      * @param int    $code
      *
      * @return array
      */
     public function getNoResultset(
-        array $data,
         string $message = 'NO',
+        array $data = [],
         int $code = 400400
     ) : array {
-        return $this->getResultset($data, $message, $code);
+        return $this->getResultset($message, $data, $code);
     }
 
     /**
@@ -48,8 +48,8 @@ trait ResultsetTrait
      * @return array
      */
     private function getResultset(
-        array $data,
         string $message,
+        array $data,
         int $code = 200200
     ) : array {
         $result = [
