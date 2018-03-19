@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Nilnice\Phalcon\Http\Response;
 use PhpAmqpLib\Message\AMQPMessage;
 
 class RabbitController extends AbstractController
@@ -13,7 +14,7 @@ class RabbitController extends AbstractController
      *
      * @throws \RuntimeException
      */
-    public function producerAction()
+    public function producerAction() : Response
     {
         $data = $this->request->getPost('data');
         $name = $data['name'] ?? 'testing_queue';
