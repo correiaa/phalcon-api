@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "c5313c1f16a6ae901e08d47f347a45b5ad94baf7"
+                "reference": "0870e83c5c58b3b90748c86dd6a47312a404a29f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/doctrine/inflector/c5313c1f16a6ae901e08d47f347a45b5ad94baf7.zip",
-                "reference": "c5313c1f16a6ae901e08d47f347a45b5ad94baf7",
+                "url": "https://files.phpcomposer.com/files/doctrine/inflector/0870e83c5c58b3b90748c86dd6a47312a404a29f.zip",
+                "reference": "0870e83c5c58b3b90748c86dd6a47312a404a29f",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
             },
             "require-dev": {
                 "doctrine/coding-standard": "^3.0",
-                "phpunit/phpunit": "^6.2"
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "extra": {
@@ -72,7 +72,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2018-03-05T05:26:13+00:00"
+            "time": "2018-03-17T18:59:38+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -126,12 +126,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "db778ee765bcdfc5fdb8410c72312866a7754031"
+                "reference": "b99a048af694e84113365b7f42f4d7c3128369f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/illuminate/contracts/db778ee765bcdfc5fdb8410c72312866a7754031.zip",
-                "reference": "db778ee765bcdfc5fdb8410c72312866a7754031",
+                "url": "https://files.phpcomposer.com/files/illuminate/contracts/b99a048af694e84113365b7f42f4d7c3128369f0.zip",
+                "reference": "b99a048af694e84113365b7f42f4d7c3128369f0",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2018-03-10T15:46:11+00:00"
+            "time": "2018-03-20T15:36:07+00:00"
         },
         {
             "name": "illuminate/support",
@@ -223,16 +223,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.24.2",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/bba6c6e410c6b4317e37a9474aeaa753808c3875.zip",
-                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
+                "url": "https://files.phpcomposer.com/files/briannesbitt/Carbon/cbcf13da0b531767e39eb86e9687f5deba9857b4.zip",
+                "reference": "cbcf13da0b531767e39eb86e9687f5deba9857b4",
                 "shasum": ""
             },
             "require": {
@@ -272,7 +272,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-10T10:10:14+00:00"
+            "time": "2018-03-19T15:50:49+00:00"
         },
         {
             "name": "nilnice/phalcon-micro",
@@ -280,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nilnice/phalcon-micro.git",
-                "reference": "a66bebeca3159f1182cd5a7e6750572b48be6b3b"
+                "reference": "ccfc55d517fb318cfef649a4bb272dd25ac2bcdc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/a66bebeca3159f1182cd5a7e6750572b48be6b3b.zip",
-                "reference": "a66bebeca3159f1182cd5a7e6750572b48be6b3b",
+                "url": "https://files.phpcomposer.com/files/nilnice/phalcon-micro/ccfc55d517fb318cfef649a4bb272dd25ac2bcdc.zip",
+                "reference": "ccfc55d517fb318cfef649a4bb272dd25ac2bcdc",
                 "shasum": ""
             },
             "require": {
@@ -297,7 +297,10 @@
             "autoload": {
                 "psr-4": {
                     "Nilnice\\Phalcon\\": "src/"
-                }
+                },
+                "files": [
+                    "src/Support/helpers.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -314,7 +317,7 @@
                 "phalcon",
                 "phalcon-micro"
             ],
-            "time": "2018-03-14T10:03:36+00:00"
+            "time": "2018-03-19T10:24:04+00:00"
         },
         {
             "name": "phalcon/incubator",
@@ -789,12 +792,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "57653508ed1bfd94de759fa564c4f4364ba89a5d"
+                "reference": "092871ad2d511b29191f4684bbd6b803e2f80aed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/twigphp/Twig/57653508ed1bfd94de759fa564c4f4364ba89a5d.zip",
-                "reference": "57653508ed1bfd94de759fa564c4f4364ba89a5d",
+                "url": "https://files.phpcomposer.com/files/twigphp/Twig/092871ad2d511b29191f4684bbd6b803e2f80aed.zip",
+                "reference": "092871ad2d511b29191f4684bbd6b803e2f80aed",
                 "shasum": ""
             },
             "require": {
@@ -803,8 +806,8 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/debug": "~2.7",
-                "symfony/phpunit-bridge": "~3.3@dev"
+                "symfony/debug": "^2.7",
+                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "library",
             "extra": {
@@ -847,7 +850,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2018-03-14T15:30:56+00:00"
+            "time": "2018-03-20T04:31:47+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -855,12 +858,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "90b2f4112475578eb60269266e79514e1b4128b6"
+                "reference": "fe2a5c22c94949983be10263417f47f8551d5946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/vlucas/phpdotenv/90b2f4112475578eb60269266e79514e1b4128b6.zip",
-                "reference": "90b2f4112475578eb60269266e79514e1b4128b6",
+                "url": "https://files.phpcomposer.com/files/vlucas/phpdotenv/fe2a5c22c94949983be10263417f47f8551d5946.zip",
+                "reference": "fe2a5c22c94949983be10263417f47f8551d5946",
                 "shasum": ""
             },
             "require": {
@@ -882,7 +885,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause-Attribution"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -897,7 +900,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2018-01-28T23:08:18+00:00"
+            "time": "2018-03-19T21:27:48+00:00"
         }
     ],
     "packages-dev": [
@@ -1572,12 +1575,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7bca1e7d27f79483b073d87d8ec4ee08f5adb68c"
+                "reference": "2cf3d15891e3843c9f0e01268e2eadd0e8beec2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/7bca1e7d27f79483b073d87d8ec4ee08f5adb68c.zip",
-                "reference": "7bca1e7d27f79483b073d87d8ec4ee08f5adb68c",
+                "url": "https://files.phpcomposer.com/files/sebastianbergmann/phpunit/2cf3d15891e3843c9f0e01268e2eadd0e8beec2f.zip",
+                "reference": "2cf3d15891e3843c9f0e01268e2eadd0e8beec2f",
                 "shasum": ""
             },
             "require": {
@@ -1644,7 +1647,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-03-08T18:18:05+00:00"
+            "time": "2018-03-15T16:51:24+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
