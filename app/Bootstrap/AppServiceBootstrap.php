@@ -141,6 +141,7 @@ class AppServiceBootstrap implements AppBootstrapInterface
             $class = 'Phalcon\Db\Adapter\Pdo\\' . $database->adapter;
             $parameter = [
                 'host'     => $database->host,
+                'port'     => $database->port,
                 'username' => $database->username,
                 'password' => $database->password,
                 'dbname'   => $database->dbname,
